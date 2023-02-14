@@ -1,14 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, Alert } from 'react-native';
 import { useFonts } from 'expo-font';
+import Heading from '../components/Heading.js';
 import React from 'react';
 
 export default function Login () {
 
   const [fontsLoaded] = useFonts({
 
-    'Montserrat-Black-Italic': require('../assets/fonts/montserrat-black-italic.ttf'),
-    'Barlow-Semibold': require('../assets/fonts/barlow-semibold.ttf'),
+    'Barlow': require('../assets/fonts/barlow-semibold.ttf'),
 
   });
 
@@ -19,7 +18,7 @@ export default function Login () {
 
     <View style = {styles.container}>
 
-      <Text style = {styles.title}>Log In</Text>
+      <Heading text={"Log In"} />
 
       <TextInput
 
@@ -72,6 +71,7 @@ const styles = StyleSheet.create({
 
     fontSize: 50,
     color: '#e02251',
+    fontWeight: 'bold',
     fontFamily: 'Montserrat',
     marginBottom: 30,
 

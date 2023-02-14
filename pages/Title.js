@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
+import Heading from '../components/Heading';
 
 export default function Title () {
 
@@ -16,7 +17,8 @@ export default function Title () {
     <View style = {styles.container}>
 
       <Text style = {styles.text}>Welcome to</Text>
-      <Text style = {styles.title}>RED LINE</Text>
+      {/* <Text style = {styles.title}>RED LINE</Text> */}
+      <Heading text = "RED LINE" />
 
     </View>
 

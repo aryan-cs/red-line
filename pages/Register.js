@@ -2,12 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, Alert } from 'react-native';
 import { useFonts } from 'expo-font';
 import React from 'react';
+import Heading from '../components/Heading';
 
 export default function Register () {
 
   const [fontsLoaded] = useFonts({
 
-    'Montserrat': require('../assets/fonts/montserrat-black-italic.ttf'),
     'Barlow': require('../assets/fonts/barlow-semibold.ttf'),
 
   });
@@ -19,7 +19,7 @@ export default function Register () {
 
     <View style = {styles.container}>
 
-      <Text style = {styles.title}>Sign Up</Text>
+      <Heading text = "Sign Up" />
 
       <TextInput
 

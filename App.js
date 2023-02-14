@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { useFonts } from 'expo-font';
+import { StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Title from './pages/Title';
 import Login from './pages/Login';
@@ -10,13 +9,13 @@ export default function App () {
 
   return (
 
-    <View style = {styles.container}>
+    <SafeAreaView style = {styles.container}>
 
-      {/* <Title /> */}
-      <Login />
+      <Title />
+      {/* <Login /> */}
       {/* <Register /> */}
 
-    </View>
+    </SafeAreaView>
 
   );
 
@@ -27,26 +26,10 @@ const styles = StyleSheet.create({
   container: {
 
     flex: 1,
-    backgroundColor: '#171717', // light mode: #ffffff, dark mode: #171717
+    backgroundColor: "#171717", // light mode: #ffffff, dark mode: #171717
     alignItems: 'center',
     justifyContent: 'center',
 
   },
-
-  title: {
-
-    fontSize: 70,
-    color: '#e02251',
-    fontFamily: 'Montserrat-Black-Italic',
-
-  },
-
-  text: {
-
-    fontSize: 25,
-    color: 'black',
-    fontFamily: 'Barlow-Semibold',
-
-  }
 
 });
