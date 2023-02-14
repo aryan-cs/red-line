@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
   container: {
 
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
 
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
   text: {
 
     fontSize: 25,
-    color: 'black',
+    color: 'white',
     fontFamily: 'Barlow-Semibold',
 
   }

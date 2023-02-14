@@ -30,6 +30,7 @@ export default function Register () {
         style = {styles.input}
         onChangeText = {onChangeEmailText}
         placeholder = {emailText}
+        placeholderTextColor = "#8a8a8a"
 
       />
 
@@ -38,6 +39,7 @@ export default function Register () {
         style = {styles.input}
         onChangeText = {onChangePasswordText}
         placeholder = {passwordText}
+        placeholderTextColor = "#8a8a8a"
       
       />
 
@@ -58,7 +60,6 @@ const styles = StyleSheet.create({
   container: {
 
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
 
@@ -86,11 +87,10 @@ const styles = StyleSheet.create({
     height: 40,
     width: 250,
     margin: 15,
-    borderWidth: 1,
     padding: 10,
     borderRadius: 10,
-    backgroundColor: '#ebebeb',
-    borderColor: '#ebebeb00',
+    color: "white", // light mode: white, dark mode: black
+    backgroundColor: '#2e2e2e', // light mode: #ebebeb, dark mode: #2e2e2e
     fontFamily: 'Barlow-Semibold',
 
   },
