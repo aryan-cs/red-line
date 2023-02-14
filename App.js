@@ -12,8 +12,8 @@ export default function App () {
 
     <View style = {styles.container}>
 
-      <Title />
-      {/* <Login /> */}
+      {/* <Title /> */}
+      <Login />
       {/* <Register /> */}
 
     </View>

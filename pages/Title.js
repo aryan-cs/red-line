@@ -6,12 +6,8 @@ export default function Title () {
 
   const [fontsLoaded] = useFonts({
 
-    'Montserrat-Italic': require('../assets/fonts/montserrat-italic.ttf'),
-    'Montserrat-Black-Italic': require('../assets/fonts/montserrat-black-italic.ttf'),
-    'Montserrat-Regular': require('../assets/fonts/montserrat.ttf'),
-
-    'Barlow-Semicondensed': require('../assets/fonts/barlow-semicondensed.ttf'),
-    'Barlow-Semibold': require('../assets/fonts/barlow-semibold.ttf'),
+    'Montserrat': require('../assets/fonts/montserrat-black-italic.ttf'),
+    'Barlow': require('../assets/fonts/barlow-semibold.ttf'),
 
   });
 
@@ -42,7 +38,7 @@ const styles = StyleSheet.create({
 
     fontSize: 70,
     color: '#e02251',
-    fontFamily: 'Montserrat-Black-Italic',
+    fontFamily: 'Montserrat',
 
   },
 
@@ -50,7 +46,7 @@ const styles = StyleSheet.create({
 
     fontSize: 25,
     color: 'white',
-    fontFamily: 'Barlow-Semibold',
+    fontFamily: 'Barlow',
 
   }
 

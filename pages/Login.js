@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableHighlight, Alert } from 'react-native';
 import { useFonts } from 'expo-font';
 import React from 'react';
 
@@ -7,11 +7,7 @@ export default function Login () {
 
   const [fontsLoaded] = useFonts({
 
-    'Montserrat-Italic': require('../assets/fonts/montserrat-italic.ttf'),
     'Montserrat-Black-Italic': require('../assets/fonts/montserrat-black-italic.ttf'),
-    'Montserrat-Regular': require('../assets/fonts/montserrat.ttf'),
-
-    'Barlow-Semicondensed': require('../assets/fonts/barlow-semicondensed.ttf'),
     'Barlow-Semibold': require('../assets/fonts/barlow-semibold.ttf'),
 
   });
@@ -39,6 +35,7 @@ export default function Login () {
         style = {styles.input}
         onChangeText = {onChangePasswordText}
         placeholder = {passwordText}
+        secureTextEntry = {true}
         placeholderTextColor = "#8a8a8a"
       
       />
@@ -46,6 +43,12 @@ export default function Login () {
       <TouchableHighlight onPress = {() => Alert.alert('Welcome back!')} style = {styles.touchable}>
 
         <Text style = {styles.label}>Continue</Text>
+
+      </TouchableHighlight>
+
+      <TouchableHighlight onPress = {() => Alert.alert("Let's create an account.")} style = {[styles.touchable, styles.create]} >
+
+        <Text style = {[styles.label, styles.createLabel]}>New here? Sign up</Text>
 
       </TouchableHighlight>
         
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
 
     fontSize: 50,
     color: '#e02251',
-    fontFamily: 'Montserrat-Black-Italic',
+    fontFamily: 'Montserrat',
     marginBottom: 30,
 
   },
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
 
     fontSize: 25,
     color: 'black',
-    fontFamily: 'Barlow-Semibold',
+    fontFamily: 'Barlow',
 
   },
 
@@ -91,14 +94,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     color: "white",  // light mode: white, dark mode: black
     backgroundColor: '#2e2e2e', // light mode: #ebebeb, dark mode: #2e2e2e
-    fontFamily: 'Barlow-Semibold',
+    fontFamily: 'Barlow',
 
   },
 
   label: {
 
     color: "white",
-    fontFamily: 'Barlow-Semibold',
+    fontFamily: 'Barlow',
     textAlign: 'center',
     fontSize: 20,
 
@@ -113,6 +116,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#e02251',
     borderRadius: 10,
 
-  }
+  },
+
+  create: {
+
+    height: 40,
+    width: 160,
+    margin: 15,
+    padding: 10,
+    fontSize: 5,
+    position: 'absolute',
+    bottom: 90,
+    backgroundColor: '#2e2e2e',
+
+  },
+
+  createLabel: { fontSize: 16 }
 
 });

@@ -7,12 +7,8 @@ export default function Register () {
 
   const [fontsLoaded] = useFonts({
 
-    'Montserrat-Italic': require('../assets/fonts/montserrat-italic.ttf'),
-    'Montserrat-Black-Italic': require('../assets/fonts/montserrat-black-italic.ttf'),
-    'Montserrat-Regular': require('../assets/fonts/montserrat.ttf'),
-
-    'Barlow-Semicondensed': require('../assets/fonts/barlow-semicondensed.ttf'),
-    'Barlow-Semibold': require('../assets/fonts/barlow-semibold.ttf'),
+    'Montserrat': require('../assets/fonts/montserrat-black-italic.ttf'),
+    'Barlow': require('../assets/fonts/barlow-semibold.ttf'),
 
   });
 
@@ -39,6 +35,7 @@ export default function Register () {
         style = {styles.input}
         onChangeText = {onChangePasswordText}
         placeholder = {passwordText}
+        secureTextEntry = {true}
         placeholderTextColor = "#8a8a8a"
       
       />
@@ -69,7 +66,7 @@ const styles = StyleSheet.create({
 
     fontSize: 50,
     color: '#e02251',
-    fontFamily: 'Montserrat-Black-Italic',
+    fontFamily: 'Montserrat',
     marginBottom: 30,
 
   },
@@ -78,7 +75,7 @@ const styles = StyleSheet.create({
 
     fontSize: 25,
     color: 'black',
-    fontFamily: 'Barlow-Semibold',
+    fontFamily: 'Barlow',
 
   },
 
@@ -91,14 +88,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     color: "white", // light mode: white, dark mode: black
     backgroundColor: '#2e2e2e', // light mode: #ebebeb, dark mode: #2e2e2e
-    fontFamily: 'Barlow-Semibold',
+    fontFamily: 'Barlow',
 
   },
 
   label: {
 
     color: "white",
-    fontFamily: 'Barlow-Semibold',
+    fontFamily: 'Barlow',
     textAlign: 'center',
     fontSize: 20,
 
