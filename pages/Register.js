@@ -41,7 +41,7 @@ export default function Register () {
       
       />
 
-      <TouchableHighlight onPress = {() => Alert.alert('Simple Button pressed')} style = {styles.touchable}>
+      <TouchableHighlight onPress = {() => Alert.alert('Thank you for signing up!')} style = {styles.touchable}>
 
         <Text style = {styles.label}>Continue</Text>
 

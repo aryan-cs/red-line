@@ -41,7 +41,7 @@ export default function Login () {
       
       />
 
-      <TouchableHighlight onPress = {() => Alert.alert('Simple Button pressed')} style = {styles.touchable}>
+      <TouchableHighlight onPress = {() => Alert.alert('Welcome back!')} style = {styles.touchable}>
 
         <Text style = {styles.label}>Continue</Text>
 
