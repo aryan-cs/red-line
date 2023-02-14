@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableHighlight, Alert } from 'react-native';
 import { useFonts } from 'expo-font';
 import React from 'react';
 
@@ -24,7 +24,6 @@ export default function Register () {
     <View style = {styles.container}>
 
       <Text style = {styles.title}>Sign Up</Text>
-      <StatusBar style = "auto" />
 
       <TextInput
 
@@ -41,6 +40,12 @@ export default function Register () {
         placeholder = {passwordText}
       
       />
+
+      <TouchableHighlight onPress = {() => Alert.alert('Simple Button pressed')} style = {styles.touchable}>
+
+        <Text style = {styles.label}>Continue</Text>
+
+      </TouchableHighlight>
         
     </View>
 
@@ -89,5 +94,25 @@ const styles = StyleSheet.create({
     fontFamily: 'Barlow-Semibold',
 
   },
+
+  label: {
+
+    color: "white",
+    fontFamily: 'Barlow-Semibold',
+    textAlign: 'center',
+    fontSize: 20,
+
+  },
+
+  touchable: {
+
+    width: 250,
+    margin: 15,
+    padding: 10,
+    textAlign: 'center',
+    backgroundColor: '#e02251',
+    borderRadius: 10,
+
+  }
 
 });

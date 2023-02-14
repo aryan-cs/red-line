@@ -21,7 +21,6 @@ export default function Title () {
 
       <Text style = {styles.text}>Welcome to</Text>
       <Text style = {styles.title}>RED LINE</Text>
-      <StatusBar style = "auto" />
 
     </View>
 

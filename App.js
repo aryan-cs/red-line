@@ -12,9 +12,9 @@ export default function App () {
 
     <View style = {styles.container}>
 
-      {/* <Title /> */}
+      <Title />
       {/* <Login /> */}
-      <Register />
+      {/* <Register /> */}
 
     </View>
 
