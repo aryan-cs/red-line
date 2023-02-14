@@ -2,23 +2,19 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
 
-export default function App() {
+import Title from './pages/Title';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
-  const [fontsLoaded] = useFonts({
-
-    'Montserrat-Italic': require('./assets/fonts/montserrat-italic.ttf'),
-    'Montserrat-SemiBold-Italic': require('./assets/fonts/montserrat-semibold-italic.ttf'),
-    'Montserrat-Regular': require('./assets/fonts/montserrat.ttf'),
-
-  });
+export default function App () {
 
   return (
 
     <View style = {styles.container}>
 
-      <Text>Welcome to</Text>
-      <Text style = {styles.title}>RED LINE</Text>
-      <StatusBar style = "auto" />
+      {/* <Title /> */}
+      {/* <Login /> */}
+      <Register />
 
     </View>
 
@@ -40,8 +36,16 @@ const styles = StyleSheet.create({
   title: {
 
     fontSize: 70,
-    color: 'red',
-    fontFamily: 'Montserrat-SemiBold-Italic',    
+    color: '#e02251',
+    fontFamily: 'Montserrat-Black-Italic',
+
+  },
+
+  text: {
+
+    fontSize: 25,
+    color: 'black',
+    fontFamily: 'Barlow-Semibold',
 
   }
 
