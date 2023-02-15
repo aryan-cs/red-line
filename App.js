@@ -12,7 +12,7 @@ export default function App () {
 
     <SafeAreaView style = {styles.container}>
 
-      {/* <Title /> */}
+      <Title />
       {/* <Login /> */}
       {/* <Register /> */}
       <Test />
