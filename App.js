@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Title from './pages/Title';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Test from './pages/Test';
 
 export default function App () {
 
@@ -11,9 +12,10 @@ export default function App () {
 
     <SafeAreaView style = {styles.container}>
 
-      <Title />
+      {/* <Title /> */}
       {/* <Login /> */}
       {/* <Register /> */}
+      <Test />
 
     </SafeAreaView>
 
