@@ -7,6 +7,8 @@ import * as Location from 'expo-location';
 export default function App () {
 
   const [location, setLocation] = useState(null);
+  const [lastLocation, setLastLocation] = useState(null);
+  const [speed, setSpeed] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
   const [fontsLoaded] = useFonts({
@@ -26,8 +28,12 @@ export default function App () {
         
         let location = await Location.getCurrentPositionAsync({});
         setLocation(location);
+        setLastLocation(location);
 
-      }, 1000);
+        let speed = location.coords.speed;
+        setSpeed(speed);
+
+      }, 10);
 
     })();
     
@@ -35,13 +41,13 @@ export default function App () {
 
   let text = 'Waiting..';
   if (errorMsg) { text = errorMsg; }
-  else if (location) { text = JSON.stringify(location); }
+  else if (location) { text = "Your speed: " + JSON.stringify(speed) + " mph" }
 
   return (
 
-    <View style={styles.container}>
+    <View style = {styles.container}>
 
-      <Text style={styles.paragraph}>{text}</Text>
+      <Text style = {styles.paragraph}>{text}</Text>
 
     </View>
 
