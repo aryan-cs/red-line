@@ -8,7 +8,7 @@ An app for car guys, by a car guy.
 
 - App loads up - Hello, World!
 - Android & iOS support
-- Primitive location & timestamp tracking
+- Speed tracking
 ## Future Features
 
 - Light & Dark Mode

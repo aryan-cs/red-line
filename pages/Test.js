@@ -33,7 +33,7 @@ export default function App () {
         let speed = location.coords.speed;
         setSpeed(speed);
 
-      }, 10);
+      }, 101);
 
     })();
     
