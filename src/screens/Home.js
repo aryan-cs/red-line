@@ -33,7 +33,7 @@ export default function ({ navigation }) {
             name = {"ios-settings-sharp"}
             style = {{}}
             size = {25}
-            color = { isDarkmode ? themeColor.white100 : themeColor.black }/>}
+            color = { isDarkmode ? themeColor.white100 : VARS.redlineBrighter }/>}
         status = {isDarkmode ? "success" : "warning"}
         onPress = {() => { navigation.navigate("Settings"); }}
         style = {{
@@ -56,7 +56,6 @@ export default function ({ navigation }) {
           alignItems: "center",
           justifyContent: "center",
           marginHorizontal: 20,
-          // marginTop: 60
         }}>
 
         <Floaty string = "floaty 1"/>
@@ -65,19 +64,6 @@ export default function ({ navigation }) {
         <Floaty string = "floaty 4"/>
         <Floaty string = "floaty 5"/>
         <Floaty string = "floaty 6"/>
-
-        <Button
-              status="danger"
-              text="Logout"
-              onPress={() => {
-                signOut(auth);
-              }}
-              style={{
-                marginTop: 10,
-              }}
-            />
-
-
 
         {/* <Section>
           <SectionContent>

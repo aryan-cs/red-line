@@ -58,7 +58,7 @@ export default function Floaty ({style, string, onPress}) {
                 fontSize: 30,
                 marginRight: 7,
                 alignSelf: "flex-end",
-                color: VARS.redline
+                color: VARS.redlineBrighter
                 
             }} string = {string} />
 

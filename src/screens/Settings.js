@@ -27,9 +27,7 @@ export default function ({ navigation }) {
 
     <Layout>
 
-      <View style = {{
-        flexDirection: "row"
-      }}>
+      <View style = {{ flexDirection: "row" }}>
 
         <AppButton
           string = {
@@ -69,54 +67,32 @@ export default function ({ navigation }) {
 
       </View>
 
-      {/* <TopNav
-        middleContent="Settings"
-        leftContent={
-          <Ionicons
-            name="chevron-back"
-            size={20}
-            color={isDarkmode ? themeColor.white100 : themeColor.black}
-          />
-        }
-        style = {{
+      <View style = {{ flex: 1, padding: 15 }}>
 
-          color: "red",
-          fontFamily: "Montserrat",
+        <AppButton
+          string = "Contact Us"
+          status = {isDarkmode ? "success" : "warning"}
+          onPress = {() => { alert("Feature coming soon!"); }}
+          style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.midGray }}/>
 
-        }}
-        leftAction = {() => navigation.goBack()}
-      /> */}
+        <AppButton
+          string = "Report an Issue"
+          status = {isDarkmode ? "success" : "warning"}
+          onPress = {() => { alert("Feature coming soon!"); }}
+          style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.midGray }}/>
 
-      <View
-        style={{
-          flex: 1,
-        }}
-      >
+        <AppButton
+          string = {isDarkmode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          status = {isDarkmode ? "success" : "warning"}
+          onPress = {() => { if (isDarkmode) { setTheme("light"); } else { setTheme("dark"); }}}
+          style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.midGray }}/>
 
-            <Button
-              status="danger"
-              text="Logout"
-              onPress={() => {
-                signOut(auth);
-              }}
-              style={{
-                marginTop: 10,
-              }}
-            />
-            <Button
-              text={isDarkmode ? "Light Mode" : "Dark Mode"}
-              status={isDarkmode ? "success" : "warning"}
-              onPress={() => {
-                if (isDarkmode) {
-                  setTheme("light");
-                } else {
-                  setTheme("dark");
-                }
-              }}
-              style={{
-                marginTop: 10,
-              }}
-            />
+        <AppButton
+          status = "danger"
+          string = "Logout"
+          onPress = {() => { signOut(auth); }}
+          style = {{ marginTop: 10, backgroundColor: VARS.redlineBrighter }}
+        />
 
       </View>
 
