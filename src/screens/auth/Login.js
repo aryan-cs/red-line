@@ -127,6 +127,6 @@ export default function ({ navigation }) {
 
     </KeyboardAvoidingView>
 
-  );
+);
 
 }

@@ -27,7 +27,19 @@ export default function ({ navigation }) {
 
     <Layout>
 
-      <View style = {{ flexDirection: "row" }}>
+    <View style = {{
+      
+      flex: 1,
+      backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
+      width: 400,
+      height: 800,
+      marginTop: -60,
+      paddingTop: 60,
+      marginBottom: -35
+      
+    }}>
+
+      <View style = {{ flexDirection: "row", backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG, }}>
 
         <AppButton
           string = {
@@ -95,6 +107,8 @@ export default function ({ navigation }) {
         />
 
       </View>
+      
+    </View>
 
     </Layout>
 

@@ -27,6 +27,19 @@ export default function ({ navigation }) {
 
     <Layout>
 
+    <View style = {{ flex: 1, backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG }}>
+
+    <View style = {{
+						
+      width: 400,
+      height: 800,
+      marginTop: -60,
+      padding: 15,
+      paddingTop: 60,
+      backgroundColor: isDarkmode ? VARS.darkmodeBGdarker : VARS.lightmodeBG,
+                
+    }}>
+
       <AppButton
         string = {
           <Ionicons
@@ -115,6 +128,10 @@ export default function ({ navigation }) {
       </View>
 
     </ScrollView>
+
+    </View>
+
+    </View>
 
     </Layout>
 

@@ -1,6 +1,6 @@
 export var darkmodeBG = "#171717";
 export var darkmodeBGaccent = "#242424";
-export var darkmodeBGdarker = "#0f0f0f";
+export var darkmodeBGdarker = "#121212";
 export var lightmodeBG = "#f7f7f7";
 export var lightmodeBGaccent = "#ffffff";
 export var midGray = "#8a8a8a";

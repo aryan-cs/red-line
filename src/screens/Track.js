@@ -92,9 +92,18 @@ export default function ({ navigation }) {
 
 		<Layout>
 
-			{/* <MapView /> */}
+			<View style = {{  alignItems: 'center', flex: 1, backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG }}>
 
-			<View style = {{  alignItems: 'center' }}>
+			<View style = {{
+						
+				width: 400,
+				height: 800,
+				marginTop: -60,
+				paddingTop: 60,
+				padding: 15,
+				backgroundColor: isDarkmode ? VARS.darkmodeBGdarker : VARS.lightmodeBG,
+						
+			}}>
 
 				<View style = {{
 					
@@ -102,7 +111,7 @@ export default function ({ navigation }) {
 					borderTopRightRadius: 30,
 					borderTopLeftRadius: 30,
 					width: 360,
-					height: 600,
+					height: 800,
 					padding: 15,
 					backgroundColor: isDarkmode ? VARS.darkmodeBGdarker : VARS.lightmodeBG,
 					
@@ -144,7 +153,7 @@ export default function ({ navigation }) {
 						justifyContent: "flex-end",
 						alignItems: "flex-start",
 						position: "absolute",
-						bottom: 0,
+						bottom: 150,
 						
 					}}>
 
@@ -179,6 +188,8 @@ export default function ({ navigation }) {
       				<AppText style = {{ fontSize: 16 }} string = {timestampInfo} /> */}
 
 				</View>
+
+			</View>
 
 			</View>
 
