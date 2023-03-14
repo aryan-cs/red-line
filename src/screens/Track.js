@@ -15,7 +15,7 @@ import * as Location from 'expo-location';
 
 export default function ({ navigation }) {
 
-	let refresh = 1000000;
+	let refresh = 20;
 	let lastAddress = "Getting user address...";
 
 	const { isDarkmode, setTheme } = useTheme();
@@ -112,7 +112,7 @@ export default function ({ navigation }) {
 					borderTopLeftRadius: 30,
 					width: 360,
 					height: 800,
-					padding: 15,
+					padding: 65,
 					backgroundColor: isDarkmode ? VARS.darkmodeBGdarker : VARS.lightmodeBG,
 					
 				}}>
