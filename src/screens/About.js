@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import { Layout, Text } from 'react-native-rapi-ui';
+import { Layout, useTheme } from 'react-native-rapi-ui';
 
 import AppText from "../../src/components/AppText";
 import AppTitle from "../../src/components/AppTitle";
@@ -11,6 +11,8 @@ import Floaty from "../../src/components/Floaty";
 import * as VARS from "../../Vars";
 
 export default function ({ navigation }) {
+
+	const { isDarkmode, setTheme } = useTheme();
 
 	return (
 
@@ -29,7 +31,7 @@ export default function ({ navigation }) {
 					textAlign: "left",
 					paddingLeft: 30,
 					fontSize: 38,
-					color: "#21212166"
+					color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray
 				}}
 				
 				string = "Toyota" />
@@ -41,7 +43,7 @@ export default function ({ navigation }) {
 					paddingLeft: 20,
 					fontSize: 100,
 					position: "absolute",
-					color: "#21212166"
+					color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray
 					
 				}}
 				
