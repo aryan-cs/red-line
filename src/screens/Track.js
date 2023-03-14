@@ -1,0 +1,189 @@
+import React, { useState, useEffect } from 'react';
+import { View } from 'react-native';
+import { Layout, useTheme } from 'react-native-rapi-ui';
+
+import AppText from "../../src/components/AppText";
+import AppTitle from "../../src/components/AppTitle";
+import AppButton from "../../src/components/AppButton";
+import AppInput from "../../src/components/AppInput";
+import Floaty from "../../src/components/Floaty";
+// import Map from "../components/Map";
+
+import * as VARS from "../../Vars";
+
+import * as Location from 'expo-location';
+
+export default function ({ navigation }) {
+
+	let refresh = 1000000;
+	let lastAddress = "Getting user address...";
+
+	const { isDarkmode, setTheme } = useTheme();
+	const [location, setLocation] = useState(null);
+  	const [address, setAddress] = useState(null);
+  	const [cords, setCords] = useState(null);
+  	const [timestamp, setTimestamp] = useState(null);
+	const [lastUpdated, setLastUpdated] = useState(null);
+  	const [speed, setSpeed] = useState(0);
+  	const [errorMsg, setErrorMsg] = useState(null);
+
+	useEffect(() => {
+
+		(async () => {
+		  
+		  let { status } = await Location.requestForegroundPermissionsAsync();
+		  if (status !== 'granted') { setErrorMsg('Permission to access location was denied'); return; }
+	
+		  const interval = setInterval(async () => {
+			
+			let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High, enableHighAccuracy: true,}).catch(function(error) { return null; });
+
+			let timestamp = location.timestamp;
+			let stamp = new Date(timestamp);
+			setLastUpdated((stamp .getHours() % 12) + ":" + stamp.getMinutes() + ":" + stamp.getSeconds());
+
+			let address = await Location.reverseGeocodeAsync(location.coords).then((address) => {
+
+				lastAddress = address[0].name;
+				return address[0].name;
+			
+			}).catch(function(error) { return lastAddress; });
+
+			let lat = location.coords.latitude;
+			let long = location.coords.longitude;
+			lat = parseFloat(lat).toFixed(5);
+			long = parseFloat(long).toFixed(5);
+			let cords = lat + ", " + long;
+
+			let speed = location.coords.speed;
+	
+			setLocation(location);
+			setAddress(address);
+			setCords(cords);
+			setTimestamp(timestamp);
+			setSpeed(speed);
+	
+		  }, refresh);
+	
+		})();
+		
+	  }, []);
+	
+	  let locationInfo = '';
+	  let addressInfo = 'Getting user address...';
+	  let cordsInfo = 'Getting user coordinates...';
+	  let timestampInfo = '';
+	  let speedInfo = '';
+	
+	  if (errorMsg) { text = errorMsg; }
+	  else if (location) {
+		
+		locationInfo = JSON.stringify(location).replace(/"/g,"");
+		addressInfo = JSON.stringify(address).replace(/"/g,"");
+		cordsInfo = JSON.stringify(cords).replace(/"/g,"");
+		timestampInfo = JSON.stringify(timestamp).replace(/"/g,"");
+
+		speedInfo = parseInt(JSON.stringify(speed).replace(/"/g,""));
+		if (speedInfo < 0) { speedInfo = 0; }
+	
+	  }
+
+	return (
+
+		<Layout>
+
+			{/* <MapView /> */}
+
+			<View style = {{  alignItems: 'center' }}>
+
+				<View style = {{
+					
+					alignItems: "center",
+					borderTopRightRadius: 30,
+					borderTopLeftRadius: 30,
+					width: 360,
+					height: 600,
+					padding: 15,
+					backgroundColor: isDarkmode ? VARS.darkmodeBGdarker : VARS.lightmodeBG,
+					
+				}}>
+
+					<View style = {{
+						
+						borderRadius: 200,
+						width: 275,
+						height: 275,
+						marginTop: 30,
+						justifyContent: "center",
+						alignItems: "center",
+						backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
+						
+					}}>
+
+						<AppTitle style = {{
+						
+							fontSize: 90,
+							textAlign: "center",
+							color: VARS.redlineBrighter
+						
+						}} string = {speedInfo} />
+
+						<AppTitle style = {{
+						
+							fontSize: 60,
+							textAlign: "center",
+							color: VARS.redlineBrighter
+						
+						}} string = {"MPH"} />
+
+					</View>
+
+					<View style = {{
+						
+						width: 350,
+						justifyContent: "flex-end",
+						alignItems: "flex-start",
+						position: "absolute",
+						bottom: 0,
+						
+					}}>
+
+						<AppText style = {{
+						
+							fontSize: 30,
+							color: VARS.redlineBrighter,
+							marginBottom: 15
+						
+						}} string = {addressInfo} />
+
+						<AppText style = {{
+						
+							fontSize: 20,
+							color: VARS.redlineBrighter,
+							marginBottom: 15
+						
+						}} string = {cordsInfo} />
+
+						<AppText style = {{
+						
+							fontSize: 15,
+							color: VARS.redlineBrighter
+					
+						}} string = {"Last updated at " + lastUpdated} />
+
+					</View>
+
+					{/* <AppText style = {{ fontSize: 16, alignItems: "flex-end" }} string = {addressInfo} />
+      				<AppText style = {{ fontSize: 16, alignItems: "flex-end" }} string = {cordsInfo} />
+      				<AppText style = {{ fontSize: 16 }} string = {speedInfo} />
+      				<AppText style = {{ fontSize: 16 }} string = {timestampInfo} /> */}
+
+				</View>
+
+			</View>
+
+		</Layout>
+
+	);
+
+}
