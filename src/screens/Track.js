@@ -7,7 +7,6 @@ import AppTitle from "../../src/components/AppTitle";
 import AppButton from "../../src/components/AppButton";
 import AppInput from "../../src/components/AppInput";
 import Floaty from "../../src/components/Floaty";
-// import Map from "../components/Map";
 
 import * as VARS from "../../Vars";
 
@@ -15,7 +14,7 @@ import * as Location from 'expo-location';
 
 export default function ({ navigation }) {
 
-	let refresh = 20;
+	let refresh = 100;
 	let lastAddress = "Getting user address...";
 
 	const { isDarkmode, setTheme } = useTheme();
@@ -36,11 +35,11 @@ export default function ({ navigation }) {
 	
 		  const interval = setInterval(async () => {
 			
-			let location = await Location.getCurrentPositionAsync({__accuracy: Location.Accuracy.High, enableHighAccuracy: true,}).catch(function(error) { return null; });
+			let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High }).catch(function(error) { return null; });
 
 			let timestamp = location.timestamp;
 			let stamp = new Date(timestamp);
-			setLastUpdated((stamp .getHours() % 12) + ":" + stamp.getMinutes() + ":" + stamp.getSeconds());
+			setLastUpdated("at " + (stamp .getHours() % 12) + ":" + stamp.getMinutes() + ":" + stamp.getSeconds());
 
 			let address = await Location.reverseGeocodeAsync(location.coords).then((address) => {
 
@@ -83,8 +82,10 @@ export default function ({ navigation }) {
 		cordsInfo = JSON.stringify(cords).replace(/"/g,"");
 		timestampInfo = JSON.stringify(timestamp).replace(/"/g,"");
 
-		speedInfo = parseInt(JSON.stringify(speed).replace(/"/g,"")) * 2.23694;
-		if (speedInfo < 0) { speedInfo = 0; }
+		// speedInfo = parseInt(JSON.stringify(speed).replace(/"/g,"")) * 2.23694;
+		speedInfo = JSON.stringify(speed);
+		// if (speedInfo < 0) { speedInfo = 0; }
+		console.log(speedInfo);
 	
 	  }
 
@@ -178,7 +179,7 @@ export default function ({ navigation }) {
 							fontSize: 15,
 							color: VARS.redlineBrighter
 					
-						}} string = {"Last updated at " + lastUpdated} />
+						}} string = {"Last updated " + lastUpdated} />
 
 					</View>
 
