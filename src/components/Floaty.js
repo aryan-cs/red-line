@@ -46,7 +46,7 @@ export default function Floaty ({style, string, onPress}) {
             zIndex: 1,
             borderColor: "transparent",
             justifyContent: "flex-end",
-            backgroundColor: VARS.lightmodeBGaccent,
+            backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
             ...style
 
           }}>

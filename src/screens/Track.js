@@ -36,7 +36,7 @@ export default function ({ navigation }) {
 	
 		  const interval = setInterval(async () => {
 			
-			let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High, enableHighAccuracy: true,}).catch(function(error) { return null; });
+			let location = await Location.getCurrentPositionAsync({__accuracy: Location.Accuracy.High, enableHighAccuracy: true,}).catch(function(error) { return null; });
 
 			let timestamp = location.timestamp;
 			let stamp = new Date(timestamp);
@@ -83,7 +83,7 @@ export default function ({ navigation }) {
 		cordsInfo = JSON.stringify(cords).replace(/"/g,"");
 		timestampInfo = JSON.stringify(timestamp).replace(/"/g,"");
 
-		speedInfo = parseInt(JSON.stringify(speed).replace(/"/g,""));
+		speedInfo = parseInt(JSON.stringify(speed).replace(/"/g,"")) * 2.23694;
 		if (speedInfo < 0) { speedInfo = 0; }
 	
 	  }
@@ -181,11 +181,6 @@ export default function ({ navigation }) {
 						}} string = {"Last updated at " + lastUpdated} />
 
 					</View>
-
-					{/* <AppText style = {{ fontSize: 16, alignItems: "flex-end" }} string = {addressInfo} />
-      				<AppText style = {{ fontSize: 16, alignItems: "flex-end" }} string = {cordsInfo} />
-      				<AppText style = {{ fontSize: 16 }} string = {speedInfo} />
-      				<AppText style = {{ fontSize: 16 }} string = {timestampInfo} /> */}
 
 				</View>
 

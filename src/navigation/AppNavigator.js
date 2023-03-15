@@ -11,7 +11,7 @@ import TabBarText from "../components/utils/TabBarText";
 // Screens
 import Home from "../screens/Home";
 import Settings from "../screens/Settings";
-import About from "../screens/About";
+import Ride from "../screens/Ride";
 import Track from "../screens/Track";
 import Loading from "../screens/utils/Loading";
 
@@ -105,7 +105,7 @@ const MainTabs = () => {
 
       <Tabs.Screen
         name="Your Ride"
-        component={About}
+        component={Ride}
         options={{
           tabBarLabel: ({ focused }) => (
             <TabBarText focused={focused} title="Your Ride" />
