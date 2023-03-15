@@ -38,7 +38,8 @@ export default function Floaty ({style, title, desc, src, onPress}) {
           
           style = {{
           
-            margin: 10,
+            marginTop: 15,
+            marginRight: 7,
             padding: 10,
             borderRadius: 10,
             width: 360,
@@ -46,18 +47,22 @@ export default function Floaty ({style, title, desc, src, onPress}) {
             zIndex: 1,
             borderColor: "transparent",
             justifyContent: "flex-end",
-            backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
+            backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : "#1c1c1c",
             ...style
 
           }}>
 
             <Image
-              source={{
-                uri: 'https://reactnative.dev/img/tiny_logo.png',
-              }}
-              style = {{ height: 200, position: "absolute", zIndex: -1 }} />
-
-            {/* image, map, etc as background of floaty */}
+              source = { require("../../assets/banner.png") }
+              style = {{
+                resizeMode: 'cover',
+                height: 200,
+                width: 360,
+                zIndex: 1,
+                position: "absolute",
+                borderRadius: 10
+                
+              }} />
 
             <AppTitle style = {{
                 
@@ -65,7 +70,8 @@ export default function Floaty ({style, title, desc, src, onPress}) {
                 marginRight: 7,
                 alignSelf: "flex-end",
                 textAlign:'right',
-                color: VARS.redlineBrighter,
+                zIndex: 3,
+                color: isDarkmode ? themeColor.white100 : VARS.redlineBrighter,
                 
                 
             }} string = {title} />
@@ -76,7 +82,8 @@ export default function Floaty ({style, title, desc, src, onPress}) {
                 marginRight: 7,
                 alignSelf: "flex-end",
                 textAlign:'right',
-                color: VARS.redlineBrighter,
+                zIndex: 2,
+                color: isDarkmode ? themeColor.white100 : VARS.lightmodeBGaccent,
                 
                 
             }} string = {desc} />

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
-import { Layout, useTheme } from 'react-native-rapi-ui';
+import React, { useState, useEffect } from "react";
+import { View } from "react-native";
+import { Layout, useTheme } from "react-native-rapi-ui";
 
 import AppText from "../../src/components/AppText";
 import AppTitle from "../../src/components/AppTitle";
@@ -10,11 +10,11 @@ import Floaty from "../../src/components/Floaty";
 
 import * as VARS from "../../Vars";
 
-import * as Location from 'expo-location';
+import * as Location from "expo-location";
 
 export default function ({ navigation }) {
 
-	let refresh = 100;
+	let refresh = 1000;
 	let lastAddress = "Getting user address...";
 
 	const { isDarkmode, setTheme } = useTheme();
@@ -31,7 +31,7 @@ export default function ({ navigation }) {
 		(async () => {
 		  
 		  let { status } = await Location.requestForegroundPermissionsAsync();
-		  if (status !== 'granted') { setErrorMsg('Permission to access location was denied'); return; }
+		  if (status !== "granted") { setErrorMsg("Permission to access location was denied"); return; }
 	
 		  const interval = setInterval(async () => {
 			
@@ -68,11 +68,11 @@ export default function ({ navigation }) {
 		
 	  }, []);
 	
-	  let locationInfo = '';
-	  let addressInfo = 'Getting user address...';
-	  let cordsInfo = 'Getting user coordinates...';
-	  let timestampInfo = '';
-	  let speedInfo = '';
+	  let locationInfo = "";
+	  let addressInfo = "Getting user address...";
+	  let cordsInfo = "Getting user coordinates...";
+	  let timestampInfo = "";
+	  let speedInfo = "";
 	
 	  if (errorMsg) { text = errorMsg; }
 	  else if (location) {
@@ -82,10 +82,9 @@ export default function ({ navigation }) {
 		cordsInfo = JSON.stringify(cords).replace(/"/g,"");
 		timestampInfo = JSON.stringify(timestamp).replace(/"/g,"");
 
-		// speedInfo = parseInt(JSON.stringify(speed).replace(/"/g,"")) * 2.23694;
-		speedInfo = JSON.stringify(speed);
-		// if (speedInfo < 0) { speedInfo = 0; }
-		console.log(speedInfo);
+		speedInfo = parseFloat(JSON.stringify(speed).replace(/"/g,"")) * 2.23694;
+		if (speedInfo < 0) { speedInfo = 0; }
+		speedInfo = speedInfo.toFixed(1);
 	
 	  }
 
@@ -93,7 +92,7 @@ export default function ({ navigation }) {
 
 		<Layout>
 
-			<View style = {{  alignItems: 'center', flex: 1, backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG }}>
+			<View style = {{  alignItems: "center", flex: 1, backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG }}>
 
 			<View style = {{
 						
