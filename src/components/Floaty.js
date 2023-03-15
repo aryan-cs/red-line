@@ -1,6 +1,6 @@
 import { themeColor, useTheme } from "react-native-rapi-ui";
 import { useCallback } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -13,7 +13,7 @@ import * as VARS from "../../Vars";
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
-export default function Floaty ({style, string, onPress}) {
+export default function Floaty ({style, title, desc, src, onPress}) {
 
   const { theme, isDarkmode } = useTheme();
 
@@ -51,6 +51,12 @@ export default function Floaty ({style, string, onPress}) {
 
           }}>
 
+            <Image
+              source={{
+                uri: 'https://reactnative.dev/img/tiny_logo.png',
+              }}
+              style = {{ height: 200, position: "absolute", zIndex: -1 }} />
+
             {/* image, map, etc as background of floaty */}
 
             <AppTitle style = {{
@@ -58,9 +64,22 @@ export default function Floaty ({style, string, onPress}) {
                 fontSize: 30,
                 marginRight: 7,
                 alignSelf: "flex-end",
-                color: VARS.redlineBrighter
+                textAlign:'right',
+                color: VARS.redlineBrighter,
                 
-            }} string = {string} />
+                
+            }} string = {title} />
+
+            <AppText style = {{
+                
+                fontSize: 18,
+                marginRight: 7,
+                alignSelf: "flex-end",
+                textAlign:'right',
+                color: VARS.redlineBrighter,
+                
+                
+            }} string = {desc} />
 
         </TouchableOpacity>
 

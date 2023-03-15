@@ -72,12 +72,11 @@ export default function ({ navigation }) {
           marginBottom: 20,
         }}>
 
-        <Floaty string = "floaty 1"/>
-        <Floaty string = "floaty 2"/>
-        <Floaty string = "floaty 3"/>
-        <Floaty string = "floaty 4"/>
-        <Floaty string = "floaty 5"/>
-        <Floaty string = "floaty 6"/>
+        <Floaty title = "LAST CRUISE" desc = "You drove at James B. Conant High school"/>
+
+        <Floaty title = "UPCOMING MEET" desc = "March 18 | Schaumburg IKEA | 9:00 PM"/>
+
+        <Floaty title = "WELCOME!" desc = "Thank you for joining Red Line!" src = "../../assets/banner.png"/>
 
       </View>
 

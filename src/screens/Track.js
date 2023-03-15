@@ -23,7 +23,7 @@ export default function ({ navigation }) {
   	const [address, setAddress] = useState(null);
   	const [cords, setCords] = useState(null);
   	const [timestamp, setTimestamp] = useState(null);
-	const [lastUpdated, setLastUpdated] = useState(null);
+	const [lastUpdated, setLastUpdated] = useState("never");
   	const [speed, setSpeed] = useState(0);
   	const [errorMsg, setErrorMsg] = useState(null);
 
