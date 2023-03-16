@@ -1,6 +1,6 @@
 import { themeColor, useTheme } from "react-native-rapi-ui";
 import { useCallback } from 'react';
-import { TouchableOpacity, View, Image } from 'react-native';
+import { TouchableOpacity, View, Image, ImageBackground } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -10,6 +10,8 @@ import AppButton from "../../src/components/AppButton";
 import AppInput from "../../src/components/AppInput";
 
 import * as VARS from "../../Vars";
+
+import MapView from 'react-native-maps';
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
@@ -40,29 +42,37 @@ export default function Floaty ({style, title, desc, src, onPress}) {
           
             marginTop: 15,
             marginRight: 7,
-            padding: 10,
             borderRadius: 10,
             width: 360,
             height: 200,
             zIndex: 1,
             borderColor: "transparent",
-            justifyContent: "flex-end",
             backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : "#1c1c1c",
             ...style
 
           }}>
 
-            <Image
-              source = { require("../../assets/banner.png") }
+            {/* <MapView
+              initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}/> */}
+
+            <ImageBackground
+              source = { src }
               style = {{
                 resizeMode: 'cover',
                 height: 200,
                 width: 360,
                 zIndex: 1,
                 position: "absolute",
+                justifyContent: "flex-end",
+                padding: 10,
                 borderRadius: 10
                 
-              }} />
+              }}>
 
             <AppTitle style = {{
                 
@@ -82,11 +92,13 @@ export default function Floaty ({style, title, desc, src, onPress}) {
                 marginRight: 7,
                 alignSelf: "flex-end",
                 textAlign:'right',
-                zIndex: 2,
+                zIndex: 3,
                 color: isDarkmode ? themeColor.white100 : VARS.lightmodeBGaccent,
                 
                 
             }} string = {desc} />
+
+            </ImageBackground>
 
         </TouchableOpacity>
 

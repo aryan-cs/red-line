@@ -14,7 +14,7 @@ import * as Location from "expo-location";
 
 export default function ({ navigation }) {
 
-	let refresh = 1000;
+	let refresh = 10;
 	let lastAddress = "Getting user address...";
 
 	const { isDarkmode, setTheme } = useTheme();
@@ -35,7 +35,7 @@ export default function ({ navigation }) {
 	
 		  const interval = setInterval(async () => {
 			
-			let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High }).catch(function(error) { return null; });
+			let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest }).catch(function(error) { return null; });
 
 			let timestamp = location.timestamp;
 			let stamp = new Date(timestamp);
