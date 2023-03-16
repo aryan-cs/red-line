@@ -37,9 +37,13 @@ export default function ({ navigation }) {
 			
 			let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest }).catch(function(error) { return null; });
 
-			let timestamp = location.timestamp;
-			let stamp = new Date(timestamp);
-			setLastUpdated("at " + (stamp .getHours() % 12) + ":" + stamp.getMinutes() + ":" + stamp.getSeconds());
+			let stamp = new Date(location.timestamp);
+			let hrs = stamp.getHours() % 12;
+			let mins = stamp.getMinutes();
+			let secs = stamp.getSeconds();
+			if (mins < 10) { mins = "0" + mins; }
+			if (secs < 10) { secs = "0" + secs; }
+			setLastUpdated("at " + hrs + ":" + mins + ":" + secs);
 
 			let address = await Location.reverseGeocodeAsync(location.coords).then((address) => {
 
@@ -84,7 +88,8 @@ export default function ({ navigation }) {
 
 		speedInfo = parseFloat(JSON.stringify(speed).replace(/"/g,"")) * 2.23694;
 		if (speedInfo < 0) { speedInfo = 0; }
-		speedInfo = speedInfo.toFixed(1);
+		if (speedInfo < 10) { speedInfo = speedInfo.toFixed(1); }
+		else { speedInfo = speedInfo.toFixed(0); }
 	
 	  }
 
