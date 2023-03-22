@@ -45,7 +45,7 @@ export default function ({ navigation }) {
             name = {"ios-settings-sharp"}
             style = {{}}
             size = {25}
-            color = { isDarkmode ? themeColor.white100 : VARS.redlineBrighter }/>}
+            color = { isDarkmode ? themeColor.white100 : VARS.redline }/>}
         status = {isDarkmode ? "success" : "warning"}
         onPress = {() => { navigation.navigate("Settings"); }}
         style = {{

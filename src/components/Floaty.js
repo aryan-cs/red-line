@@ -81,7 +81,7 @@ export default function Floaty ({style, title, desc, src, onPress}) {
                 alignSelf: "flex-end",
                 textAlign:'right',
                 zIndex: 3,
-                color: isDarkmode ? themeColor.white100 : VARS.redlineBrighter,
+                color: isDarkmode ? themeColor.white100 : VARS.redline,
                 
                 
             }} string = {title} />

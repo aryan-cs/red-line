@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { View, ActivityIndicator } from "react-native";
 import { Layout, useTheme } from "react-native-rapi-ui";
 
 import AppText from "../../src/components/AppText";
@@ -11,20 +11,28 @@ import Floaty from "../../src/components/Floaty";
 import * as VARS from "../../Vars";
 
 import * as Location from "expo-location";
+import MapView from 'react-native-maps';
 
 export default function ({ navigation }) {
 
-	let refresh = 10;
-	let lastAddress = "Getting user address...";
+	let refresh = 1000;
 
 	const { isDarkmode, setTheme } = useTheme();
 	const [location, setLocation] = useState(null);
   	const [address, setAddress] = useState(null);
+	const [longi, setLongitude] = useState(null);
+	const [lati, setLatitude] = useState(null);
   	const [cords, setCords] = useState(null);
   	const [timestamp, setTimestamp] = useState(null);
 	const [lastUpdated, setLastUpdated] = useState("never");
-  	const [speed, setSpeed] = useState(0);
+  	const [speed, setSpeed] = useState("0");
   	const [errorMsg, setErrorMsg] = useState(null);
+	const mapRef = useRef(null);
+
+	const LOADING = <ActivityIndicator
+						size = "small"
+  						color = {VARS.redline}
+  						style = {{ paddingTop: 5 }}/>;
 
 	useEffect(() => {
 
@@ -47,24 +55,33 @@ export default function ({ navigation }) {
 
 			let address = await Location.reverseGeocodeAsync(location.coords).then((address) => {
 
-				lastAddress = address[0].name;
-				return address[0].name;
+				return JSON.stringify(address[0].name).replace(/"/g,"");
 			
-			}).catch(function(error) { return lastAddress; });
+			}).catch(function(error) { return LOADING });
 
 			let lat = location.coords.latitude;
 			let long = location.coords.longitude;
-			lat = parseFloat(lat).toFixed(5);
-			long = parseFloat(long).toFixed(5);
 			let cords = lat + ", " + long;
+
 
 			let speed = location.coords.speed;
 	
 			setLocation(location);
 			setAddress(address);
 			setCords(cords);
+			setLongitude(long);
+			setLatitude(lat);
 			setTimestamp(timestamp);
 			setSpeed(speed);
+
+			mapRef.current.animateToRegion(({
+				
+				latitude: lat,
+				longitude: long,
+				latitudeDelta: 0.01,
+				longitudeDelta: 0.01,
+
+		  	}), 1 * 1000);
 	
 		  }, refresh);
 	
@@ -73,22 +90,21 @@ export default function ({ navigation }) {
 	  }, []);
 	
 	  let locationInfo = "";
-	  let addressInfo = "Getting user address...";
+	  let addressInfo = LOADING;
 	  let cordsInfo = "Getting user coordinates...";
 	  let timestampInfo = "";
-	  let speedInfo = "";
+	  let speedInfo = "0";
 	
 	  if (errorMsg) { text = errorMsg; }
 	  else if (location) {
 		
 		locationInfo = JSON.stringify(location).replace(/"/g,"");
-		addressInfo = JSON.stringify(address).replace(/"/g,"");
+		addressInfo = address;
 		cordsInfo = JSON.stringify(cords).replace(/"/g,"");
 		timestampInfo = JSON.stringify(timestamp).replace(/"/g,"");
 
 		speedInfo = parseFloat(JSON.stringify(speed).replace(/"/g,"")) * 2.23694;
 		if (speedInfo < 0) { speedInfo = 0; }
-		if (speedInfo < 10) { speedInfo = speedInfo.toFixed(1); }
 		else { speedInfo = speedInfo.toFixed(0); }
 	
 	  }
@@ -97,99 +113,100 @@ export default function ({ navigation }) {
 
 		<Layout>
 
-			<View style = {{  alignItems: "center", flex: 1, backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG }}>
-
-			<View style = {{
-						
-				width: 400,
-				height: 800,
+			<View style = {{ 
+				
+				alignItems: "center",
+				flex: 1,
+				backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
 				marginTop: -60,
 				paddingTop: 60,
-				padding: 15,
-				backgroundColor: isDarkmode ? VARS.darkmodeBGdarker : VARS.lightmodeBG,
-						
+				marginBottom: -60,
+				
 			}}>
 
+				<MapView style = {{
+
+					width: "100%",
+					height: "105%",
+					position: "absolute",
+					top: 0,
+					left: 0,
+					right: 0,
+					bottom: 0,
+					zIndex: -1,
+					
+				}}
+				
+				ref = {mapRef}/>
+
 				<View style = {{
-					
-					alignItems: "center",
-					borderTopRightRadius: 30,
-					borderTopLeftRadius: 30,
-					width: 360,
-					height: 800,
-					padding: 65,
-					backgroundColor: isDarkmode ? VARS.darkmodeBGdarker : VARS.lightmodeBG,
-					
+
+					paddingVertical: 10,
+					paddingHorizontal: 20,
+					backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
+					borderRadius: 999,
+					borderColor: VARS.redline,
+					marginTop: 5,
+
 				}}>
 
-					<View style = {{
+				<AppText style = {{
 						
-						borderRadius: 200,
-						width: 275,
-						height: 275,
-						marginTop: 30,
-						justifyContent: "center",
-						alignItems: "center",
-						backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
+					fontSize: 20,
+					color: VARS.redline,
+					textAlign: "center",
+					justifyContent: "center",
+					alignItems: "center",
 						
-					}}>
-
-						<AppTitle style = {{
-						
-							fontSize: 90,
-							textAlign: "center",
-							color: VARS.redlineBrighter
-						
-						}} string = {speedInfo} />
-
-						<AppTitle style = {{
-						
-							fontSize: 60,
-							textAlign: "center",
-							color: VARS.redlineBrighter
-						
-						}} string = {"MPH"} />
-
-					</View>
-
-					<View style = {{
-						
-						width: 350,
-						justifyContent: "flex-end",
-						alignItems: "flex-start",
-						position: "absolute",
-						bottom: 150,
-						
-					}}>
-
-						<AppText style = {{
-						
-							fontSize: 30,
-							color: VARS.redlineBrighter,
-							marginBottom: 15
-						
-						}} string = {addressInfo} />
-
-						<AppText style = {{
-						
-							fontSize: 20,
-							color: VARS.redlineBrighter,
-							marginBottom: 15
-						
-						}} string = {cordsInfo} />
-
-						<AppText style = {{
-						
-							fontSize: 15,
-							color: VARS.redlineBrighter
-					
-						}} string = {"Last updated " + lastUpdated} />
-
-					</View>
+				}} string = {addressInfo} />
 
 				</View>
 
-			</View>
+				<View style = {{
+						
+					borderRadius: 999,
+					borderColor: VARS.redline,
+					justifyContent: "center",
+					alignItems: "center",
+					position: "absolute",
+					bottom: 42,
+					right: 15,
+					width: 125,
+					height: 125,
+					backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
+
+					// borderWidth: 0,
+					// shadowColor: VARS.redlineaccent,
+    				// shadowOffset: { width: 0, height: 0 },
+    				// shadowOpacity: 1,
+    				// shadowRadius: 4,  
+    				// elevation: 5
+						
+				}}>
+
+					<AppTitle style = {{
+						
+						fontSize: 45,
+						textAlign: "center",
+						color: VARS.redline,
+						textShadowColor: isDarkmode ? VARS.redline : "transparent",
+    					textShadowRadius: 7,
+						paddingHorizontal: 7
+					
+					}} string = {speedInfo} />
+
+					<AppTitle style = {{
+						
+						fontSize: 20,
+						textAlign: "center",
+						color: VARS.redline,
+						textShadowColor: isDarkmode ? VARS.redline : "transparent",
+    					textShadowRadius: 7,
+						paddingHorizontal: 7
+					
+					}} string = {"MPH"} />
+
+					</View>
 
 			</View>
 

@@ -22,12 +22,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/red_line_foreground.png",
-        "backgroundColor": "./assets/red_line_background.png"
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "./assets/icon.png"
       }
     },
     "web": {
-      "favicon": "./assets/red_line.png"
+      "favicon": "./assets/icon.png"
     }
   }
 }

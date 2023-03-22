@@ -103,7 +103,7 @@ export default function ({ navigation }) {
           status = "danger"
           string = "Logout"
           onPress = {() => { signOut(auth); }}
-          style = {{ marginTop: 10, backgroundColor: VARS.redlineBrighter }}
+          style = {{ marginTop: 10, backgroundColor: VARS.redline }}
         />
 
       </View>
