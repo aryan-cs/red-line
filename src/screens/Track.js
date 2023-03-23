@@ -189,7 +189,6 @@ export default function ({ navigation }) {
 					backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
 
 					borderWidth: 0,
-					borderWidth: 0,
 					shadowColor: "black",
     				shadowOffset: { width: 0, height: 3 },
     				shadowOpacity: .3,

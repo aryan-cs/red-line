@@ -70,13 +70,19 @@ export default function ({ navigation }) {
         }}>
 
         <Floaty
-          title = "LAST CRUISE"
-          desc = "You drove at James B. Conant High school" />
+          title = "TEST POST"
+          desc = "This post will eventually become clickable and will lead to a page with more information about the event."
+          />
 
         <Floaty
+          title = "LAST CRUISE"
+          desc = "You drove at James B. Conant High school"
+          src = { require("../../assets/banner.png") }/>
+
+        {/* <Floaty
           title = "UPCOMING MEET"
             desc = "March 18 | Schaumburg IKEA | 9:00 PM"
-            src = {{ uri: "https://instagram.ford4-1.fna.fbcdn.net/v/t51.2885-15/331968637_2175413092659571_5100042604406842280_n.jpg?stp=dst-jpg_e35_s1080x1080&_nc_ht=instagram.ford4-1.fna.fbcdn.net&_nc_cat=107&_nc_ohc=cSv39Qzd8QcAX9FrgdM&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MzA1MjI5NzY3OTg3NTQ3NDE1MQ%3D%3D.2-ccb7-5&oh=00_AfCI9vTkN8wndexmh6GIo6rPYOb7n-TJ21XyLFX-YQXDEA&oe=64179A4F&_nc_sid=1527a3" }}/>
+            src = {{ uri: "https://instagram.ford4-1.fna.fbcdn.net/v/t51.2885-15/331968637_2175413092659571_5100042604406842280_n.jpg?stp=dst-jpg_e35_s1080x1080&_nc_ht=instagram.ford4-1.fna.fbcdn.net&_nc_cat=107&_nc_ohc=cSv39Qzd8QcAX9FrgdM&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MzA1MjI5NzY3OTg3NTQ3NDE1MQ%3D%3D.2-ccb7-5&oh=00_AfCI9vTkN8wndexmh6GIo6rPYOb7n-TJ21XyLFX-YQXDEA&oe=64179A4F&_nc_sid=1527a3" }}/> */}
 
         <Floaty
           title = "WELCOME!"
@@ -88,6 +94,34 @@ export default function ({ navigation }) {
     </ScrollView>
 
     </View>
+
+    <AppButton
+        string = {
+          <Ionicons
+            name = {"ios-add"}
+            style = {{}}
+            size = {35}
+            color = {themeColor.white100}/>}
+        status = {isDarkmode ? "success" : "warning"}
+        onPress = {() => { alert("Feature coming soon!"); }}
+        style = {{
+          width: 70,
+          height: 70,
+          borderRadius: 999,
+          bottom: 90,
+          marginLeft: 310,
+          padding: 0,
+          textAlign: "center",
+          justifyContent: "center",
+          backgroundColor: VARS.redline,
+
+          shadowColor: "black",
+    			shadowOffset: { width: 0, height: 3 },
+    			shadowOpacity: .5,
+    			shadowRadius: 6,  
+    			elevation: 1
+
+        }} />
 
     </View>
 

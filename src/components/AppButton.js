@@ -6,7 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 
 import * as VARS from "../../Vars";
 
-TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
+TouchableOpacity.defaultProps = { activeOpacity: 0.99 };
 
 export default function AppText ({style, string, onPress, disabled}) {
 
