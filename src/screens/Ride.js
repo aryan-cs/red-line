@@ -24,6 +24,7 @@ export default function ({ navigation }) {
 					marginTop: -60,
 					paddingTop: 60,
 					marginBottom: -35,
+					paddingBottom: 35,
 					flex: 1,
 					justifyContent: 'center',
 					backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
@@ -36,7 +37,7 @@ export default function ({ navigation }) {
 					
 					textAlign: "left",
 					paddingLeft: 30,
-					fontSize: 38,
+					fontSize: "40%",
 					color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray
 				}}
 				
@@ -47,7 +48,7 @@ export default function ({ navigation }) {
 				style = {{
 					
 					paddingLeft: 20,
-					fontSize: 100,
+					fontSize: "80%",
 					position: "absolute",
 					color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray
 					

@@ -30,8 +30,6 @@ export default function ({ navigation }) {
 
     <View style = {{
 						
-      width: 400,
-      height: 800,
       marginTop: -60,
       padding: 15,
       paddingTop: 60,
@@ -73,8 +71,7 @@ export default function ({ navigation }) {
 
         <Floaty
           title = "LAST CRUISE"
-          desc = "You drove at James B. Conant High school"
-          src = { require("../../assets/banner.png") }/>
+          desc = "You drove at James B. Conant High school" />
 
         <Floaty
           title = "UPCOMING MEET"

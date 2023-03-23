@@ -15,7 +15,7 @@ import MapView from 'react-native-maps';
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
-export default function Floaty ({style, title, desc, src, onPress}) {
+export default function Floaty ({style, title, desc, src, onPress, background}) {
 
   const { theme, isDarkmode } = useTheme();
 
@@ -40,41 +40,63 @@ export default function Floaty ({style, title, desc, src, onPress}) {
           
           style = {{
           
-            marginTop: 15,
-            marginRight: 7,
-            borderRadius: 10,
-            width: 360,
-            height: 200,
+            alignContent: "center",
+            justifyContent: "center",
+            alignItems: "center",
             zIndex: 1,
             borderColor: "transparent",
-            backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : "#1c1c1c",
             ...style
 
           }}>
 
-            {/* <MapView
-              initialRegion={{
-                latitude: 37.78825,
-                longitude: -122.4324,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-              }}/> */}
+            {src == null ? <View style = {{
+              
+              backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : "#1c1c1c",
+              borderRadius: 10,
+              zIndex: 2}}>
 
+              <AppTitle style = {{
+                
+                fontSize: 30,
+                paddingHorizontal: 10,
+                alignContent: "flex-end",
+                textAlign: "right",
+
+                color: isDarkmode ? themeColor.white100 : VARS.redline,
+                
+              }} string = {title} />
+
+              <AppText style = {{
+
+                fontSize: 15,
+                paddingHorizontal: 10,
+                alignContent: "flex-end",
+                textAlign: "right",
+                color: isDarkmode ? themeColor.white100 : VARS.lightmodeBGaccent,
+                 
+              }} string = {desc} />
+
+            </View> 
+              
+            :
+              
             <ImageBackground
-              source = { src }
+              source = {src}
               style = {{
+
                 resizeMode: 'cover',
-                height: 200,
-                width: 360,
+                height: "100%",
+                width: "100%",
                 zIndex: 1,
                 position: "absolute",
                 justifyContent: "flex-end",
                 padding: 10,
-                borderRadius: 10
-                
+                borderRadius: 10,
+                backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : "#1c1c1c",
+
               }}>
 
-            <AppTitle style = {{
+              <AppTitle style = {{
                 
                 fontSize: 30,
                 marginRight: 7,
@@ -83,10 +105,9 @@ export default function Floaty ({style, title, desc, src, onPress}) {
                 zIndex: 3,
                 color: isDarkmode ? themeColor.white100 : VARS.redline,
                 
-                
-            }} string = {title} />
+              }} string = {title} />
 
-            <AppText style = {{
+              <AppText style = {{
                 
                 fontSize: 18,
                 marginRight: 7,
@@ -95,10 +116,9 @@ export default function Floaty ({style, title, desc, src, onPress}) {
                 zIndex: 3,
                 color: isDarkmode ? themeColor.white100 : VARS.lightmodeBGaccent,
                 
+              }} string = {desc} />
                 
-            }} string = {desc} />
-
-            </ImageBackground>
+            </ImageBackground>}
 
         </TouchableOpacity>
 

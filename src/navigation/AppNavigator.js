@@ -71,8 +71,16 @@ const MainTabs = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
+          
           borderTopColor: isDarkmode ? themeColor.dark100 : "#c0c0c0",
           backgroundColor: isDarkmode ? themeColor.dark200 : "#ffffff",
+          borderWidth: 0,
+					shadowColor: "black",
+    			shadowOffset: { width: 0, height: 3 },
+    			shadowOpacity: .3,
+    			shadowRadius: 4,  
+    			elevation: 1,
+
         },
       }}
     >

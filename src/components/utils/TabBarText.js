@@ -11,7 +11,6 @@ export default (props) => {
 
     <AppText
       style = {{
-        marginBottom: 5,
         color: props.focused
           ? isDarkmode
             ? themeColor.white100

@@ -25,14 +25,14 @@ export default function ({ navigation }) {
   	const [cords, setCords] = useState(null);
   	const [timestamp, setTimestamp] = useState(null);
 	const [lastUpdated, setLastUpdated] = useState("never");
-  	const [speed, setSpeed] = useState("0");
+  	const [speed, setSpeed] = useState(null);
   	const [errorMsg, setErrorMsg] = useState(null);
 	const mapRef = useRef(null);
 
 	const LOADING = <ActivityIndicator
 						size = "small"
   						color = {VARS.redline}
-  						style = {{ paddingTop: 5 }}/>;
+  						style = {{ paddingTop: 6 }}/>;
 
 	useEffect(() => {
 
@@ -81,7 +81,7 @@ export default function ({ navigation }) {
 				latitudeDelta: 0.01,
 				longitudeDelta: 0.01,
 
-		  	}), 1 * 1000);
+		  	}), 1000);
 	
 		  }, refresh);
 	
@@ -93,7 +93,7 @@ export default function ({ navigation }) {
 	  let addressInfo = LOADING;
 	  let cordsInfo = "Getting user coordinates...";
 	  let timestampInfo = "";
-	  let speedInfo = "0";
+	  let speedInfo = "--";
 	
 	  if (errorMsg) { text = errorMsg; }
 	  else if (location) {
@@ -105,7 +105,10 @@ export default function ({ navigation }) {
 
 		speedInfo = parseFloat(JSON.stringify(speed).replace(/"/g,"")) * 2.23694;
 		if (speedInfo < 0) { speedInfo = 0; }
+		else if (speedInfo < 10) { speedInfo = speedInfo.toFixed(1); }
 		else { speedInfo = speedInfo.toFixed(0); }
+
+		// console.log(speedInfo);
 	
 	  }
 
@@ -118,9 +121,9 @@ export default function ({ navigation }) {
 				alignItems: "center",
 				flex: 1,
 				backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
-				marginTop: -60,
-				paddingTop: 60,
-				marginBottom: -60,
+				marginTop: -120,
+				paddingTop: 120,
+				marginBottom: -120,
 				
 			}}>
 
@@ -137,7 +140,10 @@ export default function ({ navigation }) {
 					
 				}}
 				
-				ref = {mapRef}/>
+				ref = {mapRef}
+				userInterfaceStyle = {isDarkmode ? "dark" : "light"}
+				// customMapStyle = {mapStyle}
+				/>
 
 				<View style = {{
 
@@ -147,6 +153,13 @@ export default function ({ navigation }) {
 					borderRadius: 999,
 					borderColor: VARS.redline,
 					marginTop: 5,
+
+					borderWidth: 0,
+					shadowColor: "black",
+    				shadowOffset: { width: 0, height: 3 },
+    				shadowOpacity: .3,
+    				shadowRadius: 4,  
+    				elevation: 1,
 
 				}}>
 
@@ -169,18 +182,19 @@ export default function ({ navigation }) {
 					justifyContent: "center",
 					alignItems: "center",
 					position: "absolute",
-					bottom: 42,
-					right: 15,
+					bottom: "12%",
+					right: "3%",
 					width: 125,
 					height: 125,
 					backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
 
-					// borderWidth: 0,
-					// shadowColor: VARS.redlineaccent,
-    				// shadowOffset: { width: 0, height: 0 },
-    				// shadowOpacity: 1,
-    				// shadowRadius: 4,  
-    				// elevation: 5
+					borderWidth: 0,
+					borderWidth: 0,
+					shadowColor: "black",
+    				shadowOffset: { width: 0, height: 3 },
+    				shadowOpacity: .3,
+    				shadowRadius: 4,  
+    				elevation: 1
 						
 				}}>
 
@@ -189,9 +203,10 @@ export default function ({ navigation }) {
 						fontSize: 45,
 						textAlign: "center",
 						color: VARS.redline,
-						textShadowColor: isDarkmode ? VARS.redline : "transparent",
-    					textShadowRadius: 7,
-						paddingHorizontal: 7
+						
+						// textShadowColor: isDarkmode ? VARS.redline : "transparent",
+    					// textShadowRadius: 7,
+						// paddingHorizontal: 7
 					
 					}} string = {speedInfo} />
 
@@ -200,9 +215,10 @@ export default function ({ navigation }) {
 						fontSize: 20,
 						textAlign: "center",
 						color: VARS.redline,
-						textShadowColor: isDarkmode ? VARS.redline : "transparent",
-    					textShadowRadius: 7,
-						paddingHorizontal: 7
+
+						// textShadowColor: isDarkmode ? VARS.redline : "transparent",
+    					// textShadowRadius: 7,
+						// paddingHorizontal: 7
 					
 					}} string = {"MPH"} />
 
