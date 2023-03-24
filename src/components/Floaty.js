@@ -33,15 +33,16 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
   const content = (type) => {
 
     var col = [themeColor.white100, VARS.lightmodeBGaccent];
+    var offset = 0;
 
-    if (type === "map") { col = [themeColor.white100, VARS.darkmodeBGaccent]; }
+    if (type === "map") { col = [themeColor.white100, VARS.darkmodeBGaccent]; offset = 10; }
 
     return (<>
 
       <AppTitle style = {{
                 
         fontSize: 30,
-        marginHorizontal: 16,
+        marginHorizontal: 13,
         alignSelf: "flex-end",
         textAlign:'right',
         zIndex: 3,
@@ -52,8 +53,8 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
       <AppText style = {{
                 
         fontSize: 14,
-        marginHorizontal: 16,
-        marginBottom: 22,
+        marginHorizontal: 13,
+        marginBottom: 12 + offset,
         alignSelf: "flex-end",
         textAlign:'right',
         zIndex: 3,
