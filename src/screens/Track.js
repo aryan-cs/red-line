@@ -78,8 +78,8 @@ export default function ({ navigation }) {
 				
 				latitude: lat,
 				longitude: long,
-				latitudeDelta: 0.01,
-				longitudeDelta: 0.01,
+				latitudeDelta: 0.015,
+				longitudeDelta: 0.015,
 
 		  	}), 1000);
 	
