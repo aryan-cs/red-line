@@ -80,8 +80,13 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
         zIndex: 1,
         width: 360,
         height: 200,
-        marginVertical: 10,
         borderColor: "transparent",
+        padding: 8,
+        shadowColor: "black",
+    		shadowOffset: { width: 0, height: 2 },
+    		shadowOpacity: .5,
+    		shadowRadius: 4,  
+    		elevation: 1,
         ...style
 
       }}>
@@ -127,8 +132,13 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
           zIndex: 1,
           width: 360,
           height: 200,
-          marginVertical: 10,
           borderColor: "transparent",
+          padding: 8,
+          shadowColor: "black",
+    		  shadowOffset: { width: 0, height: 2 },
+    		  shadowOpacity: .5,
+    		  shadowRadius: 4,  
+    		  elevation: 1,
           ...style
 
         }}>
@@ -199,8 +209,13 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
             zIndex: 1,
             width: 360,
             height: 200,
-            marginVertical: 10,
             borderColor: "transparent",
+            padding: 8,
+            shadowColor: "black",
+    		    shadowOffset: { width: 0, height: 2 },
+    		    shadowOpacity: .5,
+    		    shadowRadius: 4,  
+    		    elevation: 1,
             ...style
 
           }}>

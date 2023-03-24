@@ -105,7 +105,7 @@ export default function ({ navigation }) {
           width: 70,
           height: 70,
           borderRadius: 999,
-          bottom: 90,
+          bottom: 45,
           marginLeft: 310,
           padding: 0,
           textAlign: "center",

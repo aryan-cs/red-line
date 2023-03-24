@@ -74,10 +74,11 @@ const MainTabs = () => {
           
           borderTopColor: isDarkmode ? themeColor.dark100 : "#c0c0c0",
           backgroundColor: isDarkmode ? themeColor.dark200 : "#ffffff",
+          paddingTop: 8,
           borderWidth: 0,
 					shadowColor: "black",
     			shadowOffset: { width: 0, height: 3 },
-    			shadowOpacity: .3,
+    			shadowOpacity: .75,
     			shadowRadius: 4,  
     			elevation: 1,
 
