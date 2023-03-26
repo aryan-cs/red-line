@@ -31,13 +31,12 @@ export default function ({ navigation }) {
     <View style = {{
 						
       marginTop: -60,
-      padding: 15,
       paddingTop: 60,
       backgroundColor: isDarkmode ? VARS.darkmodeBGdarker : VARS.lightmodeBG,
                 
     }}>
 
-      <AppButton
+      {/* <AppButton
         string = {
           <Ionicons
             name = {"ios-settings-sharp"}
@@ -57,7 +56,7 @@ export default function ({ navigation }) {
           justifyContent: "center",
           backgroundColor: "transparent"
 
-        }} />
+        }} /> */}
 
     <ScrollView contentContainerStyle = {{ flexGrow: 1 }}>
 
@@ -66,8 +65,14 @@ export default function ({ navigation }) {
           alignItems: "center",
           justifyContent: "center",
           marginHorizontal: 20,
-          marginBottom: 20,
+          marginBottom: 100,
         }}>
+
+        <Floaty
+          title = "NEXT MEET"
+          desc = "Information for the next car meet will be posted here."
+          src = {{ uri: "https://static1.hotcarsimages.com/wordpress/wp-content/uploads/2021/05/shutterstock_1327560506.jpg" }}
+        />
 
         <Floaty
           title = "TEST POST"
@@ -105,7 +110,7 @@ export default function ({ navigation }) {
           width: 70,
           height: 70,
           borderRadius: 999,
-          bottom: 45,
+          bottom: 90,
           marginLeft: 310,
           padding: 0,
           textAlign: "center",

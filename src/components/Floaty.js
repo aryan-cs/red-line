@@ -78,7 +78,7 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
         justifyContent: "center",
         alignItems: "center",
         zIndex: 1,
-        width: 360,
+        width: 370,
         height: 200,
         borderColor: "transparent",
         padding: 8,
@@ -93,6 +93,7 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
 
           <ImageBackground
             source = {src}
+            imageStyle = {{ borderRadius: 10 }}
             style = {{
 
               resizeMode: 'stretch',
@@ -106,7 +107,19 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
 
             }}>
 
+              <View style = {{
+
+                height: "100%",
+                width: "100%",
+                backgroundColor: "rgba(0, 0, 0, 0.25)",
+                justifyContent: "flex-end",
+                borderRadius: 10,
+
+              }}>
+
               {content("image")}
+
+              </View>
                 
             </ImageBackground>
 
@@ -130,7 +143,7 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
           justifyContent: "center",
           alignItems: "center",
           zIndex: 1,
-          width: 360,
+          width: 370,
           height: 200,
           borderColor: "transparent",
           padding: 8,
@@ -207,7 +220,7 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
             justifyContent: "center",
             alignItems: "center",
             zIndex: 1,
-            width: 360,
+            width: 370,
             height: 200,
             borderColor: "transparent",
             padding: 8,
