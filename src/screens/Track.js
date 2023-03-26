@@ -107,8 +107,6 @@ export default function ({ navigation }) {
 		if (speedInfo < 0) { speedInfo = 0; }
 		else if (speedInfo < 10) { speedInfo = speedInfo.toFixed(1); }
 		else { speedInfo = speedInfo.toFixed(0); }
-
-		// console.log(speedInfo);
 	
 	  }
 
@@ -139,7 +137,6 @@ export default function ({ navigation }) {
 					zIndex: -1,
 					
 				}}
-				
 				ref = {mapRef}
 				userInterfaceStyle = {isDarkmode ? "dark" : "light"}
 				// customMapStyle = {mapStyle}

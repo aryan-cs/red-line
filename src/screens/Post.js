@@ -38,8 +38,6 @@ export default function ({ navigation }) {
       
     }}>
 
-      <View style = {{ flexDirection: "row", backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG, }}>
-
         <AppButton
           string = {
             <Ionicons
@@ -62,48 +60,25 @@ export default function ({ navigation }) {
 
       <AppTitle
       
-        string = "SETTINGS"
+        string = "POST"
         style = {{
 
-          padding: 20,
-          paddingTop: 10,
-          marginLeft: 60,
+          marginTop: -40,
           fontSize: 25,
           textAlign: "center",
           justifyContent: "center",
           color: isDarkmode ? themeColor.white100 : themeColor.black
 
-
         }}/>
 
-      </View>
+      <View style = {{ flex: 1, padding: 30 }}>
 
-      <View style = {{ flex: 1, padding: 15 }}>
-
-        <AppButton
-          string = "Contact Us"
-          status = {isDarkmode ? "success" : "warning"}
-          onPress = {() => { alert("Feature coming soon!"); }}
-          style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.midGray }}/>
-
-        <AppButton
-          string = "Report an Issue"
-          status = {isDarkmode ? "success" : "warning"}
-          onPress = {() => { alert("Feature coming soon!"); }}
-          style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.midGray }}/>
-
-        <AppButton
-          string = {isDarkmode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-          status = {isDarkmode ? "success" : "warning"}
-          onPress = {() => { if (isDarkmode) { setTheme("light"); } else { setTheme("dark"); }}}
-          style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.midGray }}/>
-
-        <AppButton
-          status = "danger"
-          string = "Logout"
-          onPress = {() => { signOut(auth); }}
-          style = {{ marginTop: 10, backgroundColor: VARS.redline }}
-        />
+        <AppText
+          string = "This is a post."
+          style = {{
+            fontSize: 20,
+            color: isDarkmode ? themeColor.white100 : themeColor.black
+          }}/>
 
       </View>
       

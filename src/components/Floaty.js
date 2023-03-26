@@ -14,11 +14,25 @@ import MapView from 'react-native-maps';
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.95 };
 
-export default function Floaty ({style, title, desc, src, cords, onPress, background}) {
+export default function Floaty ({style, title, desc, src, cords, background, navigate, navigation}) {
 
   const { theme, isDarkmode } = useTheme();
   const mapRef = useRef(null);
   const radius = 18;
+
+  const onPress = () => {
+
+    if (cords == undefined && cords == null && src == undefined && src == null) {
+
+      navigation.navigate("Post", { cords: cords });
+
+    } else {
+
+      navigation.navigate("Post");
+
+    }
+
+  }
 
   const [fontsLoaded] = useFonts({
     'Barlow': require('../../assets/fonts/barlow.ttf'),
