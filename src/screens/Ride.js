@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import { Layout, useTheme } from 'react-native-rapi-ui';
+import { Layout, useTheme, themeColor } from 'react-native-rapi-ui';
 
 import AppText from "../components/AppText";
 import AppTitle from "../components/AppTitle";
@@ -9,6 +9,8 @@ import AppInput from "../components/AppInput";
 import Floaty from "../components/Floaty";
 
 import * as VARS from "../../Vars";
+
+import { Ionicons } from "@expo/vector-icons";
 
 export default function ({ navigation }) {
 
@@ -20,23 +22,40 @@ export default function ({ navigation }) {
 
 			<View style = {{
 
-					height: 1000,
 					marginTop: -60,
 					paddingTop: 60,
 					marginBottom: -35,
 					paddingBottom: 35,
+					padding: 30,
 					flex: 1,
 					justifyContent: 'center',
 					backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
 
 				}}>
 
+			<AppButton
+        	string = {
+          		<Ionicons
+            		name = {"ios-settings-sharp"}
+            		style = {{}}
+            		size = {25}
+            		color = { isDarkmode ? themeColor.white100 : VARS.midGray }/>}
+        	status = {isDarkmode ? "success" : "warning"}
+        	onPress = {() => { navigation.navigate("Settings"); }}
+        	style = {{
+          		width: 80,
+          		height: 80,
+				position: "absolute",
+				top: -80,
+				right: -30,
+          		backgroundColor: "transparent"
+			 }} />
+
 				<AppTitle
 				
 				style = {{
 					
 					textAlign: "left",
-					paddingLeft: 30,
 					fontSize: "40%",
 					color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray
 				}}
@@ -47,7 +66,6 @@ export default function ({ navigation }) {
 				
 				style = {{
 					
-					paddingLeft: 20,
 					fontSize: "80%",
 					position: "absolute",
 					color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray
@@ -61,7 +79,6 @@ export default function ({ navigation }) {
 					style = {{
 
 						top: 40,
-						left: 30,
 						width: 530,
     					height: 350,
 						resizeMode: 'stretch',
@@ -70,7 +87,7 @@ export default function ({ navigation }) {
 
 					source = {{ uri: "https://platform.cstatic-images.com/xlarge/in/v2/stock_photos/2c9ffe7c-be6b-42fd-8ba0-045467e4c0c0/6fe7cda2-6e61-4197-ae03-7d9bd29af358.png" }} />
 
-				<View style = {{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 50, paddingLeft: 30, paddingRight: 30 }}>
+				<View style = {{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 50 }}>
 
 					<AppText string = "MK5" style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
 					<AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
@@ -82,7 +99,7 @@ export default function ({ navigation }) {
 
 				</View>
 
-				<AppTitle string = "12,345 miles" style = {{ paddingHorizontal: 30, marginTop: 20, fontSize: 30, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray, textAlign: "right" }} />
+				<AppTitle string = "12,345 miles" style = {{ marginTop: 20, fontSize: 30, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray, textAlign: "right" }} />
 
 			</View>
 

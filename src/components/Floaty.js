@@ -18,6 +18,7 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
 
   const { theme, isDarkmode } = useTheme();
   const mapRef = useRef(null);
+  const radius = 18;
 
   const [fontsLoaded] = useFonts({
     'Barlow': require('../../assets/fonts/barlow.ttf'),
@@ -72,7 +73,7 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
 
       <View onLayout = {onLayoutRootView}>
 
-      <TouchableOpacity style = {{
+      <TouchableOpacity onPress = {onPress} style = {{
           
         alignContent: "center",
         justifyContent: "center",
@@ -93,7 +94,7 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
 
           <ImageBackground
             source = {src}
-            imageStyle = {{ borderRadius: 10 }}
+            imageStyle = {{ borderRadius: radius }}
             style = {{
 
               resizeMode: 'stretch',
@@ -102,7 +103,7 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
               zIndex: 1,
               position: "absolute",
               justifyContent: "flex-end",
-              borderRadius: 10,
+              borderRadius: radius,
               backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : "#1c1c1c",
 
             }}>
@@ -113,7 +114,7 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
                 width: "100%",
                 backgroundColor: "rgba(0, 0, 0, 0.25)",
                 justifyContent: "flex-end",
-                borderRadius: 10,
+                borderRadius: radius,
 
               }}>
 
@@ -137,7 +138,7 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
     
       <View onLayout = {onLayoutRootView}>
 
-        <TouchableOpacity style = {{
+        <TouchableOpacity onPress = {onPress} style = {{
           
           alignContent: "center",
           justifyContent: "center",
@@ -159,7 +160,7 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
           <View style = {{
 
               backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : "#1c1c1c",
-              borderRadius: 10,
+              borderRadius: radius,
               height: "100%",
               width: "100%",
               justifyContent: "flex-end",
@@ -176,7 +177,7 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
               bottom: 0,
               width: "100%",
               height: "100%",
-              borderRadius: 10,
+              borderRadius: radius,
 
             }}
 
@@ -212,31 +213,29 @@ export default function Floaty ({style, title, desc, src, cords, onPress, backgr
     
       <View onLayout = {onLayoutRootView}>
 
-        <TouchableOpacity
+        <TouchableOpacity onPress = {onPress} style = {{
             
-          style = {{
-            
-            alignContent: "center",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 1,
-            width: 370,
-            height: 200,
-            borderColor: "transparent",
-            padding: 8,
-            shadowColor: "black",
-    		    shadowOffset: { width: 0, height: 2 },
-    		    shadowOpacity: .5,
-    		    shadowRadius: 4,  
-    		    elevation: 1,
-            ...style
+          alignContent: "center",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 1,
+          width: 370,
+          height: 200,
+          borderColor: "transparent",
+          padding: 8,
+          shadowColor: "black",
+    		  shadowOffset: { width: 0, height: 2 },
+    		  shadowOpacity: .5,
+    		  shadowRadius: 4,  
+    		  elevation: 1,
+          ...style
 
-          }}>
+        }}>
 
               <View style = {{
 
                 backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : "#1c1c1c",
-                borderRadius: 10,
+                borderRadius: radius,
                 height: "100%",
                 width: "100%",
                 justifyContent: "flex-end",

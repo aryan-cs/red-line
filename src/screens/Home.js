@@ -2,7 +2,6 @@ import React from "react";
 import { View, Linking, ScrollView } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
 import {
-  Layout,
   useTheme,
   themeColor
 } from "react-native-rapi-ui";
@@ -33,28 +32,6 @@ export default function ({ navigation }) {
       backgroundColor: isDarkmode ? VARS.darkmodeBGdarker : VARS.lightmodeBG,
                 
     }}>
-
-      {/* <AppButton
-        string = {
-          <Ionicons
-            name = {"ios-settings-sharp"}
-            style = {{}}
-            size = {25}
-            color = { isDarkmode ? themeColor.white100 : VARS.redline }/>}
-        status = {isDarkmode ? "success" : "warning"}
-        onPress = {() => { navigation.navigate("Settings"); }}
-        style = {{
-          width: 40,
-          height: 40,
-          borderRadius: 50,
-          top: -10,
-          marginLeft: 330,
-          padding: 0,
-          textAlign: "center",
-          justifyContent: "center",
-          backgroundColor: "transparent"
-
-        }} /> */}
 
     <ScrollView contentContainerStyle = {{ flexGrow: 1 }}>
 
