@@ -24,8 +24,6 @@ export default function ({ navigation }) {
 
   return (
 
-    <Layout>
-
     <View style = {{ flex: 1, backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG }}>
 
     <View style = {{
@@ -65,7 +63,8 @@ export default function ({ navigation }) {
           alignItems: "center",
           justifyContent: "center",
           marginHorizontal: 20,
-          marginBottom: 100,
+          marginTop: 60,
+          marginBottom: 60
         }}>
 
         <Floaty
@@ -126,8 +125,6 @@ export default function ({ navigation }) {
         }} />
 
     </View>
-
-    </Layout>
 
   );
 
