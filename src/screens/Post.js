@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { ImageBackground, View } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
 import {
   Layout,
@@ -30,13 +30,13 @@ export default function ({ navigation }) {
       
       flex: 1,
       backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
-      width: 400,
-      height: 800,
       marginTop: -60,
       paddingTop: 60,
       marginBottom: -35
       
     }}>
+
+      <View style = {{ flexDirection: "row", backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG, }}>
 
         <AppButton
           string = {
@@ -58,30 +58,34 @@ export default function ({ navigation }) {
 
           }} />
 
-      <AppTitle
-      
-        string = "POST"
-        style = {{
+      </View>
 
-          marginTop: -40,
-          fontSize: 25,
-          textAlign: "center",
+      <View style = {{ flex: 1 }}>
+
+        <View style = {{
+          alignContent: "center",
           justifyContent: "center",
-          color: isDarkmode ? themeColor.white100 : themeColor.black
+          alignItems: "center",
+        }}>
 
-        }}/>
+            <AppTitle
+              string = {"POST"}
+              style = {{
 
-      <View style = {{ flex: 1, padding: 30 }}>
+                fontSize: 50,
+                marginHorizontal: 0,
+                marginVertical: 10,
+                color: VARS.redline,
+                fontWeight: "bold",
+                textAlign: "right",
+                backgroundColor: "transparent"
 
-        <AppText
-          string = "This is a post."
-          style = {{
-            fontSize: 20,
-            color: isDarkmode ? themeColor.white100 : themeColor.black
-          }}/>
+              }} />
 
       </View>
       
+    </View>
+
     </View>
 
     </Layout>
