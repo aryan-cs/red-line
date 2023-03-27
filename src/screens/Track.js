@@ -43,7 +43,10 @@ export default function ({ navigation }) {
 	
 		  const interval = setInterval(async () => {
 			
-			let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest }).catch(function(error) { return null; });
+			let location = await Location.getCurrentPositionAsync({
+				accuracy: Location.Accuracy.BestForNavigation,
+				activityType: Location.ActivityType.AutomotiveNavigation,
+			}).catch(function(error) { return null; });
 
 			let stamp = new Date(location.timestamp);
 			let hrs = stamp.getHours() % 12;
@@ -63,8 +66,8 @@ export default function ({ navigation }) {
 			let long = location.coords.longitude;
 			let cords = lat + ", " + long;
 
-
 			let speed = location.coords.speed;
+			console.log(speed);
 	
 			setLocation(location);
 			setAddress(address);
@@ -81,7 +84,7 @@ export default function ({ navigation }) {
 				latitudeDelta: 0.015,
 				longitudeDelta: 0.015,
 
-		  	}), 1000);
+		  	}), refresh);
 	
 		  }, refresh);
 	
