@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
 import {
   Layout,
@@ -30,35 +30,39 @@ export default function ({ navigation }) {
       
       flex: 1,
       backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
-      width: 400,
-      height: 800,
       marginTop: -60,
       paddingTop: 60,
       marginBottom: -35
       
     }}>
 
-      <View style = {{ flexDirection: "row", backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG, }}>
+          <TouchableOpacity
+						style = {{
+							width: 80,
+							height: 80,
+							marginHorizontal: 20,
+							marginVertical: 10,
+							textAlign: "center",
+							backgroundColor: "transparent"
+						}}
+						onPress = {() => { navigation.goBack(); }}>
+							
+						<Ionicons
+							name = {"md-chevron-back"}
+							style = {{}}
+							size = {25}
+							color = { isDarkmode ? themeColor.white100 : "black" }/>
 
-        <AppButton
-          string = {
-            <Ionicons
-              name = {"chevron-back"}
-              style = {{}}
-              size = {25}
-              color = { isDarkmode ? themeColor.white100 : themeColor.black }/>}
-          status = {isDarkmode ? "success" : "warning"}
-          onPress = {() => { navigation.goBack(); }}
-          style = {{
-            width: 50,
-            height: 50,
-            borderRadius: 50,
-            padding: 0,
-            left: 10,
-            justifyContent: "center",
-            backgroundColor: "transparent"
+					</TouchableOpacity>
 
-          }} />
+      <View style = {{
+        backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
+        textAlign: "center",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "row",
+
+      }}>
 
       <AppTitle
       
@@ -66,9 +70,7 @@ export default function ({ navigation }) {
         style = {{
 
           padding: 20,
-          paddingTop: 10,
-          marginLeft: 60,
-          fontSize: 25,
+          fontSize: 45,
           textAlign: "center",
           justifyContent: "center",
           color: isDarkmode ? themeColor.white100 : themeColor.black
