@@ -22,34 +22,16 @@ export default function ({ navigation }) {
 
 			<View style = {{
 
-					marginTop: -60,
-					paddingTop: 60,
-					marginBottom: -35,
-					paddingBottom: 35,
-					padding: 30,
-					flex: 1,
-					justifyContent: 'center',
-					backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
+				marginTop: -60,
+				paddingTop: 60,
+				marginBottom: -35,
+				paddingBottom: 35,
+				padding: 30,
+				flex: 1,
+				justifyContent: 'center',
+				backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
 
-				}}>
-
-			<AppButton
-        	string = {
-          		<Ionicons
-            		name = {"ios-settings-sharp"}
-            		style = {{}}
-            		size = {25}
-            		color = { isDarkmode ? themeColor.white100 : VARS.midGray }/>}
-        	status = {isDarkmode ? "success" : "warning"}
-        	onPress = {() => { navigation.navigate("Settings"); }}
-        	style = {{
-          		width: 80,
-          		height: 80,
-				position: "absolute",
-				top: -80,
-				right: -30,
-          		backgroundColor: "transparent"
-			 }} />
+			}}>
 
 				<AppTitle
 				

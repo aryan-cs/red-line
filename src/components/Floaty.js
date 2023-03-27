@@ -18,7 +18,7 @@ export default function Floaty ({style, title, desc, src, cords, background, nav
 
   const { theme, isDarkmode } = useTheme();
   const mapRef = useRef(null);
-  const radius = 18;
+  const radius = 12;
 
   const onPress = () => {
 

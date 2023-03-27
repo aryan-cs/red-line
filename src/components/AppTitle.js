@@ -28,6 +28,7 @@ export default function AppText ({style, string}) {
         
         color: isDarkmode ? themeColor.white : themeColor.black,
         fontFamily: "Montserrat",
+        paddingHorizontal: 5,
         ...style
       
       }}

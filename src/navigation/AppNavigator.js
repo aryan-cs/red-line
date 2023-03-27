@@ -11,10 +11,11 @@ import TabBarText from "../components/utils/TabBarText";
 // Screens
 import Home from "../screens/Home";
 import Settings from "../screens/Settings";
-import Post from "../screens/Post";
 import Ride from "../screens/Ride";
 import Track from "../screens/Track";
+import Profile from "../screens/Profile";
 import Loading from "../screens/utils/Loading";
+import Post from "../screens/Post";
 
 // Auth screens
 import Login from "../screens/auth/Login";
@@ -126,8 +127,24 @@ const MainTabs = () => {
           ),
         }}
       />
+
+      <Tabs.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarLabel: ({ focused }) => (
+            <TabBarText focused={focused} title="Profile" />
+          ),
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} icon={"ios-person-circle"} />
+          ),
+        }}
+      />
+
     </Tabs.Navigator>
+
   );
+  
 };
 
 export default () => {
