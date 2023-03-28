@@ -67,7 +67,7 @@ export default function ({ navigation }) {
 			let cords = lat + ", " + long;
 
 			let speed = location.coords.speed;
-			console.log(speed);
+			// console.log(speed);
 	
 			setLocation(location);
 			setAddress(address);

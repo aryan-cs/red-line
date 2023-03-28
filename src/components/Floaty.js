@@ -10,6 +10,7 @@ import AppButton from "../../src/components/AppButton";
 import AppInput from "../../src/components/AppInput";
 
 import * as VARS from "../../Vars";
+import * as db from "../../Firebase";
 import MapView from 'react-native-maps';
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.95 };
@@ -22,15 +23,17 @@ export default function Floaty ({style, title, desc, src, cords, background, nav
 
   const onPress = () => {
 
-    if (cords == undefined && cords == null && src == undefined && src == null) {
+    db.saveRide("Honda", "Civic", 2019, "Black", "1.5L", 180, 0);
 
-      navigation.navigate("Post", { cords: cords });
+    // if (cords == undefined && cords == null && src == undefined && src == null) {
 
-    } else {
+    //   navigation.navigate("Post", { cords: cords });
 
-      navigation.navigate("Post");
+    // } else {
 
-    }
+    //   navigation.navigate("Post");
+
+    // }
 
   }
 
