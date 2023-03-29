@@ -15,7 +15,7 @@ import MapView from 'react-native-maps';
 
 export default function ({ navigation }) {
 
-	let refresh = 100000;
+	let refresh = 1000;
 
 	const { isDarkmode, setTheme } = useTheme();
 	const [location, setLocation] = useState(null);
@@ -83,9 +83,9 @@ export default function ({ navigation }) {
 				latitudeDelta: 0.015,
 				longitudeDelta: 0.015,
 
-		  	}), refresh).catch(function(error) { return null; });
+		  	}), refresh);
 	
-		  }, refresh).catch(function(error) { return null; });
+		  }, refresh);
 	
 		})();
 		

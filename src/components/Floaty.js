@@ -23,18 +23,19 @@ export default function Floaty ({style, title, desc, src, cords, background, nav
 
   const onPress = () => {
 
-    db.saveRide("Honda", "Civic", 2019, "Black", "1.5L", 180, 0);
-    db.saveUser("Admin Account", "admin", "admin@gmail.com", "password");
+    // db.saveRide("Honda", "Civic", 2019, "Black", "1.5L", 180, 0);
+    // db.saveUser("Admin Account", "admin", "admin@gmail.com", "password");
+    // db.getUser();
 
-    // if (cords == undefined && cords == null && src == undefined && src == null) {
+    if (cords == undefined && cords == null && src == undefined && src == null) {
 
-    //   navigation.navigate("Post", { cords: cords });
+      navigation.navigate("Post", { cords: cords });
 
-    // } else {
+    } else {
 
-    //   navigation.navigate("Post");
+      navigation.navigate("Post");
 
-    // }
+    }
 
   }
 

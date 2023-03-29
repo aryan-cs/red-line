@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, setDoc } from "firebase/firestore"; 
+import { getFirestore, collection, doc, setDoc, getDoc } from "firebase/firestore"; 
 
 const firebaseConfig = {
     apiKey: "AIzaSyCt9YHjNGMBL1g9RYPkzEhPBVtn74991MQ",
@@ -52,5 +52,16 @@ export async function saveUser (username, email, password) {
     })
     .then(() => { console.log("User saved!"); })
     .catch((error) => { console.log("Error saving user: " + error); });
+
+}
+
+export async function getUser () {
+
+    const docRef = doc(db, "users", auth.currentUser.uid, "info", "personal");
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) { return docSnap.data(); }
+
+    else { return null; }
 
 }
