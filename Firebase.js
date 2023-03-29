@@ -18,17 +18,12 @@ export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
 
-export async function saveImage (image, name) {
+export async function saveUserImage (image, name) {
 
-    const storageRef = ref(storage, "images/" + name);
+    const storageRef = ref(storage, "users/images/" + name);
     const uploadTask = uploadBytesResumable(storageRef, image);
 
-    uploadTask.on("state_changed", (snapshot) => {
-
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-
-    }, (error) => {
+    uploadTask.on("state_changed", (snapshot) => {}, (error) => {
 
         console.log("Error uploading image: " + error);
 
@@ -45,9 +40,9 @@ export async function saveImage (image, name) {
 
 }
 
-export async function getImage (name) {
+export async function getUserImage (name) {
 
-    const storageRef = ref(storage, "images/" + name);
+    const storageRef = ref(storage, "users/images/" + name);
     const downloadURL = await getDownloadURL(storageRef);
 
     return downloadURL;

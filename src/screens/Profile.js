@@ -19,7 +19,7 @@ export default function ({ navigation }) {
 	const [user, setUser] = React.useState(null);
 	const [username, setUsername] = React.useState("");
 	const [email, setEmail] = React.useState("");
-	const [pfp, setPfp] = React.useState();
+	const [profileImage, setProfileImage] = React.useState();
 	
 	useEffect(() => {
 
@@ -29,9 +29,13 @@ export default function ({ navigation }) {
 			setUser(user);
 			setUsername(user.username);
 			setEmail(user.email);
+			setProfileImage({ uri: user.profileImage });
 		
 		})
 		.catch((error) => { console.log("Error getting user: " + error); });
+
+		db.getUserImage("default.png")
+		.then((image) => { setProfileImage({ uri: image }); })
 
 	}, []);
 
@@ -119,7 +123,7 @@ export default function ({ navigation }) {
     		  				shadowRadius: 8,  
     		  				elevation: 1,
 						}}
-						source = {pfp}
+						source = {profileImage}
 					/>
 
 					<View style = {{
@@ -138,7 +142,7 @@ export default function ({ navigation }) {
 						}}
 						string = "Upload picture"
 						onPress = {() => {
-							db.saveImage(require("../../assets/default.png"), "default.png");
+							db.saveUserImage(require("../../assets/default.png"), "default.png");
 						}}/>
 
 						<AppButton style = {{
@@ -149,35 +153,12 @@ export default function ({ navigation }) {
 						string = "Download picture"
 						onPress = {() => {
 						
-							const image = db.getImage("default.png");
-
-							if (image != null) {
-
-								setPfp(image);
-							
-							}
+							db.getUserImage("default.png")
+							.then((image) => { console.log("Got image!"); setProfileImage({ uri: image }); })
 
 						}}/>
 
-					</View>
-
-
-
-
-				{/* <AppText style = {{
-					
-					fontSize: 20,
-					color: isDarkmode ? themeColor.white100 : VARS.midGray,
-					marginBottom: 10, }}
-					string = {user.username}/>
-
-				<AppText style = {{
-					
-					fontSize: 20,
-					color: isDarkmode ? themeColor.white100 : VARS.midGray,
-					marginBottom: 10, }}
-					string = {user.email}/> */}
-				
+					</View>				
 
 			</View>
 
