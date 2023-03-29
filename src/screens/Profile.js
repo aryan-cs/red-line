@@ -19,6 +19,7 @@ export default function ({ navigation }) {
 	const [user, setUser] = React.useState(null);
 	const [username, setUsername] = React.useState("");
 	const [email, setEmail] = React.useState("");
+	const [pfp, setPfp] = React.useState();
 	
 	useEffect(() => {
 
@@ -77,13 +78,17 @@ export default function ({ navigation }) {
 						marginTop: "-50%",
 						justifyContent: "flex-end",
 						alignItems: "flex-end",
+						shadowColor: "black",
+    		  			shadowOffset: { width: 0, height: 2 },
+    		  			shadowOpacity: .25,
+    		  			shadowRadius: 8,  
+    		  			elevation: 1,
 
 					}}>
 
 						<AppTitle style = {{
 							fontSize: 40,
 							marginHorizontal: 10,
-							marginBottom: 5,
 							color: themeColor.white100,
 						}}
 						string = {username}/>
@@ -106,13 +111,15 @@ export default function ({ navigation }) {
 							borderRadius: "100%",
 							marginBottom: 10,
 							backgroundColor: themeColor.white100,
+							borderWidth: 8,
+							borderColor: isDarkmode ? "#2b2b2b" : VARS.redline,
 							shadowColor: "black",
-    						shadowOffset: { width: 0, height: 2 },
-    						shadowOpacity: .5,
-    						shadowRadius: 4,  
-    						elevation: 1,
+    		  				shadowOffset: { width: 0, height: 0 },
+    		  				shadowOpacity: .25,
+    		  				shadowRadius: 8,  
+    		  				elevation: 1,
 						}}
-						// source = {require(user.pfp)}/>
+						source = {pfp}
 					/>
 
 					<View style = {{
@@ -129,16 +136,28 @@ export default function ({ navigation }) {
 							width: 170,
 							backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
 						}}
-						string = "Edit Profile"
-						onPress = {() => { alert("Feature coming soon!") }}/>
+						string = "Upload picture"
+						onPress = {() => {
+							db.saveImage(require("../../assets/default.png"), "default.png");
+						}}/>
 
 						<AppButton style = {{
 							marginBottom: 10,
 							width: 170,
 							backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
 						}}
-						string = "Change Password"
-						onPress = {() => { alert("Feature coming soon!") }}/>
+						string = "Download picture"
+						onPress = {() => {
+						
+							const image = db.getImage("default.png");
+
+							if (image != null) {
+
+								setPfp(image);
+							
+							}
+
+						}}/>
 
 					</View>
 

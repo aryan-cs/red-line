@@ -4,7 +4,13 @@ import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import * as VARS from "../../../Vars"
 
 export default (props) => {
+
   const { isDarkmode } = useTheme();
+  
+  let size = 22;
+
+  if (props.icon === "car-side") { size = 20; }
+  else if (props.icon === "ios-person-circle") { size = 26; }
 
   if (props.icon === "car-side") {
     return (
@@ -15,7 +21,7 @@ export default (props) => {
           alignItems: "flex-end",
           marginBottom: 3,
         }}
-        size={20}
+        size={size}
         color={
           props.focused
             ? isDarkmode
@@ -37,7 +43,7 @@ export default (props) => {
           alignItems: "flex-end",
           marginBottom: 3,
         }}
-        size={22}
+        size={size}
         color={
           props.focused
             ? isDarkmode
