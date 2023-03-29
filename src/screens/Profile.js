@@ -73,7 +73,7 @@ export default function ({ navigation }) {
 
 						width: "100%",
 						height: "45%",
-						backgroundColor: VARS.redline,
+						backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
 						marginTop: "-50%",
 						justifyContent: "flex-end",
 						alignItems: "flex-end",
@@ -81,17 +81,18 @@ export default function ({ navigation }) {
 					}}>
 
 						<AppTitle style = {{
-							fontSize: 30,
+							fontSize: 40,
 							marginHorizontal: 10,
+							marginBottom: 5,
 							color: themeColor.white100,
 						}}
 						string = {username}/>
 
 						<AppText style = {{
-							fontSize: 18,
+							fontSize: 15,
 							marginHorizontal: 10,
 							marginBottom: 10,
-							color: themeColor.white100,
+							color: themeColor.white100 + "b3",
 						}}
 						string = {email}/>
 
@@ -125,14 +126,16 @@ export default function ({ navigation }) {
 
 						<AppButton style = {{
 							marginBottom: 10,
-							width: 170
+							width: 170,
+							backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
 						}}
 						string = "Edit Profile"
 						onPress = {() => { alert("Feature coming soon!") }}/>
 
 						<AppButton style = {{
 							marginBottom: 10,
-							width: 170
+							width: 170,
+							backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
 						}}
 						string = "Change Password"
 						onPress = {() => { alert("Feature coming soon!") }}/>
