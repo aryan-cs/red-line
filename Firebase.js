@@ -12,24 +12,17 @@ const firebaseConfig = {
     measurementId: "G-TT13ZH8Y4C"
   };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+export const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+export const auth = getAuth(app);
 
-export const FIREBASE = {
-
-    app: app,
-    db: db,
-    auth: auth,
-    userID: auth.currentUser.uid,
-
-}
+// export const UID = auth.currentUser.uid;
 
 export async function saveRide (company, model, year, color, engine, hp, miles) {
 
     console.log("Saving ride...");
     
-    await setDoc(doc(db, "users", FIREBASE.userID, "rides", company + model + year), {
+    await setDoc(doc(db, "users", auth.currentUser.uid, "rides", company + model + year), {
 
         company: company,
         model: model,
@@ -43,18 +36,21 @@ export async function saveRide (company, model, year, color, engine, hp, miles) 
     .then(() => { console.log("Ride saved!"); })
     .catch((error) => { console.log("Error saving ride: " + error); });
 
-    // set(ref(db, 'users/' + DATABASE.userID + "/rides/" + company + model + year), {
+}
 
-    //     company: company,
-    //     model: model,
-    //     year: year,
-    //     color: color,
-    //     engine: engine,
-    //     hp: hp,
-    //     miles: miles
+export async function saveUser (username, email, password) {
 
-    // })
-    // .then(() => { console.log("Ride saved!"); })
-    // .catch((error) => { console.log("Error saving ride: " + error); });
+    console.log("Saving user...");
+    
+    await setDoc(doc(db, "users", auth.currentUser.uid, "info", "personal"), {
+
+        username: username,
+        email: email,
+        password: password,
+        uid: auth.currentUser.uid
+
+    })
+    .then(() => { console.log("User saved!"); })
+    .catch((error) => { console.log("Error saving user: " + error); });
 
 }

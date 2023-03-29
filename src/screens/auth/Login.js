@@ -16,6 +16,7 @@ import AppButton from "../../components/AppButton";
 import AppInput from "../../components/AppInput";
 
 import * as VARS from "../../../Vars";
+import * as db from "../../../Firebase";
 
 export default function ({ navigation }) {
 
@@ -29,7 +30,8 @@ export default function ({ navigation }) {
 
     setLoading(true);
 
-    await signInWithEmailAndPassword(auth, email, password).catch(function (error) {
+    await signInWithEmailAndPassword(auth, email, password)
+    .catch(function (error) {
 
       var errorCode  =  error.code;
       var errorMessage  =  error.message;
@@ -117,18 +119,7 @@ export default function ({ navigation }) {
               disabled = {loading}
             />
 
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                marginTop: 30,
-                justifyContent: "center",
-              }}
-            >
-
-            </View>
-
-            </View>
+          </View>
 
         {/* </ScrollView> */}
 

@@ -24,6 +24,7 @@ export default function Floaty ({style, title, desc, src, cords, background, nav
   const onPress = () => {
 
     db.saveRide("Honda", "Civic", 2019, "Black", "1.5L", 180, 0);
+    db.saveUser("Admin Account", "admin", "admin@gmail.com", "password");
 
     // if (cords == undefined && cords == null && src == undefined && src == null) {
 

@@ -18,6 +18,7 @@ import AppButton from "../../components/AppButton";
 import AppInput from "../../components/AppInput";
 
 import * as VARS from "../../../Vars";
+import * as db from "../../../Firebase";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -26,13 +27,20 @@ export default function ({ navigation }) {
   const { isDarkmode, setTheme } = useTheme();
   const auth = getAuth();
   const [email, setEmail] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function register () {
 
     setLoading(true);
-    await createUserWithEmailAndPassword(auth, email, password).catch(function (error) {
+    await createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      setLoading(false);
+      alert("Account created successfully!");
+      db.saveUser(displayName, email, password);
+    })
+    .catch(function (error) {
 
       // Handle Errors here.
       var errorCode = error.code;
@@ -73,6 +81,20 @@ export default function ({ navigation }) {
               autoCorrect = {false}
               keyboardType = "email-address"
               onChangeText = {(text) => setEmail(text)}
+              style = {{ marginTop: 10 }}
+            />
+
+            <AppText style = {{ marginTop: 25, fontSize: 17 }} string = "Display Name" />
+
+            <AppInput
+              containerStyle = {{ marginTop: 15 }}
+              placeholder = "Enter a display name"
+              value = {displayName}
+              autoCapitalize = "none"
+              autoCompleteType = "off"
+              autoCorrect = {false}
+              keyboardType = "email-address"
+              onChangeText = {(text) => setDisplayName(text)}
               style = {{ marginTop: 10 }}
             />
 

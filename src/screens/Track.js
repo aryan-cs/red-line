@@ -15,7 +15,7 @@ import MapView from 'react-native-maps';
 
 export default function ({ navigation }) {
 
-	let refresh = 1000;
+	let refresh = 100000;
 
 	const { isDarkmode, setTheme } = useTheme();
 	const [location, setLocation] = useState(null);
@@ -60,14 +60,13 @@ export default function ({ navigation }) {
 
 				return JSON.stringify(address[0].name).replace(/"/g,"");
 			
-			}).catch(function(error) { return LOADING });
+			}).catch(function(error) { return LOADING; });
 
 			let lat = location.coords.latitude;
 			let long = location.coords.longitude;
 			let cords = lat + ", " + long;
 
 			let speed = location.coords.speed;
-			// console.log(speed);
 	
 			setLocation(location);
 			setAddress(address);
@@ -84,9 +83,9 @@ export default function ({ navigation }) {
 				latitudeDelta: 0.015,
 				longitudeDelta: 0.015,
 
-		  	}), refresh);
+		  	}), refresh).catch(function(error) { return null; });
 	
-		  }, refresh);
+		  }, refresh).catch(function(error) { return null; });
 	
 		})();
 		
