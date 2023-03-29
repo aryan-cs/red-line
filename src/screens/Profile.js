@@ -90,7 +90,7 @@ export default function ({ navigation }) {
 
 						<AppText style = {{
 							fontSize: 15,
-							marginHorizontal: 10,
+							marginHorizontal: 15,
 							marginBottom: 10,
 							color: themeColor.white100 + "b3",
 						}}
