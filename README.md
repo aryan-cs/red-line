@@ -9,7 +9,7 @@ An app for car guys, by a car guy.
 - App loads up - Hello, World!
 - Android & iOS support
 - Realtime speed & location tracking
-- Community Home page
+- Community feed page
 - Login & Sign up
 - Password reset
 - Light & Dark Mode
