@@ -142,7 +142,7 @@ export default function ({ navigation }) {
 						}}
 						string = "Upload picture"
 						onPress = {() => {
-							db.saveUserImage(require("../../assets/default.png"), "default.png");
+							db.saveUserImage(require("../../assets/default.png"), db.auth.currentUser.uid + ".png");
 						}}/>
 
 						<AppButton style = {{
@@ -153,8 +153,8 @@ export default function ({ navigation }) {
 						string = "Download picture"
 						onPress = {() => {
 						
-							db.getUserImage("default.png")
-							.then((image) => { console.log("Got image!"); setProfileImage({ uri: image }); })
+							db.getUserImage(db.auth.currentUser.uid + ".png")
+							.then((image) => { console.log("Got image!"); console.log(image); setProfileImage({ uri: image }); })
 
 						}}/>
 
