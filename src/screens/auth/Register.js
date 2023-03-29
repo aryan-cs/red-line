@@ -42,10 +42,8 @@ export default function ({ navigation }) {
     })
     .catch(function (error) {
 
-      // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
-      // ...
       setLoading(false);
       alert(errorMessage);
 
@@ -127,8 +125,6 @@ export default function ({ navigation }) {
                 justifyContent: "center",
               }}>
 
-              {/* <AppText style = {{ marginTop: 25, fontSize: 17 }} string = "Already have an account? " /> */}
-
               <TouchableOpacity
 
                 onPress = {() => { navigation.navigate("Login"); }}>
@@ -138,8 +134,6 @@ export default function ({ navigation }) {
                   style = {{ marginTop: 20 }}
                   size = {24}
                   color = { isDarkmode ? themeColor.white100 : VARS.midGray }/>
-
-                {/* <AppText style = {{ marginTop: 25, fontSize: 17 }} string = "Go back" /> */}
 
               </TouchableOpacity>
 
@@ -152,4 +146,5 @@ export default function ({ navigation }) {
     </KeyboardAvoidingView>
 
   );
+
 }
