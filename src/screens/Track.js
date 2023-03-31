@@ -9,6 +9,7 @@ import AppInput from "../../src/components/AppInput";
 import Floaty from "../../src/components/Floaty";
 
 import * as VARS from "../../Vars";
+import * as db from "../../Firebase";
 
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
@@ -19,6 +20,8 @@ export default function ({ navigation }) {
 	let refresh = 1000;
 
 	const { isDarkmode, setTheme } = useTheme();
+	const [username, setUsername] = React.useState("");
+	const [profileImage, setProfileImage] = React.useState();
 	const [location, setLocation] = useState(null);
   	const [address, setAddress] = useState(null);
 	const [longi, setLongitude] = useState(null);
@@ -36,6 +39,17 @@ export default function ({ navigation }) {
   						style = {{ paddingTop: 6 }}/>;
 
 	useEffect(() => {
+
+		db.getUser()
+		.then((user) => {
+				
+			setUsername(user.username);
+			
+			db.getUserImage(user.uid + ".png")
+			.then((image) => { setProfileImage(image); })
+			
+		})
+		.catch((error) => { console.log("Error getting user: " + error); });
 
 		(async () => {
 		  
@@ -150,7 +164,7 @@ export default function ({ navigation }) {
 						latitude: lati ? lati : 0,
 						longitude: longi ? longi : 0,
 					}}
-            		title = {"Admin"}
+            		title = {username}
             		description = {"Current Location"}
 					pinColor = {VARS.redline}
          		>
@@ -162,16 +176,10 @@ export default function ({ navigation }) {
 						borderRadius: "100%",
 						borderColor: VARS.redline,
 						borderWidth: 2.5,
-						shadowColor: "black",
-						shadowOffset: { width: 0, height: 3 },
-						shadowOpacity: .3,
-						shadowRadius: 4,
-						elevation: 1,
-						marginBottom: 10,
 
 					}}
 					defaultSource = {require("../../assets/default.png")}
-					source = {require("../../assets/default.png")}/>
+					source = {profileImage}/>
 
 				</Marker>
 
