@@ -123,6 +123,7 @@ export default function ({ navigation }) {
     		  				shadowRadius: 8,  
     		  				elevation: 1,
 						}}
+						defaultSource = {require("../../assets/default.png")}
 						source = {profileImage}
 					/>
 
@@ -154,7 +155,7 @@ export default function ({ navigation }) {
 						onPress = {() => {
 						
 							db.getUserImage(db.auth.currentUser.uid + ".png")
-							.then((image) => { console.log("Got image!"); console.log(image); setProfileImage({ uri: image }); })
+							.then((image) => { console.log("Got image!"); console.log(image); setProfileImage({ image }); })
 
 						}}/>
 
