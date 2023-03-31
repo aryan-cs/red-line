@@ -15,27 +15,20 @@ import MapView from 'react-native-maps';
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.95 };
 
-export default function Floaty ({style, title, desc, src, cords, background, navigate, navigation}) {
+export default function Floaty ({style, title, desc, src, cords, postText, navigation}) {
 
   const { theme, isDarkmode } = useTheme();
-  const mapRef = useRef(null);
   const radius = 12;
 
   const onPress = () => {
 
-    // db.saveRide("Honda", "Civic", 2019, "Black", "1.5L", 180, 0);
-    // db.saveUser("Admin Account", "admin", "admin@gmail.com", "password");
-    // db.getUser();
+    let content = { text: postText, }
 
-    if (cords == undefined && cords == null && src == undefined && src == null) {
+    if (cords !== undefined && cords !== null) { content = { ...content, cords: cords, } }
 
-      navigation.navigate("Post", { cords: cords });
+    if (src !== undefined && src !== null) { content = { ...content, src: src, } }
 
-    } else {
-
-      navigation.navigate("Post");
-
-    }
+    navigation.navigate("Post", content);
 
   }
 

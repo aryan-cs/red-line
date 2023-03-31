@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ImageBackground, View } from "react-native";
-import { getAuth, signOut } from "firebase/auth";
 import {
   Layout,
   themeColor,
@@ -17,10 +16,9 @@ import * as VARS from "../../Vars";
 
 import { Ionicons } from "@expo/vector-icons";
 
-export default function ({ navigation }) {
+function Post ({ route, navigation }) {
 
   const { isDarkmode, setTheme } = useTheme();
-  const auth = getAuth();
 
   return (
 
@@ -83,6 +81,21 @@ export default function ({ navigation }) {
               }} />
 
       </View>
+
+      <AppText
+        string = {route.params.text}
+        style = {{
+
+          fontSize: 20,
+          paddingHorizontal: 20,
+          marginHorizontal: 0,
+          marginVertical: 10,
+          color: isDarkmode ? themeColor.white100 : themeColor.black,
+          fontWeight: "bold",
+          textAlign: "left",
+          backgroundColor: "transparent"
+
+        }}/>
       
     </View>
 
@@ -93,3 +106,5 @@ export default function ({ navigation }) {
   );
 
 }
+
+export default Post;

@@ -49,12 +49,14 @@ export default function ({ navigation }) {
           desc = "Information for the next car meet will be posted here."
           src = {{ uri: "https://static1.hotcarsimages.com/wordpress/wp-content/uploads/2021/05/shutterstock_1327560506.jpg" }}
           navigation = {navigation}
+          postText = "so the next meet will be like idk"
         />
 
         <Floaty
           title = "TEST POST"
           desc = "This post will eventually become clickable and will lead to a page with more information about the event."
           navigation = {navigation}
+          postText = "ahaha do this working?"
         />
 
         <Floaty
@@ -62,6 +64,7 @@ export default function ({ navigation }) {
           desc = "Map integration coming soon!"
           cords = "39.100483, 125.930597"
           navigation = {navigation}
+          postText = "u big man fr"
         />
 
         <Floaty
@@ -69,6 +72,7 @@ export default function ({ navigation }) {
           desc = "Thank you for joining Red Line!"
           src = { require("../../assets/banner.png") }
           navigation = {navigation}
+          postText = "hello hello hello thank u for coming"
         />
 
       </View>
