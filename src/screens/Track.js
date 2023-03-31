@@ -155,6 +155,10 @@ export default function ({ navigation }) {
 					
 				}}
 				ref = {mapRef}
+				// showsUserLocation={true}
+				loadingEnabled = {true}
+         		loadingIndicatorColor = {VARS.redline}
+         		loadingBackgroundColor = {"white"}
 				userInterfaceStyle = {isDarkmode ? "dark" : "light"}
 				// customMapStyle = {mapStyle}
 				>
