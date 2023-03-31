@@ -1,6 +1,13 @@
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"; 
+import {
+    getFirestore,
+    collection,
+    doc,
+    setDoc,
+    getDoc,
+    addDoc,
+    getDocs } from "firebase/firestore"; 
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
@@ -17,37 +24,6 @@ export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
-
-export async function saveUserImage (image, name) {
-
-    const storageRef = ref(storage, "users/images/" + name);
-    const uploadTask = uploadBytesResumable(storageRef, image);
-
-    uploadTask.on("state_changed", (snapshot) => {}, (error) => {
-
-        console.log("Error uploading image: " + error);
-
-    }, () => {
-
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-
-            console.log("Image uploaded successfully!");
-            return downloadURL;
-
-        });
-
-    });
-
-}
-
-export async function getUserImage (name) {
-
-    const storageRef = ref(storage, "users/images/" + name);
-    const downloadURL = await getDownloadURL(storageRef);
-
-    return downloadURL;
-
-}
 
 export async function saveRide (company, model, year, color, engine, hp, miles) {
 
@@ -105,5 +81,66 @@ export async function getUser () {
     if (docSnap.exists()) { return docSnap.data(); }
 
     else { return null; }
+
+}
+
+export async function saveUserImage (image, name) {
+
+    const storageRef = ref(storage, "users/images/" + name);
+    const uploadTask = uploadBytesResumable(storageRef, image);
+
+    uploadTask.on("state_changed", (snapshot) => {}, (error) => {
+
+        console.log("Error uploading image: " + error);
+
+    }, () => {
+
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+
+            console.log("Image uploaded successfully!");
+            return downloadURL;
+
+        });
+
+    });
+
+}
+
+export async function getUserImage (name) {
+
+    const storageRef = ref(storage, "users/images/" + name);
+    const downloadURL = await getDownloadURL(storageRef);
+
+    return downloadURL;
+
+}
+
+export async function savePost (title, caption, imagePath, description, id) {
+
+    console.log("Saving post...");
+
+    await addDoc(collection(db, "posts"), {
+
+        title: title,
+        caption: caption,
+        imagePath: imagePath,
+        description: description,
+        id: id,
+        timestamp: Date.now()
+
+    })
+    .then(() => { console.log("Post saved!"); })
+    .catch((error) => { console.log("Error saving post: " + error); });
+
+}
+
+export async function getPosts () {
+
+    let postsData = [];
+    const querySnapshot = await getDocs(collection(db, "feed"));
+
+    querySnapshot.forEach((doc) => { postsData.push(doc.data()); });
+
+    return postsData;
 
 }
