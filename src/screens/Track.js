@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator, Image } from "react-native";
 import { Layout, useTheme } from "react-native-rapi-ui";
 
 import AppText from "../../src/components/AppText";
@@ -11,7 +11,8 @@ import Floaty from "../../src/components/Floaty";
 import * as VARS from "../../Vars";
 
 import * as Location from "expo-location";
-import MapView from 'react-native-maps';
+import MapView from "react-native-maps";
+import { Marker } from "react-native-maps";
 
 export default function ({ navigation }) {
 
@@ -142,14 +143,46 @@ export default function ({ navigation }) {
 				ref = {mapRef}
 				userInterfaceStyle = {isDarkmode ? "dark" : "light"}
 				// customMapStyle = {mapStyle}
-				/>
+				>
+
+				<Marker
+            		coordinate = {{
+						latitude: lati ? lati : 0,
+						longitude: longi ? longi : 0,
+					}}
+            		title = {"Admin"}
+            		description = {"Current Location"}
+					pinColor = {VARS.redline}
+         		>
+
+					<Image style = {{
+
+						width: 40,
+						height: 40,
+						borderRadius: "100%",
+						borderColor: VARS.redline,
+						borderWidth: 2.5,
+						shadowColor: "black",
+						shadowOffset: { width: 0, height: 3 },
+						shadowOpacity: .3,
+						shadowRadius: 4,
+						elevation: 1,
+						marginBottom: 10,
+
+					}}
+					defaultSource = {require("../../assets/default.png")}
+					source = {require("../../assets/default.png")}/>
+
+				</Marker>
+
+				</MapView>
 
 				<View style = {{
 
 					paddingVertical: 10,
 					paddingHorizontal: 20,
 					backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
-					borderRadius: 999,
+					borderRadius: "100%",
 					borderColor: VARS.redline,
 					marginTop: 5,
 
@@ -176,7 +209,7 @@ export default function ({ navigation }) {
 
 				<View style = {{
 						
-					borderRadius: 999,
+					borderRadius: "100%",
 					borderColor: VARS.redline,
 					justifyContent: "center",
 					alignItems: "center",
