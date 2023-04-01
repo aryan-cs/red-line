@@ -33,7 +33,7 @@ export default function ({ navigation }) {
           <Floaty
             title = {post.title}
             desc = {post.caption}
-            src = {{ uri: post.imagePath }}
+            // src = {{ uri: post.imagePath }}
             navigation = {navigation}
             postText = {post.description}
           />
