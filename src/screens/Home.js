@@ -39,15 +39,11 @@ export default function ({ navigation }) {
           />
         );
 
-        console.log("Post: " + post.title);
-        console.log(allFeed);
-
         console.log("---------------------------");
         console.log("Post: " + post.title);
         console.log("Caption: " + post.caption);
         console.log("Description: " + post.description);
         console.log("Image: " + post.imagePath);
-        console.log("ID: " + post.id);
         console.log("Timestamp: " + post.timestamp);
         console.log("---------------------------");
 
@@ -118,25 +114,25 @@ export default function ({ navigation }) {
           src = {{ uri: "https://static1.hotcarsimages.com/wordpress/wp-content/uploads/2021/05/shutterstock_1327560506.jpg" }}
           navigation = {navigation}
           postText = "so the next meet will be like idk"
-        /> */}
+        />
 
-        {/* <Floaty
+        <Floaty
           title = "TEST POST"
           desc = "This post will eventually become clickable and will lead to a page with more information about the event."
           navigation = {navigation}
           src = {{ uri: undefined }}
           postText = "ahaha do this working?"
-        /> */}
+        />
 
-        {/* <Floaty
+        <Floaty
           title = "LAST CRUISE"
           desc = "Map integration coming soon!"
           cords = "39.100483, 125.930597"
           navigation = {navigation}
           postText = "u big man fr"
-        /> */}
+        />
 
-        {/* <Floaty
+        <Floaty
           title = "WELCOME!"
           desc = "Thank you for joining Red Line!"
           src = { require("../../assets/banner.png") }

@@ -22,6 +22,8 @@ export default function Floaty ({style, title, desc, src, cords, postText, navig
 
   const onPress = () => {
 
+    // db.savePost(title, desc, src, postText);
+
     let content = { text: postText, }
 
     if (cords !== undefined && cords !== null) { content = { ...content, cords: cords, } }

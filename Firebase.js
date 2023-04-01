@@ -115,17 +115,16 @@ export async function getUserImage (name) {
 
 }
 
-export async function savePost (title, caption, imagePath, description, id) {
+export async function savePost (title, caption, imagePath, description) {
 
     console.log("Saving post...");
 
-    await addDoc(collection(db, "posts"), {
+    await addDoc(collection(db, "feed"), {
 
         title: title,
         caption: caption,
         imagePath: imagePath,
         description: description,
-        id: id,
         timestamp: Date.now()
 
     })
