@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { View, Linking, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, ScrollView } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
 import {
   useTheme,
@@ -21,15 +21,18 @@ export default function ({ navigation }) {
 
   const { isDarkmode, setTheme } = useTheme();
   const auth = getAuth();
-  let allFeed = [];
+  const [allFeed, setAllFeed] = useState([]);
 
   useEffect(() => {
 
     db.getPosts().then((posts) => {
 
+      setAllFeed([]);
+
       posts.forEach((post) => {
 
-        allFeed.push(
+        setAllFeed((allFeed) => [
+          ...allFeed,
           <Floaty
             title = {post.title}
             desc = {post.caption}
@@ -37,15 +40,15 @@ export default function ({ navigation }) {
             navigation = {navigation}
             postText = {post.description}
           />
-        );
+        ]);
 
-        console.log("---------------------------");
-        console.log("Post: " + post.title);
-        console.log("Caption: " + post.caption);
-        console.log("Description: " + post.description);
-        console.log("Image: " + post.imagePath);
-        console.log("Timestamp: " + post.timestamp);
-        console.log("---------------------------");
+        // console.log("---------------------------");
+        // console.log("Post: " + post.title);
+        // console.log("Caption: " + post.caption);
+        // console.log("Description: " + post.description);
+        // console.log("Image: " + post.imagePath);
+        // console.log("Timestamp: " + post.timestamp);
+        // console.log("---------------------------");
 
       });
 
@@ -97,7 +100,7 @@ export default function ({ navigation }) {
     <ScrollView contentContainerStyle = {{ flexGrow: 1 }}>
 
       <View
-        id = "feed"
+        nativeID = "feedView"
         style = {{
           alignItems: "center",
           justifyContent: "center",
