@@ -76,11 +76,10 @@ export default function ({ navigation }) {
 							height: 60,
 							position: "absolute",
               bottom: "2%",
-              right: "-1.5%",
+              right: "3.5%",
               justifyContent: "center",
               alignItems: "center",
-							marginHorizontal: 20,
-							textAlign: "center",
+              textAlign: "center",
 							backgroundColor: VARS.redline,
               borderRadius: "100%",
 							zIndex: 1,
@@ -89,8 +88,8 @@ export default function ({ navigation }) {
 							
 						<Ionicons
 							name = {"ios-add"}
-							style = {{}}
-							size = {35}
+							style = {{marginLeft: 2, marginTop: 1}}
+							size = {40}
 							color = { themeColor.white100 }/>
 
 					</TouchableOpacity>
