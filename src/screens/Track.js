@@ -122,7 +122,6 @@ export default function ({ navigation }) {
 
 		speedInfo = parseFloat(JSON.stringify(speed).replace(/"/g,"")) * 2.23694;
 		if (speedInfo < 0) { speedInfo = 0; }
-		else if (speedInfo < 10) { speedInfo = speedInfo.toFixed(1); }
 		else { speedInfo = speedInfo.toFixed(0); }
 	
 	  }

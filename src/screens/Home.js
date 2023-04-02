@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, TouchableOpacity } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
 import {
   useTheme,
@@ -32,14 +32,16 @@ export default function ({ navigation }) {
       posts.forEach((post) => {
 
         setAllFeed((allFeed) => [
-          ...allFeed,
           <Floaty
             title = {post.title}
             desc = {post.caption}
-            // src = {{ uri: post.imagePath }}
+            src = {post.imagePath}
+            cords = {post.cords}
             navigation = {navigation}
             postText = {post.description}
-          />
+            key = {post.timestamp}
+          />,
+          ...allFeed,
         ]);
 
         // console.log("---------------------------");
@@ -68,80 +70,43 @@ export default function ({ navigation }) {
                 
     }}>
 
-      <AppButton
-        string = {
-          <Ionicons
-            name = {"ios-add"}
-            style = {{}}
-            size = {38}
-            color = {themeColor.white100}/>}
-        status = {isDarkmode ? "success" : "warning"}
-        onPress = {() => { alert("Feature coming soon!"); }}
-        style = {{
-          width: 70,
-          height: 70,
-          borderRadius: 999,
-          padding: 0,
-          marginRight: "6%",
-          marginLeft: "auto",
-          marginTop: "auto",
-          marginBottom: "-190%",
-          textAlign: "center",
-          justifyContent: "center",
-          backgroundColor: VARS.redline,
-          shadowColor: "black",
-    			shadowOffset: { width: 0, height: 3 },
-    			shadowOpacity: .25,
-    			shadowRadius: 6,  
-    			elevation: 1
+<TouchableOpacity
+						style = {{
+							width: 60,
+							height: 60,
+							position: "absolute",
+              bottom: "2%",
+              right: "-1.5%",
+              justifyContent: "center",
+              alignItems: "center",
+							marginHorizontal: 20,
+							textAlign: "center",
+							backgroundColor: VARS.redline,
+              borderRadius: "100%",
+							zIndex: 1,
+						}}
+						onPress = {() => { alert("Feature coming soon!"); }}>
+							
+						<Ionicons
+							name = {"ios-add"}
+							style = {{}}
+							size = {35}
+							color = { themeColor.white100 }/>
 
-        }} />
+					</TouchableOpacity>
 
     <ScrollView contentContainerStyle = {{ flexGrow: 1 }}>
 
-      <View
-        nativeID = "feedView"
-        style = {{
-          alignItems: "center",
-          justifyContent: "center",
-          marginHorizontal: 20,
-          marginTop: 60,
-          marginBottom: 60
-        }}>
+      <View style = {{
+        alignItems: "center",
+        justifyContent: "center",
+        marginHorizontal: 20,
+        marginTop: 60,
+        marginBottom: 60,
+        zIndex: 1
+      }}>
 
-          {allFeed}
-
-        {/* <Floaty
-          title = "NEXT MEET"
-          desc = "Information for the next car meet will be posted here."
-          src = {{ uri: "https://static1.hotcarsimages.com/wordpress/wp-content/uploads/2021/05/shutterstock_1327560506.jpg" }}
-          navigation = {navigation}
-          postText = "so the next meet will be like idk"
-        />
-
-        <Floaty
-          title = "TEST POST"
-          desc = "This post will eventually become clickable and will lead to a page with more information about the event."
-          navigation = {navigation}
-          src = {{ uri: undefined }}
-          postText = "ahaha do this working?"
-        />
-
-        <Floaty
-          title = "LAST CRUISE"
-          desc = "Map integration coming soon!"
-          cords = "39.100483, 125.930597"
-          navigation = {navigation}
-          postText = "u big man fr"
-        />
-
-        <Floaty
-          title = "WELCOME!"
-          desc = "Thank you for joining Red Line!"
-          src = { require("../../assets/banner.png") }
-          navigation = {navigation}
-          postText = "hello hello hello thank u for coming"
-        /> */}
+        {allFeed}
 
       </View>
 

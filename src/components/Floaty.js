@@ -22,13 +22,11 @@ export default function Floaty ({style, title, desc, src, cords, postText, navig
 
   const onPress = () => {
 
-    // db.savePost(title, desc, src, postText);
-
     let content = { text: postText, }
 
-    if (cords !== undefined && cords !== null) { content = { ...content, cords: cords, } }
+    if (cords !== undefined && cords !== null) { content = { ...content, cords: cords, }; }
 
-    if (src !== undefined && src !== null) { content = { ...content, src: src, } }
+    if (src !== undefined && src !== null) { content = { ...content, src: src, }; }
 
     navigation.navigate("Post", content);
 
@@ -81,7 +79,7 @@ export default function Floaty ({style, title, desc, src, cords, postText, navig
 
   };
 
-  if (src !== undefined && src !== null) {
+  if (src !== undefined && src !== null && src !== "") {
     
     return (
 
@@ -107,7 +105,7 @@ export default function Floaty ({style, title, desc, src, cords, postText, navig
       }}>
 
           <ImageBackground
-            source = {src}
+            source = {{ uri: src }}
             imageStyle = {{ borderRadius: radius }}
             style = {{
 
@@ -146,7 +144,7 @@ export default function Floaty ({style, title, desc, src, cords, postText, navig
   
   }
 
-  else if (cords !== undefined && cords !== null) {
+  else if (cords !== undefined && cords !== null && cords !== "") {
 
     return (
     
