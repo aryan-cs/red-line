@@ -3,6 +3,7 @@ import {
   ScrollView,
   View,
   KeyboardAvoidingView,
+  Dimensions
 } from "react-native";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {
@@ -26,19 +27,34 @@ export default function ({ navigation }) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const windowDimensions = Dimensions.get('window');
+  const screenDimensions = Dimensions.get('screen');
+
   async function login () {
 
-    setLoading(true);
+    if (Dimensions.get("window").height < 850 || Dimensions.get("window").width < 390) {
 
-    await signInWithEmailAndPassword(auth, email, password)
-    .catch(function (error) {
+      alert("This screen size is currently unsupported for this app. Please use a larger screen size.");
 
-      var errorCode  =  error.code;
-      var errorMessage  =  error.message;
-      setLoading(false);
-      alert(errorMessage);
+      return;
 
-    });
+    }
+
+    else {
+
+      setLoading(true);
+
+      await signInWithEmailAndPassword(auth, email, password)
+      .catch(function (error) {
+
+        var errorCode  =  error.code;
+        var errorMessage  =  error.message;
+        setLoading(false);
+        alert(errorMessage);
+
+      });
+
+    }
 
   }
 

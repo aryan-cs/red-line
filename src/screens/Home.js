@@ -32,6 +32,7 @@ export default function ({ navigation }) {
       posts.forEach((post) => {
 
         setAllFeed((allFeed) => [
+
           <Floaty
             title = {post.title}
             desc = {post.caption}
@@ -42,6 +43,7 @@ export default function ({ navigation }) {
             key = {post.timestamp}
           />,
           ...allFeed,
+
         ]);
 
       });
@@ -55,34 +57,35 @@ export default function ({ navigation }) {
     <View style = {{ flex: 1, backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG }}>
 
       <View style = {{
-              
         marginTop: -60,
         paddingTop: 60,
-        backgroundColor: isDarkmode ? VARS.darkmodeBGdarker : VARS.lightmodeBG,
-                  
+        backgroundColor: isDarkmode ? VARS.darkmodeBGdarker : VARS.lightmodeBG,      
       }}>
 
-        <TouchableOpacity
-          style = {{
-            width: 60,
-            height: 60,
-            position: "absolute",
-            bottom: "2%",
-            right: "3.5%",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            backgroundColor: VARS.redline,
-            borderRadius: "100%",
-            zIndex: 1,
-          }}
-          onPress = {() => { alert("Feature coming soon!"); }}>
+        <TouchableOpacity style = {{
+          width: 60,
+          height: 60,
+          position: "absolute",
+          bottom: "2%",
+          right: "3.5%",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          backgroundColor: themeColor.white100,
+          borderRadius: "100%",
+          zIndex: 1,
+        }}
+        
+        onPress = {() => { alert("Feature coming soon!"); }}>
             
           <Ionicons
-            name = {"ios-add"}
-            style = {{marginLeft: 2, marginTop: 1}}
-            size = {40}
-            color = { themeColor.white100 }/>
+            name = {"ios-add-circle"}
+            style = {{
+              marginLeft: -5.25,
+              marginTop: -10,
+            }}
+            size = {75}
+            color = { VARS.redline }/>
 
         </TouchableOpacity>
 

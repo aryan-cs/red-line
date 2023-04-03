@@ -60,7 +60,7 @@ export default function ({ navigation }) {
 			
 			let location = await Location.getCurrentPositionAsync({
 				accuracy: Location.Accuracy.BestForNavigation,
-				activityType: Location.ActivityType.AutomotiveNavigation,
+				// activityType: Location.ActivityType.AutomotiveNavigation,
 			}).catch(function(error) { return null; });
 
 			let stamp = new Date(location.timestamp);
@@ -119,7 +119,7 @@ export default function ({ navigation }) {
 		addressInfo = address;
 		cordsInfo = JSON.stringify(cords).replace(/"/g,"");
 		timestampInfo = JSON.stringify(timestamp).replace(/"/g,"");
-
+``
 		speedInfo = parseFloat(JSON.stringify(speed).replace(/"/g,"")) * 2.23694;
 		if (speedInfo < 0) { speedInfo = 0; }
 		else { speedInfo = speedInfo.toFixed(0); }
@@ -159,7 +159,6 @@ export default function ({ navigation }) {
          		loadingIndicatorColor = {VARS.redline}
          		loadingBackgroundColor = {"white"}
 				userInterfaceStyle = {isDarkmode ? "dark" : "light"}
-				// customMapStyle = {mapStyle}
 				>
 
 				<Marker
