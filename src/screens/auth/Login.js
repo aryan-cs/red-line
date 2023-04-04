@@ -34,7 +34,7 @@ export default function ({ navigation }) {
 
     if (Dimensions.get("window").height < 850 || Dimensions.get("window").width < 390) {
 
-      alert("This screen size is currently unsupported for this app. Please use a larger screen size.");
+      alert("This screen size is currently unsupported for this app. Please use a larger device.");
 
       return;
 

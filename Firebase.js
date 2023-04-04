@@ -86,19 +86,22 @@ export async function getUser () {
 
 export async function saveUserImage (image, name) {
 
+    console.log("Saving user image...");    
+
     const storageRef = ref(storage, "users/images/" + name);
-    const uploadTask = uploadBytesResumable(storageRef, image);
+    const uploadTask = uploadBytesResumable(storageRef, image, { contentType: "image/png" });
 
     uploadTask.on("state_changed", (snapshot) => {}, (error) => {
 
-        console.log("Error uploading image: " + error);
+        console.log("Error saving user image: " + error);
 
     }, () => {
 
+        console.log("User image saved!");
+
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 
-            console.log("Image uploaded successfully!");
-            return downloadURL;
+            console.log('File available at', downloadURL);
 
         });
 

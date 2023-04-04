@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, ActivityIndicator, Image } from "react-native";
-import { Layout, useTheme } from "react-native-rapi-ui";
+import { Layout, themeColor, useTheme } from "react-native-rapi-ui";
 
 import AppText from "../../src/components/AppText";
 import AppTitle from "../../src/components/AppTitle";
@@ -37,19 +37,48 @@ export default function ({ navigation }) {
 						size = "small"
   						color = {VARS.redline}
   						style = {{ paddingTop: 6 }}/>;
+					
+	let indicatorContent = <ActivityIndicator
+								size = "small"
+								style = {{
+									width: 40,
+									height: 40,
+									borderRadius: "100%",
+									borderColor: VARS.darkmodeBGaccent,
+									borderWidth: 2.5,
+									backgroundColor: themeColor.white100,
+
+									shadowColor: "black",
+    								shadowOffset: { width: 0, height: 3 },
+    								shadowOpacity: .3,
+    								shadowRadius: 4,  
+    								elevation: 1,
+								}}/>;
 
 	useEffect(() => {
 
-		db.getUser()
-		.then((user) => {
-				
-			setUsername(user.username);
-			
-			db.getUserImage(user.uid + ".png")
-			.then((image) => { setProfileImage(image); })
-			
-		})
-		.catch((error) => { console.log("Error getting user: " + error); });
+		db.getUserImage("default.png")
+		.then((image) => {
+			console.log(image);
+			setProfileImage(image);
+
+			indicatorContent = <Image style = {{
+									width: 40,
+									height: 40,
+									borderRadius: "100%",
+									borderColor: VARS.redline,
+									borderWidth: 2.5,
+
+									shadowColor: "black",
+    								shadowOffset: { width: 0, height: 3 },
+    								shadowOpacity: .3,
+    								shadowRadius: 4,  
+    								elevation: 1,
+								}}
+								defaultSource = {require("../../assets/default.png")}
+								source = {profileImage}/>
+
+		});
 
 		(async () => {
 		  
@@ -171,17 +200,7 @@ export default function ({ navigation }) {
 					pinColor = {VARS.redline}
          		>
 
-					<Image style = {{
-
-						width: 40,
-						height: 40,
-						borderRadius: "100%",
-						borderColor: VARS.redline,
-						borderWidth: 2.5,
-
-					}}
-					defaultSource = {require("../../assets/default.png")}
-					source = {profileImage}/>
+					{indicatorContent}
 
 				</Marker>
 

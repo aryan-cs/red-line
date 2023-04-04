@@ -33,21 +33,33 @@ export default function ({ navigation }) {
 
   async function register () {
 
-    setLoading(true);
-    await createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      setLoading(false);
-      alert("Account created successfully!");
-      db.saveUser(displayName, email, password);
-    })
-    .catch(function (error) {
+    if (Dimensions.get("window").height < 850 || Dimensions.get("window").width < 390) {
 
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      setLoading(false);
-      alert(errorMessage);
+      alert("This screen size is currently unsupported for this app. Please use a larger device.");
 
-    });
+      return;
+
+    }
+
+    else {
+
+      setLoading(true);
+      await createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        setLoading(false);
+        alert("Account created successfully!");
+        db.saveUser(displayName, email, password);
+      })
+      .catch(function (error) {
+
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        setLoading(false);
+        alert(errorMessage);
+
+      });
+
+    }
 
   }
 
