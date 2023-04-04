@@ -75,7 +75,6 @@ export default function ({ navigation }) {
     								shadowRadius: 4,  
     								elevation: 1,
 								}}
-								defaultSource = {require("../../assets/default.png")}
 								source = {profileImage}/>
 
 		});

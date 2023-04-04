@@ -201,7 +201,6 @@ export default function Floaty ({style, title, desc, src, cords, postText, navig
               longitudeDelta: 0.05,
 
             }}
-
             userInterfaceStyle = {isDarkmode ? "dark" : "light"}
             pointerEvents = "none"
             // customMapStyle = {mapStyle}

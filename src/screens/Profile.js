@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Layout, useTheme, themeColor } from 'react-native-rapi-ui';
 
 import AppText from "../components/AppText";
@@ -20,6 +20,19 @@ export default function ({ navigation }) {
 	const [username, setUsername] = React.useState("");
 	const [email, setEmail] = React.useState("");
 	const [profileImage, setProfileImage] = React.useState();
+	let indicatorContent = <ActivityIndicator
+								size = "small"
+								style = {{
+									width: 100,
+									height: 100,
+									marginTop: -50,
+									marginLeft: 20,
+									borderRadius: "100%",
+									marginBottom: 10,
+									backgroundColor: themeColor.white100,
+									borderWidth: 8,
+									borderColor: isDarkmode ? "#2b2b2b" : VARS.redline,
+								}}/>;
 	
 	useEffect(() => {
 
@@ -37,6 +50,24 @@ export default function ({ navigation }) {
 		.then((image) => {
 			console.log(image);
 			setProfileImage(image);
+			indicatorContent = <Image style = {{
+									width: 100,
+									height: 100,
+									marginTop: -50,
+									marginLeft: 20,
+									borderRadius: "100%",
+									marginBottom: 10,
+									backgroundColor: themeColor.white100,
+									borderWidth: 8,
+									borderColor: isDarkmode ? "#2b2b2b" : VARS.redline,
+									shadowColor: "black",
+									shadowOffset: { width: 0, height: 0 },
+									shadowOpacity: .25,
+									shadowRadius: 8,  
+									elevation: 1,
+								}}
+								source = {{uri: profileImage}}
+		/>
 		});
 
 	}, []);
@@ -109,7 +140,9 @@ export default function ({ navigation }) {
 
 					</View>
 
-					<Image style = {{
+					{indicatorContent}
+
+					{/* <Image style = {{
 							width: 100,
 							height: 100,
 							marginTop: -50,
@@ -127,7 +160,7 @@ export default function ({ navigation }) {
 						}}
 						// defaultSource = {require("../../assets/default.png")}
 						source = {{uri: profileImage}}
-					/>
+					/> */}
 
 					<View style = {{
 						marginHorizontal: 20,
