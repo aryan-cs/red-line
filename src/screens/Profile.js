@@ -12,6 +12,7 @@ import * as VARS from "../../Vars";
 import * as db from "../../Firebase";
 
 import { Ionicons } from "@expo/vector-icons";
+import ImagePicker from 'react-native-image-picker'
 
 export default function ({ navigation }) {
 
@@ -20,19 +21,6 @@ export default function ({ navigation }) {
 	const [username, setUsername] = React.useState("");
 	const [email, setEmail] = React.useState("");
 	const [profileImage, setProfileImage] = React.useState();
-	let indicatorContent = <ActivityIndicator
-								size = "small"
-								style = {{
-									width: 100,
-									height: 100,
-									marginTop: -50,
-									marginLeft: 20,
-									borderRadius: "100%",
-									marginBottom: 10,
-									backgroundColor: themeColor.white100,
-									borderWidth: 8,
-									borderColor: isDarkmode ? "#2b2b2b" : VARS.redline,
-								}}/>;
 	
 	useEffect(() => {
 
@@ -47,28 +35,7 @@ export default function ({ navigation }) {
 		.catch((error) => { console.log("Error getting user: " + error); });
 
 		db.getUserImage("default.png")
-		.then((image) => {
-			console.log(image);
-			setProfileImage(image);
-			indicatorContent = <Image style = {{
-									width: 100,
-									height: 100,
-									marginTop: -50,
-									marginLeft: 20,
-									borderRadius: "100%",
-									marginBottom: 10,
-									backgroundColor: themeColor.white100,
-									borderWidth: 8,
-									borderColor: isDarkmode ? "#2b2b2b" : VARS.redline,
-									shadowColor: "black",
-									shadowOffset: { width: 0, height: 0 },
-									shadowOpacity: .25,
-									shadowRadius: 8,  
-									elevation: 1,
-								}}
-								source = {{uri: profileImage}}
-		/>
-		});
+		.then((image) => { setProfileImage(image); });
 
 	}, []);
 
@@ -140,9 +107,7 @@ export default function ({ navigation }) {
 
 					</View>
 
-					{indicatorContent}
-
-					{/* <Image style = {{
+					<Image style = {{
 							width: 100,
 							height: 100,
 							marginTop: -50,
@@ -153,14 +118,12 @@ export default function ({ navigation }) {
 							borderWidth: 8,
 							borderColor: isDarkmode ? "#2b2b2b" : VARS.redline,
 							shadowColor: "black",
-    		  				shadowOffset: { width: 0, height: 0 },
-    		  				shadowOpacity: .25,
-    		  				shadowRadius: 8,  
-    		  				elevation: 1,
+							shadowOffset: { width: 0, height: 0 },
+							shadowOpacity: .25,
+							shadowRadius: 8,  
+							elevation: 1,
 						}}
-						// defaultSource = {require("../../assets/default.png")}
-						source = {{uri: profileImage}}
-					/> */}
+						source = {{ uri: profileImage }}/>
 
 					<View style = {{
 						marginHorizontal: 20,
@@ -179,19 +142,6 @@ export default function ({ navigation }) {
 						string = "Upload picture"
 						onPress = {() => {
 							db.saveUserImage(require("../../assets/default.png"), db.auth.currentUser.uid + ".png");
-						}}/>
-
-						<AppButton style = {{
-							marginBottom: 10,
-							width: 170,
-							backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
-						}}
-						string = "Download picture"
-						onPress = {() => {
-						
-							db.getUserImage(db.auth.currentUser.uid + ".png")
-							.then((image) => { console.log("Got image!"); console.log(image); setProfileImage({ image }); })
-
 						}}/>
 
 					</View>				

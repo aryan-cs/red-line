@@ -55,27 +55,24 @@ export default function ({ navigation }) {
     								elevation: 1,
 								}}/>;
 
+	const [content, setContent] = React.useState(indicatorContent);
+
 	useEffect(() => {
 
-		db.getUserImage("default.png")
-		.then((image) => {
-			console.log(image);
-			setProfileImage(image);
+		db.getUser()
+		.then((user) => {
 
-			indicatorContent = <Image style = {{
-									width: 40,
-									height: 40,
-									borderRadius: "100%",
-									borderColor: VARS.redline,
-									borderWidth: 2.5,
-
-									shadowColor: "black",
-    								shadowOffset: { width: 0, height: 3 },
-    								shadowOpacity: .3,
-    								shadowRadius: 4,  
-    								elevation: 1,
-								}}
-								source = {profileImage}/>
+			// db.getUserImage(user.uid + ".png")
+			db.getUserImage("default.png")
+			.then((image) => {
+				setContent(<Image style = {{
+								width: 40,
+								height: 40,
+								borderRadius: "100%",
+								borderWidth: 0,
+							}}
+							source = {{ uri: image }}/>);
+			});
 
 		});
 
@@ -147,7 +144,7 @@ export default function ({ navigation }) {
 		addressInfo = address;
 		cordsInfo = JSON.stringify(cords).replace(/"/g,"");
 		timestampInfo = JSON.stringify(timestamp).replace(/"/g,"");
-``
+
 		speedInfo = parseFloat(JSON.stringify(speed).replace(/"/g,"")) * 2.23694;
 		if (speedInfo < 0) { speedInfo = 0; }
 		else { speedInfo = speedInfo.toFixed(0); }
@@ -197,9 +194,17 @@ export default function ({ navigation }) {
             		title = {username}
             		description = {"Current Location"}
 					pinColor = {VARS.redline}
-         		>
+					style = {{
 
-					{indicatorContent}
+						shadowColor: "black",
+						shadowOffset: { width: 0, height: 3 },
+						shadowOpacity: 0.35,
+						shadowRadius: 4,  
+						elevation: 1,
+
+					}}>
+
+					{content}
 
 				</Marker>
 
