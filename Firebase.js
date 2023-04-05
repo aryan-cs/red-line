@@ -8,7 +8,7 @@ import {
     getDoc,
     addDoc,
     getDocs } from "firebase/firestore"; 
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCt9YHjNGMBL1g9RYPkzEhPBVtn74991MQ",
@@ -89,7 +89,7 @@ export async function saveUserImage (image, name) {
     console.log("Saving user image...");    
 
     const storageRef = ref(storage, "users/images/" + name);
-    const uploadTask = uploadBytesResumable(storageRef, image, { contentType: "image/png" });
+    const uploadTask = uploadBytesResumable(storageRef, image, { contentType: "image/jpg" });
 
     uploadTask.on("state_changed", (snapshot) => {}, (error) => {
 

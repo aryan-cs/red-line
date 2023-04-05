@@ -12,7 +12,7 @@ import * as VARS from "../../Vars";
 import * as db from "../../Firebase";
 
 import { Ionicons } from "@expo/vector-icons";
-import ImagePicker from 'react-native-image-picker'
+import * as ImagePicker from 'expo-image-picker';
 
 export default function ({ navigation }) {
 
@@ -39,20 +39,35 @@ export default function ({ navigation }) {
 
 	}, []);
 
+	
+
+	const choosePhoto = async () => {
+		let _image = await ImagePicker.launchImageLibraryAsync({
+		  mediaTypes: ImagePicker.MediaTypeOptions.Images,
+		  allowsEditing: true,
+		  aspect: [4, 3],
+		  quality: 1,
+		});
+		if (!_image.canceled) {
+			setProfileImage(_image.assets[0].uri);
+			db.saveUserImage(_image.assets[0].uri, user.uid + ".png");
+		}
+	  };
+
 	return (
 
 		<Layout>
 
 			<View style = {{
 
-					marginTop: -60,
-					paddingTop: 60,
-					marginBottom: -35,
-					paddingBottom: 35,
-					flex: 1,
-					backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
+				marginTop: -60,
+				paddingTop: 60,
+				marginBottom: -35,
+				paddingBottom: 35,
+				flex: 1,
+				backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
 
-				}}>
+			}}>
 
 					<TouchableOpacity
 						style = {{
@@ -114,7 +129,7 @@ export default function ({ navigation }) {
 							marginLeft: 20,
 							borderRadius: "100%",
 							marginBottom: 10,
-							backgroundColor: themeColor.white100,
+							backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
 							borderWidth: 8,
 							borderColor: isDarkmode ? "#2b2b2b" : VARS.redline,
 							shadowColor: "black",
@@ -123,6 +138,7 @@ export default function ({ navigation }) {
 							shadowRadius: 8,  
 							elevation: 1,
 						}}
+						// defaultSource = {require("../../assets/default.png")}
 						source = {{ uri: profileImage }}/>
 
 					<View style = {{
@@ -141,7 +157,10 @@ export default function ({ navigation }) {
 						}}
 						string = "Upload picture"
 						onPress = {() => {
-							db.saveUserImage(require("../../assets/default.png"), db.auth.currentUser.uid + ".png");
+
+							choosePhoto();
+
+							// db.saveUserImage(require("../../assets/default.png"), db.auth.currentUser.uid + ".png");
 						}}/>
 
 					</View>				
