@@ -39,8 +39,6 @@ export default function ({ navigation }) {
 
 	}, []);
 
-	
-
 	const choosePhoto = async () => {
 		let _image = await ImagePicker.launchImageLibraryAsync({
 		  mediaTypes: ImagePicker.MediaTypeOptions.Images,

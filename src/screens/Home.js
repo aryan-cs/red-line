@@ -38,9 +38,9 @@ export default function ({ navigation }) {
             desc = {post.caption}
             src = {post.imagePath}
             cords = {post.cords}
-            navigation = {navigation}
             postText = {post.description}
             key = {post.timestamp}
+            navigation = {navigation}
           />,
           ...allFeed,
 

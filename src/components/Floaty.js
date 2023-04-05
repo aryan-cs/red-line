@@ -22,7 +22,7 @@ export default function Floaty ({style, title, desc, src, cords, postText, navig
 
   const onPress = () => {
 
-    let content = { text: postText, }
+    let content = { text: postText, title: title }
 
     if (cords !== undefined && cords !== null) { content = { ...content, cords: cords, }; }
 

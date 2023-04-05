@@ -53,7 +53,6 @@ function Post ({ route, navigation }) {
             left: 10,
             justifyContent: "center",
             backgroundColor: "transparent"
-
           }} />
 
       </View>
@@ -67,7 +66,7 @@ function Post ({ route, navigation }) {
         }}>
 
             <AppTitle
-              string = {"POST"}
+              string = {route.params.title}
               style = {{
 
                 fontSize: 50,
@@ -75,7 +74,7 @@ function Post ({ route, navigation }) {
                 marginVertical: 10,
                 color: VARS.redline,
                 fontWeight: "bold",
-                textAlign: "right",
+                textAlign: "center",
                 backgroundColor: "transparent"
 
               }} />
@@ -86,7 +85,7 @@ function Post ({ route, navigation }) {
         string = {route.params.text}
         style = {{
 
-          fontSize: 20,
+          fontSize: 16,
           paddingHorizontal: 20,
           marginHorizontal: 0,
           marginVertical: 10,
