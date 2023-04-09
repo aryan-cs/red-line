@@ -14,11 +14,14 @@ import * as db from "../../Firebase";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function ({ navigation }) {
 
 	let refresh = 1000;
 
+	const mapRef = useRef(null);
 	const { isDarkmode, setTheme } = useTheme();
 	const [username, setUsername] = React.useState("");
 	const [profileImage, setProfileImage] = React.useState();
@@ -26,12 +29,13 @@ export default function ({ navigation }) {
   	const [address, setAddress] = useState(null);
 	const [longi, setLongitude] = useState(null);
 	const [lati, setLatitude] = useState(null);
-  	const [cords, setCords] = useState(null);
   	const [timestamp, setTimestamp] = useState(null);
 	const [lastUpdated, setLastUpdated] = useState("never");
   	const [speed, setSpeed] = useState(null);
   	const [errorMsg, setErrorMsg] = useState(null);
-	const mapRef = useRef(null);
+	const [content, setContent] = React.useState(indicatorContent);
+	const [tracking, setTracking] = React.useState(true);
+	const [journey, setJourney] = React.useState([]);
 
 	const LOADING = <ActivityIndicator
 						size = "small"
@@ -55,7 +59,39 @@ export default function ({ navigation }) {
     								elevation: 1,
 								}}/>;
 
-	const [content, setContent] = React.useState(indicatorContent);
+	let trackButton = <ActivityIndicator
+						size = "small"
+						color = {VARS.redline}
+						style = {{
+							backgroundColor: themeColor.white100,
+							width: "100%",
+							height: "100%",
+							borderRadius: "100%",
+						}}/>;
+
+	// let tracker = setInterval();
+	let tracker;
+
+
+	const toggleTracking = () => {
+
+		setTracking(!tracking);
+		console.log("Tracking? " + tracking);
+
+		if (!tracking) { clearInterval(tracker); }
+
+		tracker = setInterval(() => {
+
+			setJourney([ ...journey, {
+				latitude: lati,
+				longitude: longi,
+				timestamp: Date.now(),
+				speed: speed,	
+			}]);
+
+		}, refresh);
+
+	}
 
 	useEffect(() => {
 
@@ -88,6 +124,8 @@ export default function ({ navigation }) {
 				// activityType: Location.ActivityType.AutomotiveNavigation,
 			}).catch(function(error) { return null; });
 
+			setTimestamp(location.timestamp)
+
 			let stamp = new Date(location.timestamp);
 			let hrs = stamp.getHours() % 12;
 			let mins = stamp.getMinutes();
@@ -104,17 +142,15 @@ export default function ({ navigation }) {
 
 			let lat = location.coords.latitude;
 			let long = location.coords.longitude;
-			let cords = lat + ", " + long;
-
 			let speed = location.coords.speed;
 	
 			setLocation(location);
 			setAddress(address);
-			setCords(cords);
 			setLongitude(long);
 			setLatitude(lat);
-			setTimestamp(timestamp);
 			setSpeed(speed);
+
+			console.log("moving at speed: " + speed)
 
 			mapRef.current.animateToRegion(({
 				
@@ -124,6 +160,20 @@ export default function ({ navigation }) {
 				longitudeDelta: 0.005,
 
 		  	}), refresh);
+
+			// if (tracking) {
+
+			// 	// console.log(location.timestamp + " | " + timestamp + " | " + Date.now())
+			// 	// console.log(lat + ", " + long + " | @ " + Date.now() + " going " + speed + " mph");
+
+			// 	setJourney([ ...journey, {
+			// 		latitude: lat,
+			// 		longitude: long,
+			// 		timestamp: Date.now(),
+			// 		speed: parseFloat(speed * 2.23694).toFixed(1),	
+			// 	}]);
+
+			// }
 	
 		  }, refresh);
 	
@@ -131,23 +181,31 @@ export default function ({ navigation }) {
 		
 	  }, []);
 	
-	  let locationInfo = "";
 	  let addressInfo = LOADING;
-	  let cordsInfo = "Getting user coordinates...";
-	  let timestampInfo = "";
 	  let speedInfo = "--";
 	
 	  if (errorMsg) { text = errorMsg; }
 	  else if (location) {
 		
-		locationInfo = JSON.stringify(location).replace(/"/g,"");
 		addressInfo = address;
-		cordsInfo = JSON.stringify(cords).replace(/"/g,"");
-		timestampInfo = JSON.stringify(timestamp).replace(/"/g,"");
-
 		speedInfo = parseFloat(JSON.stringify(speed).replace(/"/g,"")) * 2.23694;
 		if (speedInfo < 0) { speedInfo = 0; }
 		else { speedInfo = speedInfo.toFixed(0); }
+
+		trackButton = <TouchableOpacity
+						onPress = {toggleTracking}
+						style = {{}}>
+						
+						<Ionicons
+							name = {tracking ? "ios-play-circle" : "ios-pause-circle"}
+							style = {{
+							  marginLeft: -5.25,
+							  marginTop: -10,
+							}}
+							size = {75}
+							color = { themeColor.white100 }/>
+
+					</TouchableOpacity>	
 	
 	  }
 
@@ -243,6 +301,31 @@ export default function ({ navigation }) {
 				<View style = {{
 						
 					borderRadius: "100%",
+					justifyContent: "center",
+					alignItems: "center",
+					textAlign: "center",
+					position: "absolute",
+					bottom: "28%",
+					right: "2%",
+					backgroundColor: VARS.redline,
+					width: 60,
+					height: 60,
+
+					shadowColor: "black",
+					shadowOffset: { width: 0, height: 3 },
+					shadowOpacity: .3,
+					shadowRadius: 4,  
+					elevation: 1
+							
+				}}>
+	
+					{trackButton}
+	
+				</View>
+
+				<View style = {{
+						
+					borderRadius: "100%",
 					borderColor: VARS.redline,
 					justifyContent: "center",
 					alignItems: "center",
@@ -253,7 +336,6 @@ export default function ({ navigation }) {
 					height: 125,
 					backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
 
-					borderWidth: 0,
 					shadowColor: "black",
     				shadowOffset: { width: 0, height: 3 },
     				shadowOpacity: .3,
@@ -286,7 +368,7 @@ export default function ({ navigation }) {
 					
 					}} string = {"MPH"} />
 
-					</View>
+				</View>
 
 			</View>
 
