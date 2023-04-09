@@ -35,7 +35,9 @@ export default function ({ navigation }) {
   	const [errorMsg, setErrorMsg] = useState(null);
 	const [content, setContent] = React.useState(indicatorContent);
 	const [tracking, setTracking] = React.useState(true);
-	const [journey, setJourney] = React.useState([]);
+	// const [journey, setJourney] = React.useState([]);
+	let journey = new Array();
+	let sec = 0;
 
 	const LOADING = <ActivityIndicator
 						size = "small"
@@ -69,27 +71,70 @@ export default function ({ navigation }) {
 							borderRadius: "100%",
 						}}/>;
 
-	// let tracker = setInterval();
 	let tracker;
-
 
 	const toggleTracking = () => {
 
 		setTracking(!tracking);
 		console.log("Tracking? " + tracking);
 
-		if (!tracking) { clearInterval(tracker); }
-
 		tracker = setInterval(() => {
 
-			setJourney([ ...journey, {
+			// console.log(journey)
+
+			// console.log("--------------------");
+			// console.log("Tracking? " + tracking);
+			// console.log("Journey length: " + journey.length);
+			// console.log("Timestamp: " + timestamp);
+			// console.log("Latitude: " + lati);
+			// console.log("Longitude: " + longi);
+			// console.log("Speed: " + speed);
+			// console.log("--------------------");
+
+			sec++;
+
+			journey.push({
 				latitude: lati,
 				longitude: longi,
 				timestamp: Date.now(),
-				speed: speed,	
-			}]);
+				speed: speed,
+			});
+
+			// setJourney([ ...journey, {
+			// 	latitude: lati,
+			// 	longitude: longi,
+			// 	timestamp: Date.now(),
+			// 	speed: speed,	
+			// }]);
+
+			if (!tracking) {
+				
+				clearInterval(tracker);
+				console.log("Tracker stopped");
+				console.log("Journey length: " + journey.length);
+				console.log(sec + "!!!");
+
+				if (journey.length > 0) {
+
+					console.log(journey[journey.length - 1].timestamp - journey[0].timestamp + "ms");
+
+					if (journey[journey.length - 1].timestamp - journey[0].timestamp > 1000) {
+
+						console.log("Saving journey...");
+
+						db.saveJourney(journey);
+						console.log("Journey added to database");
+
+					}
+
+				}
+			
+			}
 
 		}, refresh);
+
+		// setJourney([]);
+		// journey = [];
 
 	}
 
@@ -149,8 +194,6 @@ export default function ({ navigation }) {
 			setLongitude(long);
 			setLatitude(lat);
 			setSpeed(speed);
-
-			console.log("moving at speed: " + speed)
 
 			mapRef.current.animateToRegion(({
 				

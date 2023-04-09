@@ -150,3 +150,18 @@ export async function getPosts () {
     return postsData;
 
 }
+
+export async function saveJourney (journey) {
+
+    console.log("Saving journey...");
+
+    await addDoc(collection(db, "users", auth.currentUser.uid, "journeys"), {
+
+        journey: journey,
+        timestamp: Date.now()
+
+    })
+    .then(() => { console.log("Journey saved!"); })
+    .catch((error) => { console.log("Error saving journey: " + error); });
+
+}
