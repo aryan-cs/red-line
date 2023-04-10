@@ -16,11 +16,11 @@ import * as VARS from "../../Vars";
 import * as db from "../../Firebase";
 
 import { Ionicons } from "@expo/vector-icons";
+import { ActivityIndicator } from "react-native-web";
 
 export default function ({ navigation }) {
 
   const { isDarkmode, setTheme } = useTheme();
-  const auth = getAuth();
   const [allFeed, setAllFeed] = useState([]);
 
   useEffect(() => {

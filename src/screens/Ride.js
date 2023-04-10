@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Image } from 'react-native';
 import { Layout, useTheme, themeColor } from 'react-native-rapi-ui';
 
@@ -9,12 +9,58 @@ import AppInput from "../components/AppInput";
 import Floaty from "../components/Floaty";
 
 import * as VARS from "../../Vars";
+import * as db from "../../Firebase";
 
 import { Ionicons } from "@expo/vector-icons";
 
 export default function ({ navigation }) {
 
+	let current = 0;
+
 	const { isDarkmode, setTheme } = useTheme();
+	const [rides, setRides] = React.useState([]);
+	const [milesDriven, setMilesDriven] = React.useState(0);
+	const [topSpeed, setTopSpeed] = React.useState(0);
+	const [company, setCompany] = React.useState("--");
+	const [model, setModel] = React.useState("--");
+	const [year, setYear] = React.useState("--");
+	const [engine, setEngine] = React.useState("--");
+	const [hp, setHP] = React.useState("--");
+	const [miles, setMiles] = React.useState("--");
+	const [image, setImage] = React.useState(null);
+
+
+	useEffect(() => {
+
+		db.getRides()
+		.then((rides) => {
+
+			let _miles = 0;
+			let _topSpeed = 0;
+
+			for (let i = 0; i < rides.length; i++) {
+
+				_miles += parseInt(rides[i].miles);
+
+				if (rides[i].topSpeed > _topSpeed) { _topSpeed = rides[i].topSpeed; }
+
+			}
+
+			setRides(rides);
+			setMilesDriven(_miles);
+			setTopSpeed(_topSpeed);
+			setCompany(rides[current].company);
+			setModel(rides[current].model);
+			setYear(rides[current].year);
+			setEngine(rides[current].engine);
+			setHP(rides[current].hp);
+			setImage(rides[current].image);
+			setMiles(rides[current].miles);
+
+		})
+		.catch((error) => { console.log("Error getting rides: " + error); });
+
+	}, []);
 
 	return (
 
@@ -42,46 +88,45 @@ export default function ({ navigation }) {
 					color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray
 				}}
 				
-				string = "Toyota" />
+				string = {company} />
 
 				<AppTitle
 				
 				style = {{
 					
 					fontSize: "80%",
-					position: "absolute",
 					color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray
 					
 				}}
 				
-				string = "SUPRA" />
+				string = {model} />
 
 				<Image
 
 					style = {{
 
-						top: 40,
-						width: 530,
-    					height: 350,
+						top: 80,
+						width: "100%",
+						height: 200,
 						resizeMode: 'stretch',
 
 					}}
 
-					source = {{ uri: "https://platform.cstatic-images.com/xlarge/in/v2/stock_photos/2c9ffe7c-be6b-42fd-8ba0-045467e4c0c0/6fe7cda2-6e61-4197-ae03-7d9bd29af358.png" }} />
+					source = {{ uri: image }} />
 
-				<View style = {{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 50 }}>
+				<View style = {{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
 
-					<AppText string = "MK5" style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
+					<AppText string = {model} style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
 					<AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
-					<AppText string = "2023" style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
+					<AppText string = {year} style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
 					<AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
-					<AppText string = "3.0L Turbo V6" style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
+					<AppText string = {engine} style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
 					<AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
-					<AppText string = "382 HP" style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
+					<AppText string = {hp + " HP"} style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
 
 				</View>
 
-				<AppTitle string = "12,345 miles" style = {{ marginTop: 20, fontSize: 30, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray, textAlign: "right" }} />
+				<AppTitle string = {miles + (miles > 1 ? " miles" : " mile")} style = {{ marginTop: 20, fontSize: 30, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray, textAlign: "right" }} />
 
 			</View>
 

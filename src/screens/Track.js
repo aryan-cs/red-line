@@ -28,13 +28,12 @@ export default function ({ navigation }) {
   	const [address, setAddress] = useState(null);
 	const [longi, setLongitude] = useState(null);
 	const [lati, setLatitude] = useState(null);
-  	const [speed, setSpeed] = useState(null);
+  	const speed = useRef(null);
   	const [errorMsg, setErrorMsg] = useState(null);
 	const [content, setContent] = React.useState(indicatorContent);
 	const [tracking, setTracking] = React.useState(true);
-	// const [journey, setJourney] = React.useState([]);
-	let journey = new Array();
-	let sec = 0;
+	const tracker = useRef(null);
+	const journey = useRef([]);
 
 	const LOADING = <ActivityIndicator
 						size = "small"
@@ -68,70 +67,54 @@ export default function ({ navigation }) {
 							borderRadius: "100%",
 						}}/>;
 
-	let tracker;
-
 	const toggleTracking = () => {
 
 		setTracking(!tracking);
-		console.log("Tracking? " + tracking);
 
-		tracker = setInterval(() => {
+		if (tracking) {
 
-			// console.log(journey)
+			tracker.current = setInterval(() => {
 
-			// console.log("--------------------");
-			// console.log("Tracking? " + tracking);
-			// console.log("Journey length: " + journey.length);
-			// console.log("Timestamp: " + timestamp);
-			// console.log("Latitude: " + lati);
-			// console.log("Longitude: " + longi);
-			// console.log("Speed: " + speed);
-			// console.log("--------------------");
+				console.log("--------------------");
+				console.log("Tracking? " + tracking);
+				console.log("Journey length: " + journey.current.length);
+				console.log("Latitude: " + lati);
+				console.log("Longitude: " + longi);
+				console.log("Timestamp: " + Date.now());
+				console.log("Speed: " + speed.current);
+				console.log("--------------------");
 
-			sec++;
+				journey.current.push({
+					latitude: lati,
+					longitude: longi,
+					timestamp: Date.now(),
+					speed: speed.current,
+				});
 
-			journey.push({
-				latitude: lati,
-				longitude: longi,
-				timestamp: Date.now(),
-				speed: speed,
-			});
+			}, refresh);
 
-			// setJourney([ ...journey, {
-			// 	latitude: lati,
-			// 	longitude: longi,
-			// 	timestamp: Date.now(),
-			// 	speed: speed,	
-			// }]);
+		}
 
-			if (!tracking) {
+		else if (!tracking) {
 				
-				clearInterval(tracker);
-				console.log("Tracker stopped");
-				console.log("Journey length: " + journey.length);
-				console.log(sec + "!!!");
+			clearInterval(tracker.current);
 
-				if (journey.length > 0) {
+			if (journey.current.length > 0) {
 
-					console.log(journey[journey.length - 1].timestamp - journey[0].timestamp + "ms");
+				console.log(journey.current[journey.current.length - 1].timestamp - journey.current[0].timestamp + "ms");
 
-					if (journey[journey.length - 1].timestamp - journey[0].timestamp > 1000) {
+				if (journey.current[journey.current.length - 1].timestamp - journey.current[0].timestamp > 1000) {
 
-						console.log("Saving journey...");
-
-						db.saveJourney(journey);
-						console.log("Journey added to database");
-
-					}
+					db.saveJourney(journey.current);
+					alert("Drive saved!")
 
 				}
-			
+
 			}
+	
+		}
 
-		}, refresh);
-
-		// setJourney([]);
-		// journey = [];
+		journey.current = [];
 
 	}
 
@@ -186,13 +169,12 @@ export default function ({ navigation }) {
 
 			let lat = location.coords.latitude;
 			let long = location.coords.longitude;
-			let speed = location.coords.speed;
+			speed.current = location.coords.speed;
 	
 			setLocation(location);
 			setAddress(address);
 			setLongitude(long);
 			setLatitude(lat);
-			setSpeed(speed);
 
 			mapRef.current.animateToRegion(({
 				
@@ -230,7 +212,7 @@ export default function ({ navigation }) {
 	  else if (location) {
 		
 		addressInfo = address;
-		speedInfo = parseFloat(JSON.stringify(speed).replace(/"/g,"")) * 2.23694;
+		speedInfo = parseFloat(JSON.stringify(speed.current).replace(/"/g,"")) * 2.23694;
 		if (speedInfo < 0) { speedInfo = 0; }
 		else { speedInfo = speedInfo.toFixed(0); }
 
