@@ -47,12 +47,17 @@ export async function saveRide (company, model, year, color, engine, hp, miles) 
 
 export async function getRides () {
 
-    const docRef = doc(db, "users", auth.currentUser.uid, "rides");
-    const docSnap = await getDoc(docRef);
+    // const docRef = doc(db, "users", auth.currentUser.uid, "rides");
+    // const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) { return docSnap.data(); }
+    // if (docSnap.exists()) { return docSnap.data(); }
 
-    else { return null; }
+    // else { return null; }
+
+    const snapshot = await getDocs(collection(db, "users", auth.currentUser.uid, "rides"));
+    let rides = [];
+    snapshot.forEach((doc) => { rides.push(doc.data()); });
+    return rides;
 
 }
 

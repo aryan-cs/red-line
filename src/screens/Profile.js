@@ -21,8 +21,17 @@ export default function ({ navigation }) {
 	const [username, setUsername] = React.useState("");
 	const [email, setEmail] = React.useState("");
 	const [profileImage, setProfileImage] = React.useState();
+	const [createdDate, setCreatedDate] = React.useState();
+	const [lastSignIn, setLastSignIn] = React.useState();
+	const [rides, setRides] = React.useState([]);
+	const [milesDriven, setMilesDriven] = React.useState(0);
+	const [topSpeed, setTopSpeed] = React.useState(0);
 	
 	useEffect(() => {
+
+		let data = db.auth.currentUser;
+		setCreatedDate(data.metadata.creationTime);
+		setLastSignIn(data.metadata.lastSignInTime);
 
 		db.getUser()
 		.then((user) => {
@@ -35,7 +44,29 @@ export default function ({ navigation }) {
 		.catch((error) => { console.log("Error getting user: " + error); });
 
 		db.getUserImage("default.png")
+		// db.getUserImage(user.uid + ".png")
 		.then((image) => { setProfileImage(image); });
+
+		db.getRides()
+		.then((rides) => {
+
+			let _miles = 0;
+			let _topSpeed = 0;
+
+			for (let i = 0; i < rides.length; i++) {
+
+				_miles += parseInt(rides[i].miles);
+
+				if (rides[i].topSpeed > _topSpeed) { _topSpeed = rides[i].topSpeed; }
+
+			}
+
+			setRides(rides);
+			setMilesDriven(_miles);
+			setTopSpeed(_topSpeed);
+
+		})
+		.catch((error) => { console.log("Error getting rides: " + error); });
 
 	}, []);
 
@@ -50,7 +81,13 @@ export default function ({ navigation }) {
 			setProfileImage(_image.assets[0].uri);
 			db.saveUserImage(_image.assets[0].uri, user.uid + ".png");
 		}
-	  };
+	};
+
+	const changeName = () => {
+
+		alert("Feature coming soon!");
+
+	}
 
 	return (
 
@@ -140,7 +177,116 @@ export default function ({ navigation }) {
 						source = {{ uri: profileImage }}/>
 
 					<View style = {{
+						paddingHorizontal: 15,
 						marginHorizontal: 20,
+						marginTop: 10,
+						paddingTop: 15,
+						borderRadius: 15,
+						flex: 1,
+						flexDirection: "column",
+						justifyContent: "center",
+						backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
+					}}>
+
+						<AppText style = {{
+							fontSize: 20,
+							margin: 10,
+							color: isDarkmode ? themeColor.white100 : themeColor.black100,
+						}}
+						string = {"Joined on " + (new Date(createdDate)).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}/>
+
+						<AppText style = {{
+							fontSize: 20,
+							margin: 10,
+							color: isDarkmode ? themeColor.white100 : themeColor.black100,
+						}}
+						string = {"Last seen on " + (new Date(lastSignIn)).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}/>
+
+						<View style = {{
+							flexDirection: "row",
+							justifyContent: "space-between",
+							alignItems: "center",
+							marginVertical: 30,
+						}}>
+
+						<View style = {{
+							flexDirection: "column",
+							marginHorizontal: 10,
+							marginBottom: 10,
+							width: "25%",
+						}}>
+
+							<AppTitle style = {{
+								fontSize: 30,
+								color: isDarkmode ? themeColor.white100 : themeColor.black100,
+								textAlign: "center",
+							}}
+							string = {rides.length}/>
+
+							<AppText style = {{
+								fontSize: 18,
+								margin: 10,
+								color: isDarkmode ? themeColor.white100 : themeColor.black100,
+								flexWrap: 'wrap',
+								textAlign: "center",
+							}}
+							string = {rides.length > 1 ? "rides" : "ride"}/>
+
+						</View>
+
+						<View style = {{
+							flexDirection: "column",
+							marginHorizontal: 10,
+							marginBottom: 10,
+							width: "25%",
+						}}>
+
+							<AppTitle style = {{
+								fontSize: 30,
+								color: isDarkmode ? themeColor.white100 : themeColor.black100,
+								textAlign: "center",
+							}}
+							string = {milesDriven}/>
+
+							<AppText style = {{
+								fontSize: 18,
+								margin: 10,
+								color: isDarkmode ? themeColor.white100 : themeColor.black100,
+								flexWrap: "wrap",
+								textAlign: "center",
+							}}
+							string = {milesDriven > 1 ? "miles" : "mile"}/>
+
+						</View>
+
+						<View style = {{
+							flexDirection: "column",
+							marginHorizontal: 10,
+							marginBottom: 10,
+							width: "25%",
+						}}>
+
+							<AppTitle style = {{
+								fontSize: 30,
+								color: isDarkmode ? themeColor.white100 : themeColor.black100,
+								textAlign: "center",
+							}}
+							string = {topSpeed}/>
+
+							<AppText style = {{
+								fontSize: 18,
+								margin: 10,
+								color: isDarkmode ? themeColor.white100 : themeColor.black100,
+								flexWrap: 'wrap',
+								textAlign: "center",
+							}}
+							string = {"mph"}/>
+
+						</View>
+
+					</View>
+
+					<View style = {{
 						flex: 1,
 						flexDirection: "row",
 						justifyContent: "space-between",
@@ -149,19 +295,24 @@ export default function ({ navigation }) {
 					}}>
 
 						<AppButton style = {{
-							marginBottom: 10,
-							width: 170,
+							marginBottom: 15,
+							width: 155,
 							backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
 						}}
 						string = "Upload picture"
-						onPress = {() => {
+						onPress = {() => { choosePhoto(); }}/>
 
-							choosePhoto();
+						<AppButton style = {{
+							marginBottom: 15,
+							width: 155,
+							backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
+						}}
+						string = "Change name"
+						onPress = {() => { changeName(); }}/>
 
-							// db.saveUserImage(require("../../assets/default.png"), db.auth.currentUser.uid + ".png");
-						}}/>
+					</View>		
 
-					</View>				
+				</View>		
 
 			</View>
 

@@ -24,13 +24,10 @@ export default function ({ navigation }) {
 	const mapRef = useRef(null);
 	const { isDarkmode, setTheme } = useTheme();
 	const [username, setUsername] = React.useState("");
-	const [profileImage, setProfileImage] = React.useState();
 	const [location, setLocation] = useState(null);
   	const [address, setAddress] = useState(null);
 	const [longi, setLongitude] = useState(null);
 	const [lati, setLatitude] = useState(null);
-  	const [timestamp, setTimestamp] = useState(null);
-	const [lastUpdated, setLastUpdated] = useState("never");
   	const [speed, setSpeed] = useState(null);
   	const [errorMsg, setErrorMsg] = useState(null);
 	const [content, setContent] = React.useState(indicatorContent);
@@ -143,6 +140,8 @@ export default function ({ navigation }) {
 		db.getUser()
 		.then((user) => {
 
+			setUsername(user.username);
+
 			// db.getUserImage(user.uid + ".png")
 			db.getUserImage("default.png")
 			.then((image) => {
@@ -169,7 +168,7 @@ export default function ({ navigation }) {
 				// activityType: Location.ActivityType.AutomotiveNavigation,
 			}).catch(function(error) { return null; });
 
-			setTimestamp(location.timestamp)
+			// setTimestamp(location.timestamp)
 
 			let stamp = new Date(location.timestamp);
 			let hrs = stamp.getHours() % 12;
@@ -177,7 +176,7 @@ export default function ({ navigation }) {
 			let secs = stamp.getSeconds();
 			if (mins < 10) { mins = "0" + mins; }
 			if (secs < 10) { secs = "0" + secs; }
-			setLastUpdated("at " + hrs + ":" + mins + ":" + secs);
+			// setLastUpdated("at " + hrs + ":" + mins + ":" + secs);
 
 			let address = await Location.reverseGeocodeAsync(location.coords).then((address) => {
 
@@ -246,7 +245,7 @@ export default function ({ navigation }) {
 							  marginTop: -10,
 							}}
 							size = {75}
-							color = { themeColor.white100 }/>
+							color = {isDarkmode ? VARS.darkmodeBGaccent : themeColor.white100}/>
 
 					</TouchableOpacity>	
 	
