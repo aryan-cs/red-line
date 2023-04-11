@@ -21,12 +21,12 @@ export default function ({ navigation }) {
 	const [rides, setRides] = React.useState([]);
 	const [milesDriven, setMilesDriven] = React.useState(0);
 	const [topSpeed, setTopSpeed] = React.useState(0);
-	const [company, setCompany] = React.useState("--");
-	const [model, setModel] = React.useState("--");
-	const [year, setYear] = React.useState("--");
-	const [engine, setEngine] = React.useState("--");
-	const [hp, setHP] = React.useState("--");
-	const [miles, setMiles] = React.useState("--");
+	const [company, setCompany] = React.useState("");
+	const [model, setModel] = React.useState("");
+	const [year, setYear] = React.useState("");
+	const [engine, setEngine] = React.useState("");
+	const [hp, setHP] = React.useState(0);
+	const [miles, setMiles] = React.useState("");
 	const [image, setImage] = React.useState(null);
 
 
@@ -38,11 +38,13 @@ export default function ({ navigation }) {
 			let _miles = 0;
 			let _topSpeed = 0;
 
-			for (let i = 0; i < rides.length; i++) {
+			for (let r = 0; r < rides.length; r++) {
 
-				_miles += parseInt(rides[i].miles);
+				_miles += parseInt(rides[r].miles);
 
-				if (rides[i].topSpeed > _topSpeed) { _topSpeed = rides[i].topSpeed; }
+				if (rides[r].topSpeed > _topSpeed) { _topSpeed = rides[r].topSpeed; }
+
+				// db.getRideImage(rides[r].image);
 
 			}
 
@@ -69,7 +71,7 @@ export default function ({ navigation }) {
 			<View style = {{
 
 				marginTop: -60,
-				paddingTop: 60,
+				paddingTop: 100,
 				marginBottom: -35,
 				paddingBottom: 35,
 				padding: 30,
@@ -99,22 +101,23 @@ export default function ({ navigation }) {
 					
 				}}
 				
-				string = {model} />
+				string = {model.toUpperCase()} />
 
 				<Image
 
 					style = {{
 
-						top: 80,
 						width: "100%",
 						height: 200,
+						marginVertical: 20,
 						resizeMode: 'stretch',
 
 					}}
 
-					source = {{ uri: image }} />
+					defaultSource = { require("../../assets/car.png") }
+					source = {{ uri: image }}/>
 
-				<View style = {{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+				<View style = {{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 20 }}>
 
 					<AppText string = {model} style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
 					<AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray }} />
@@ -126,7 +129,7 @@ export default function ({ navigation }) {
 
 				</View>
 
-				<AppTitle string = {miles + (miles > 1 ? " miles" : " mile")} style = {{ marginTop: 20, fontSize: 30, color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray, textAlign: "right" }} />
+				<AppTitle string = {miles + (miles > 1 ? " miles" : " mile")} style = {{ marginTop: 30, fontSize: "45%", color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray, textAlign: "right" }} />
 
 			</View>
 

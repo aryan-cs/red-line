@@ -39,13 +39,12 @@ export default function ({ navigation }) {
 			setUser(user);
 			setUsername(user.username);
 			setEmail(user.email);
+
+			db.getUserImage(user.uid)
+			.then((image) => { setProfileImage(image); });
 		
 		})
 		.catch((error) => { console.log("Error getting user: " + error); });
-
-		db.getUserImage("default.png")
-		// db.getUserImage(user.uid + ".png")
-		.then((image) => { setProfileImage(image); });
 
 		db.getRides()
 		.then((rides) => {
@@ -173,7 +172,7 @@ export default function ({ navigation }) {
 							shadowRadius: 8,  
 							elevation: 1,
 						}}
-						// defaultSource = {require("../../assets/default.png")}
+						defaultSource = {require("../../assets/default.png")}
 						source = {{ uri: profileImage }}/>
 
 					<View style = {{

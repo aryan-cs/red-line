@@ -125,8 +125,7 @@ export default function ({ navigation }) {
 
 			setUsername(user.username);
 
-			// db.getUserImage(user.uid + ".png")
-			db.getUserImage("default.png")
+			db.getUserImage(user.uid)
 			.then((image) => {
 				setContent(<Image style = {{
 								width: 40,
@@ -134,6 +133,7 @@ export default function ({ navigation }) {
 								borderRadius: "100%",
 								borderWidth: 0,
 							}}
+							defaultSource={require("../../assets/default.png")}
 							source = {{ uri: image }}/>);
 			});
 

@@ -82,34 +82,26 @@ export async function getUser () {
 
 }
 
-export async function saveUserImage (image, name) {
+export async function saveUserImage (image) {
 
     console.log("Saving user image...");    
 
-    const storageRef = ref(storage, "users/images/" + name);
-    const uploadTask = uploadBytesResumable(storageRef, image, { contentType: "image/jpg" });
+    const response = await fetch(image);
+    const blob = await response.blob();
+    const storageRef = ref(storage, "users/pfp/" + auth.currentUser.uid);
 
-    uploadTask.on("state_changed", (snapshot) => {}, (error) => {
+    const uploadTask = uploadBytesResumable(storageRef, blob);
 
-        console.log("Error saving user image: " + error);
-
-    }, () => {
-
-        console.log("User image saved!");
-
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-
-            console.log('File available at', downloadURL);
-
-        });
-
-    });
+    uploadTask.on("state_changed",
+    (snapshot) => {},
+    (error) => { alert(error); },
+    () => { getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => { return downloadURL; }); });
 
 }
 
 export async function getUserImage (name) {
 
-    const storageRef = ref(storage, "users/images/" + name);
+    const storageRef = ref(storage, "users/pfp/" + name);
     const downloadURL = await getDownloadURL(storageRef);
 
     return downloadURL;
@@ -161,5 +153,41 @@ export async function saveJourney (journey) {
     })
     .then(() => { console.log("Journey saved!"); })
     .catch((error) => { console.log("Error saving journey: " + error); });
+
+}
+
+export async function getJourneys () {
+
+    let journeysData = [];
+    const querySnapshot = await getDocs(collection(db, "users", auth.currentUser.uid, "journeys"));
+
+    querySnapshot.forEach((doc) => { journeysData.push(doc.data()); });
+
+    return journeysData;
+
+}
+
+export async function saveRideImage (image, name) {
+
+    console.log("Saving ride image...");    
+
+    const response = await fetch(image);
+    const blob = await response.blob();
+    const storageRef = ref(storage, "users/rides/" + auth.currentUser.uid + "/" + name);
+    const uploadTask = uploadBytesResumable(storageRef, blob);
+
+    uploadTask.on("state_changed",
+    (snapshot) => {},
+    (error) => { alert(error); },
+    () => { getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => { return downloadURL; }); });
+
+}
+
+export async function getRideImage (name) {
+
+    const storageRef = ref(storage, "users/rides/" + auth.currentUser.uid + "/" + name);
+    const downloadURL = await getDownloadURL(storageRef);
+
+    return downloadURL;
 
 }
