@@ -111,6 +111,8 @@ export default function ({ navigation }) {
 						height: 200,
 						marginVertical: 20,
 						resizeMode: 'stretch',
+						borderRadius: 15,
+
 
 					}}
 
