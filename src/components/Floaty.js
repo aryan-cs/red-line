@@ -197,8 +197,8 @@ export default function Floaty ({style, title, desc, src, cords, postText, navig
 
               latitude: parseFloat(cords.substring(0, cords.indexOf(","))),
               longitude: parseFloat(cords.substring(cords.indexOf(",") + 1)),
-              latitudeDelta: 0.05,
-              longitudeDelta: 0.05,
+              latitudeDelta: 0.001,
+              longitudeDelta: 0.001,
 
             }}
             userInterfaceStyle = {isDarkmode ? "dark" : "light"}
