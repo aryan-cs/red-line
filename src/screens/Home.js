@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, ScrollView, TouchableOpacity } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
 import {
@@ -15,15 +15,30 @@ import Floaty from "../../src/components/Floaty";
 import * as VARS from "../../Vars";
 import * as db from "../../Firebase";
 
+import * as Location from "expo-location";
 import { Ionicons } from "@expo/vector-icons";
-import { ActivityIndicator } from "react-native-web";
 
 export default function ({ navigation }) {
 
   const { isDarkmode, setTheme } = useTheme();
   const [allFeed, setAllFeed] = useState([]);
+  const lastCruiseCords = useRef();
+  const lastCruiseTime = useRef();
+  const [lastCruiseAddress, setLastCruiseAddress] = useState();
 
   useEffect(() => {
+
+    db.getJourneys().then((allJourneys) => {
+
+      lastCruiseCords.current = allJourneys[allJourneys.length - 1].journey[allJourneys[allJourneys.length - 1].journey.length - 1].latitude + ", " + allJourneys[allJourneys.length - 1].journey[allJourneys[allJourneys.length - 1].journey.length - 1].longitude;
+      lastCruiseTime.current = allJourneys[allJourneys.length - 1].journey[allJourneys[allJourneys.length - 1].journey.length - 1].timestamp;
+      lastCruiseAddress.current = Location.reverseGeocodeAsync({
+        latitude: allJourneys[allJourneys.length - 1].journey[allJourneys[allJourneys.length - 1].journey.length - 1].latitude,
+        longitude: allJourneys[allJourneys.length - 1].journey[allJourneys[allJourneys.length - 1].journey.length - 1].longitude
+      })
+      .then((address) => { setLastCruiseAddress(address[0].name + ", " + address[0].city + ", " + address[0].region + ", " + address[0].country); });
+
+    });
 
     db.getPosts().then((posts) => {
 
@@ -99,6 +114,14 @@ export default function ({ navigation }) {
             marginBottom: 60,
             zIndex: 1
           }}>
+
+            <Floaty
+              title = {"LAST CRUISE"}
+              desc = {"Your lastest drive."}
+              cords = {lastCruiseCords.current}
+              postText = {"You last drove to " + lastCruiseAddress + "."}
+              navigation = {navigation}
+            />
 
             {allFeed}
 
