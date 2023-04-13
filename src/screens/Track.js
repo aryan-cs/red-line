@@ -268,7 +268,7 @@ export default function ({ navigation }) {
 				userInterfaceStyle = {isDarkmode ? "dark" : "light"}
 				>
 
-				<Marker
+				<Marker.Animated
             		coordinate = {{
 						latitude: lati ? lati : 0,
 						longitude: longi ? longi : 0,
@@ -276,6 +276,7 @@ export default function ({ navigation }) {
             		title = {username}
             		description = {"Current Location"}
 					pinColor = {VARS.redline}
+					animateToRegion = {true}
 					style = {{
 
 						shadowColor: "black",
@@ -288,7 +289,7 @@ export default function ({ navigation }) {
 
 					{content}
 
-				</Marker>
+				</Marker.Animated>
 
 				</MapView>
 

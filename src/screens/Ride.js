@@ -12,6 +12,7 @@ import * as VARS from "../../Vars";
 import * as db from "../../Firebase";
 
 import { Ionicons } from "@expo/vector-icons";
+import CarouselCards from '../components/CarouselCards';
 
 export default function ({ navigation }) {
 
@@ -68,7 +69,7 @@ export default function ({ navigation }) {
 
 		<Layout>
 
-			<View style = {{
+			{/* <View style = {{
 
 				marginTop: -60,
 				paddingTop: 100,
@@ -79,9 +80,11 @@ export default function ({ navigation }) {
 				justifyContent: 'center',
 				backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
 
-			}}>
+			}}> */}
 
-				<AppTitle
+				<CarouselCards />
+
+				{/* <AppTitle
 				
 				style = {{
 					
@@ -103,21 +106,13 @@ export default function ({ navigation }) {
 				
 				string = {model.toUpperCase()} />
 
-				<Image
-
-					style = {{
-
-						width: "100%",
-						height: 200,
-						marginVertical: 20,
-						resizeMode: 'stretch',
-						borderRadius: 15,
-
-
-					}}
-
-					defaultSource = { require("../../assets/car.png") }
-					source = {{ uri: image }}/>
+				{image != null ?
+					<Image source = {{ uri: image }}
+						style = {{ width: "100%",
+								   height: 200,
+								   marginTop: 20,
+								   borderRadius: 10 }} />
+				: null}
 
 				<View style = {{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 20 }}>
 
@@ -131,9 +126,9 @@ export default function ({ navigation }) {
 
 				</View>
 
-				<AppTitle string = {miles + (miles > 1 ? " miles" : " mile")} style = {{ marginTop: 30, fontSize: "45%", color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray, textAlign: "right" }} />
+				<AppTitle string = {miles + (miles > 1 ? " miles" : " mile")} style = {{ marginTop: 30, fontSize: "45%", color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray, textAlign: "right" }} /> */}
 
-			</View>
+			{/* </View> */}
 
 		</Layout>
 
