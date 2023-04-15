@@ -1,11 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
-import {
-  Layout,
-  themeColor,
-  useTheme,
-} from "react-native-rapi-ui";
+import { Layout, themeColor, useTheme, } from "react-native-rapi-ui";
 
 import AppText from "../components/AppText";
 import AppTitle from "../components/AppTitle";

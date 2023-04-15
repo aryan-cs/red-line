@@ -69,18 +69,17 @@ export default function ({ navigation }) {
 
 		<Layout>
 
-			{/* <View style = {{
+			<View style = {{
 
 				marginTop: -60,
-				paddingTop: 100,
+				paddingTop: 65,
 				marginBottom: -35,
-				paddingBottom: 35,
 				padding: 30,
 				flex: 1,
 				justifyContent: 'center',
 				backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
 
-			}}> */}
+			}}>
 
 				<CarouselCards />
 
@@ -128,7 +127,7 @@ export default function ({ navigation }) {
 
 				<AppTitle string = {miles + (miles > 1 ? " miles" : " mile")} style = {{ marginTop: 30, fontSize: "45%", color: isDarkmode ? VARS.lightmodeBGaccent : VARS.midGray, textAlign: "right" }} /> */}
 
-			{/* </View> */}
+			</View>
 
 		</Layout>
 

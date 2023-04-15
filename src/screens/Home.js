@@ -1,10 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, ScrollView, TouchableOpacity } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
-import {
-  useTheme,
-  themeColor
-} from "react-native-rapi-ui";
+import { useTheme, themeColor } from "react-native-rapi-ui";
 
 import AppText from "../../src/components/AppText";
 import AppTitle from "../../src/components/AppTitle";
@@ -117,7 +114,7 @@ export default function ({ navigation }) {
 
             <Floaty
               title = {"LAST CRUISE"}
-              desc = {(lastCruiseAddress !== undefined && lastCruiseAddress !== null) ? "Last drove to " + lastCruiseAddress.substring(0, lastCruiseAddress.indexOf(",")) : "Last drove to..."}
+              desc = {(lastCruiseAddress !== undefined && lastCruiseAddress !== null) ? "Last drove to " + lastCruiseAddress.substring(0, lastCruiseAddress.indexOf(",")) : "Unable to load last cruise."}
               cords = {lastCruiseCords.current}
               postText = {"You last drove to " + lastCruiseAddress + "."}
               navigation = {navigation}
