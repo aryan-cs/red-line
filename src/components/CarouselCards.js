@@ -27,9 +27,14 @@ const CarouselCards = () => {
         
         data.forEach(ride => {
 
-          if ((ride.company + ride.model + ride.year + ride.hp) ===
-              (user.currentRide.company + user.currentRide.model + user.currentRide.year + user.currentRide.hp)) {
-              ride.isActive = true; }
+          if (user.currentRide) {
+            if ((ride.company + ride.model + ride.year + ride.hp) ===
+                (user.currentRide.company + user.currentRide.model + user.currentRide.year + user.currentRide.hp)) {
+                ride.isActive = true; }
+          }
+
+          db.getRideImage(ride.company + ride.model + ride.year + user.uid)
+          .then((url) => { ride.image = url; });
           
         });
 

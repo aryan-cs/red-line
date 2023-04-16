@@ -98,7 +98,7 @@ export default function ({ navigation }) {
 
 				if (journey.current[journey.current.length - 1].timestamp - journey.current[0].timestamp > 1000) {
 
-					db.saveJourney(journey.current);
+					db.saveJourney(journey.current, currentRide);
 					alert("Drive saved!");
 
 					let miles = 0;

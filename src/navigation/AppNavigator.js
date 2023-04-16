@@ -11,6 +11,7 @@ import TabBarText from "../components/utils/TabBarText";
 // Screens
 import Home from "../screens/Home";
 import Settings from "../screens/Settings";
+import Add from "../screens/Add";
 import Ride from "../screens/Ride";
 import Track from "../screens/Track";
 import Profile from "../screens/Profile";
@@ -61,6 +62,7 @@ const Main = () => {
     >
       <MainStack.Screen name="MainTabs" component={MainTabs} />
       <MainStack.Screen name="Settings" component={Settings} />
+      <MainStack.Screen name="Add Ride" component={Add} />
       <MainStack.Screen name="Post" component={Post} />
     </MainStack.Navigator>
   );

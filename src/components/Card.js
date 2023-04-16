@@ -45,7 +45,7 @@ export default function ({ item, index }) {
         <AppTitle string = {item.company}
           style = {{
             color: "#222",
-            fontSize: item.image ? 28 : 50,
+            fontSize: item.image ? 28 : 30,
             fontWeight: "bold",
             paddingLeft: 20,
             paddingTop: 20
@@ -54,7 +54,7 @@ export default function ({ item, index }) {
         <AppTitle string = {item.model.toUpperCase()}
           style = {{
             color: "#222",
-            fontSize: item.image ? 68 : 100,
+            fontSize: item.image ? 68 : "70%",
             fontWeight: "bold",
             paddingLeft: 20,
           }}/>
@@ -63,7 +63,7 @@ export default function ({ item, index }) {
           style = {{
             alignSelf: "center",
             width: "90%",
-            height: item.image ? 180 : 40,
+            height: item.image ? 180 : "30%",
             borderRadius: 8,
             shadowColor: "black",
             shadowOffset: { width: 0, height: 0 },
@@ -94,27 +94,13 @@ export default function ({ item, index }) {
         </View>
 
         <AppTitle
-          string = {item.miles + (item.miles > 1 ? " miles" : " mile")}
+          string = {item.miles + (item.miles == 1 ? " mile" : " miles")}
           style = {{
             marginHorizontal: 15,
             marginBottom: 60,
             fontSize: 30,
             color: "black",
             textAlign: "right"
-          }} />
-
-        <AppButton
-          string = {"      "}
-          style = {{
-            backgroundColor: VARS.redline,
-            alignSelf: "left",
-            margin: 10,
-            marginBottom: -10,
-            borderRadius: "100%",
-          }}
-          onPress = {() => {
-            alert("Activated the " + item.company + " " + item.model + "!");
-            db.setCurrentRide(item);
           }} />
 
         <View
@@ -134,6 +120,28 @@ export default function ({ item, index }) {
               paddingHorizontal: 20,
               fontSize: 40,
             }} />
+
+          </View>
+
+          <View
+            style = {{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+            }}>
+
+            <AppButton
+              string = {"      "}
+              style = {{
+                backgroundColor: VARS.redline,
+                marginHorizontal: 10,
+                marginBottom: 10,
+                borderRadius: "100%",
+              }}
+              onPress = {() => {
+                alert("Activated the " + item.company + " " + item.model + "!");
+                db.setCurrentRide(item);
+              }} />
 
           </View>
 

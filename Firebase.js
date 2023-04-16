@@ -26,7 +26,7 @@ export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
 
-export async function saveRide (company, model, year, color, engine, hp, miles) {
+export async function saveRide (company, model, year, engine, hp, miles) {
 
     console.log("Saving ride...");
     
@@ -35,7 +35,6 @@ export async function saveRide (company, model, year, color, engine, hp, miles) 
         company: company,
         model: model,
         year: year,
-        color: color,
         engine: engine,
         hp: hp,
         miles: miles,
@@ -68,7 +67,6 @@ export async function setCurrentRide (car) {
         uid: auth.currentUser.uid,
 
         currentRide: {
-            color: car.color,
             company: car.company,
             engine: car.engine,
             hp: car.hp,
@@ -174,14 +172,15 @@ export async function getPosts () {
 
 }
 
-export async function saveJourney (journey) {
+export async function saveJourney (journey, ride) {
 
     console.log("Saving journey...");
 
     await addDoc(collection(db, "users", auth.currentUser.uid, "journeys"), {
 
         journey: journey,
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        ride: ride
 
     })
     .then(() => { console.log("Journey saved!"); })
@@ -202,23 +201,31 @@ export async function getJourneys () {
 
 export async function saveRideImage (image, name) {
 
-    console.log("Saving ride image...");    
+    console.log("Saving ride image...");
 
     const response = await fetch(image);
     const blob = await response.blob();
-    const storageRef = ref(storage, "users/rides/" + auth.currentUser.uid + "/" + name);
+    const storageRef = ref(storage, "users/rides/" + name + auth.currentUser.uid);
+
     const uploadTask = uploadBytesResumable(storageRef, blob);
 
     uploadTask.on("state_changed",
     (snapshot) => {},
     (error) => { alert(error); },
-    () => { getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => { return downloadURL; }); });
+    () => {
+        getDownloadURL(uploadTask.snapshot.ref)
+        .then((downloadURL) => {
+            console.log("Saved ride image!");
+            console.log(downloadURL);   
+            return downloadURL;
+        });
+    });    
 
 }
 
 export async function getRideImage (name) {
 
-    const storageRef = ref(storage, "users/rides/" + auth.currentUser.uid + "/" + name);
+    const storageRef = ref(storage, "users/rides/" + name);
     const downloadURL = await getDownloadURL(storageRef);
 
     return downloadURL;
