@@ -23,7 +23,9 @@ export default function ({ navigation }) {
 
 	const mapRef = useRef(null);
 	const { isDarkmode, setTheme } = useTheme();
-	const [username, setUsername] = React.useState("");
+	const [user, setUser] = useState(null);
+	const [currentRide, setCurrentRide] = useState(null);
+	const [username, setUsername] = useState("");
 	const [location, setLocation] = useState(null);
   	const [address, setAddress] = useState(null);
 	const [longi, setLongitude] = useState(null);
@@ -75,15 +77,6 @@ export default function ({ navigation }) {
 
 			tracker.current = setInterval(() => {
 
-				console.log("--------------------");
-				console.log("Tracking? " + tracking);
-				console.log("Journey length: " + journey.current.length);
-				console.log("Latitude: " + lati);
-				console.log("Longitude: " + longi);
-				console.log("Timestamp: " + Date.now());
-				console.log("Speed: " + speed.current);
-				console.log("--------------------");
-
 				journey.current.push({
 					latitude: lati,
 					longitude: longi,
@@ -106,7 +99,28 @@ export default function ({ navigation }) {
 				if (journey.current[journey.current.length - 1].timestamp - journey.current[0].timestamp > 1000) {
 
 					db.saveJourney(journey.current);
-					alert("Drive saved!")
+					alert("Drive saved!");
+
+					let miles = 0;
+					
+					for (let i = 0; i < journey.current.length; i++) {
+
+						let datapoint = journey.current[i];
+						let nextPoint = journey.current[i + 1];
+
+						if (nextPoint) {
+
+							let distance = Math.sqrt(Math.pow(datapoint.latitude - nextPoint.latitude, 2) + Math.pow(datapoint.longitude - nextPoint.longitude, 2));
+							miles += distance * 69;
+							
+						}
+
+						if (datapoint.speed > user.currentRide.topSpeed) { user.currentRide.topSpeed = datapoint.speed; }
+
+					}
+
+					user.currentRide.miles += miles;
+					db.saveUser(username, user.email, currentRide);
 
 				}
 
@@ -123,6 +137,8 @@ export default function ({ navigation }) {
 		db.getUser()
 		.then((user) => {
 
+			setUser(user);
+			setCurrentRide(user.currentRide);
 			setUsername(user.username);
 
 			db.getUserImage(user.uid)
@@ -176,28 +192,18 @@ export default function ({ navigation }) {
 			setLongitude(long);
 			setLatitude(lat);
 
-			mapRef.current.animateToRegion(({
-				
-				latitude: lat,
-				longitude: long,
-				latitudeDelta: 0.005,
-				longitudeDelta: 0.005,
+			if (mapRef.current !== null) {
 
-		  	}), refresh);
+				mapRef.current.animateToRegion(({
 
-			// if (tracking) {
+					latitude: lat,
+					longitude: long,
+					latitudeDelta: 0.005,
+					longitudeDelta: 0.005,
 
-			// 	// console.log(location.timestamp + " | " + timestamp + " | " + Date.now())
-			// 	// console.log(lat + ", " + long + " | @ " + Date.now() + " going " + speed + " mph");
+		  		}), refresh);
 
-			// 	setJourney([ ...journey, {
-			// 		latitude: lat,
-			// 		longitude: long,
-			// 		timestamp: Date.now(),
-			// 		speed: parseFloat(speed * 2.23694).toFixed(1),	
-			// 	}]);
-
-			// }
+			}
 	
 		  }, refresh);
 	
@@ -274,7 +280,7 @@ export default function ({ navigation }) {
 						longitude: longi ? longi : 0,
 					}}
             		title = {username}
-            		description = {"Current Location"}
+            		description = {currentRide ? "Driving their " + currentRide.company + " " + currentRide.model : "No ride selected"}
 					pinColor = {VARS.redline}
 					animateToRegion = {true}
 					style = {{
@@ -284,6 +290,7 @@ export default function ({ navigation }) {
 						shadowOpacity: 0.35,
 						shadowRadius: 4,  
 						elevation: 1,
+						paddingTop: 5,
 
 					}}>
 

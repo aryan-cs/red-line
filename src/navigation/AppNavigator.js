@@ -88,11 +88,12 @@ const MainTabs = () => {
         },
       }}
     >
-      {/* these icons using Ionicons */}
+
       <Tabs.Screen
         name="Track"
         component={Track}
         options={{
+          unmountOnBlur: true,
           tabBarLabel: ({ focused }) => (
             <TabBarText focused={focused} title="Track" />
           ),
@@ -119,6 +120,7 @@ const MainTabs = () => {
         name="Your Ride"
         component={Ride}
         options={{
+          unmountOnBlur: true,
           tabBarLabel: ({ focused }) => (
             <TabBarText focused={focused} title="Your Ride" />
           ),

@@ -114,9 +114,13 @@ export default function ({ navigation }) {
 
             <Floaty
               title = {"LAST CRUISE"}
-              desc = {(lastCruiseAddress !== undefined && lastCruiseAddress !== null) ? "Last drove to " + lastCruiseAddress.substring(0, lastCruiseAddress.indexOf(",")) : "Unable to load last cruise."}
+              desc = {(lastCruiseAddress !== undefined && lastCruiseAddress !== null) ?
+                        "Last drove to " + lastCruiseAddress.substring(0, lastCruiseAddress.indexOf(",")) :
+                        "Unable to load last cruise."}
               cords = {lastCruiseCords.current}
-              postText = {"You last drove to " + lastCruiseAddress + "."}
+              postText = {(lastCruiseAddress !== undefined && lastCruiseAddress !== null) ?
+                            "Last drove to " + lastCruiseAddress :
+                            "Unable to load last cruise."}
               navigation = {navigation}
             />
 

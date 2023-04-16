@@ -1,4 +1,4 @@
-import { getAuth } from "firebase/auth";
+import { updateProfile, getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import {
     getFirestore,
@@ -7,7 +7,8 @@ import {
     setDoc,
     getDoc,
     addDoc,
-    getDocs } from "firebase/firestore"; 
+    getDocs,
+} from "firebase/firestore"; 
 import { getStorage, ref, uploadBytesResumable, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
@@ -37,7 +38,9 @@ export async function saveRide (company, model, year, color, engine, hp, miles) 
         color: color,
         engine: engine,
         hp: hp,
-        miles: miles
+        miles: miles,
+        topSpeed: 0,
+        uid: auth.currentUser.uid
 
     })
     .then(() => { console.log("Ride saved!"); })
@@ -54,16 +57,46 @@ export async function getRides () {
 
 }
 
-export async function saveUser (username, email, password) {
+export async function setCurrentRide (car) {
+
+    console.log("Saving current ride...");
+
+    await setDoc(doc(db, "users", auth.currentUser.uid, "info", "personal"), {
+
+        email: auth.currentUser.email,
+        username: auth.currentUser.displayName,
+        uid: auth.currentUser.uid,
+
+        currentRide: {
+            color: car.color,
+            company: car.company,
+            engine: car.engine,
+            hp: car.hp,
+            miles: car.miles,
+            model: car.model,
+            topSpeed: car.topSpeed,
+            uid: car.uid,
+            year: car.year
+        }
+
+    })
+    .then(() => { console.log("Current ride saved!"); })
+    .catch((error) => { console.log("Error saving current ride: " + error); });
+    
+}
+
+export async function saveUser (username, email, ride) {
 
     console.log("Saving user...");
+
+    await updateProfile(auth.currentUser, { displayName: username });
     
     await setDoc(doc(db, "users", auth.currentUser.uid, "info", "personal"), {
 
         username: username,
         email: email,
-        password: password,
-        uid: auth.currentUser.uid
+        uid: auth.currentUser.uid,
+        currentRide: ride
 
     })
     .then(() => { console.log("User saved!"); })

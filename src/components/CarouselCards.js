@@ -20,7 +20,26 @@ const CarouselCards = () => {
   const isCarousel = React.useRef(null);
   const [rides, setRides] = React.useState([]);
 
-  useEffect(() => { db.getRides().then((data) => { setRides(data); }); }, []);
+  useEffect(() => {
+    
+    db.getRides().then((data) => {
+      db.getUser().then((user) => {
+        
+        data.forEach(ride => {
+
+          if ((ride.company + ride.model + ride.year + ride.hp) ===
+              (user.currentRide.company + user.currentRide.model + user.currentRide.year + user.currentRide.hp)) {
+              ride.isActive = true; }
+          
+        });
+
+        setRides(data);
+
+      });
+
+    });
+  
+  }, []);
    
   return (
 
@@ -31,7 +50,8 @@ const CarouselCards = () => {
       alignItems: 'center',
       alignSelf: 'center',
       marginTop: 40,
-      backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG
+      backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
+      borderRadius: 15,
     }}>
 
       <Carousel
@@ -46,7 +66,7 @@ const CarouselCards = () => {
         useScrollView = {true}
       />
 
-      <Pagination
+      {/* <Pagination
         dotsLength = {rides.length}
         activeDotIndex = {index}
         carouselRef = {isCarousel}
@@ -60,7 +80,7 @@ const CarouselCards = () => {
         inactiveDotOpacity = {0.4}
         inactiveDotScale = {0.6}
         tappableDots = {true}
-      />
+      /> */}
 
     </View>
 

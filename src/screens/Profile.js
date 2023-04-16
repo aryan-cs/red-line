@@ -84,7 +84,7 @@ export default function ({ navigation }) {
 
 	const changeName = () => {
 
-		alert("Feature coming soon!");
+		
 
 	}
 
