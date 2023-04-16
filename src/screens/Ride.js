@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { Layout, useTheme, themeColor } from 'react-native-rapi-ui';
 
 import AppText from "../components/AppText";
@@ -35,6 +35,40 @@ export default function ({ navigation }) {
 			}}>
 
 				<CarouselCards />
+
+				<TouchableOpacity style = {{
+        		  width: 60,
+        		  height: 60,
+        		  position: "absolute",
+        		  bottom: "2%",
+        		  right: "50%",
+        		  justifyContent: "center",
+        		  alignItems: "center",
+        		  textAlign: "center",
+        		  backgroundColor: themeColor.white100,
+        		  borderRadius: "100%",
+        		  zIndex: 1,
+				  shadowColor: "black",
+    		  shadowOffset: { width: 0, height: 2 },
+    		  shadowOpacity: .5,
+    		  shadowRadius: 4,  
+    		  elevation: 1,
+
+				  
+        		}}
+			
+        		onPress = {() => { alert("Feature coming soon!"); }}>
+				
+        		  <Ionicons
+        		    name = {"ios-add-circle"}
+        		    style = {{
+        		      marginLeft: -5.25,
+        		      marginTop: -10,
+        		    }}
+        		    size = {75}
+        		    color = { VARS.redline }/>
+
+        		</TouchableOpacity>
 
 			</View>
 
