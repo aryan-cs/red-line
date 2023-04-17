@@ -139,21 +139,33 @@ export async function getUserImage (name) {
 
 }
 
-export async function savePost (title, caption, imagePath, cords, description) {
+export async function savePostImage (image, name) {
+
+    console.log("Saving post image...");
+
+    const response = await fetch(image);
+    const blob = await response.blob();
+    const storageRef = ref(storage, "feed/" + name);
+
+    const uploadTask = uploadBytesResumable(storageRef, blob);
+
+    uploadTask.on("state_changed",
+    (snapshot) => {},
+    (error) => { alert(error); },
+    () => { getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => { return downloadURL; }); });
+
+}
+
+export async function savePost (title, caption, description) {
 
     console.log("Saving post...");
-
-    if (cords == null || cords == undefined) { cords = ""; }
-    if (imagePath == null || imagePath == undefined) { imagePath = ""; }
 
     await addDoc(collection(db, "feed"), {
 
         title: title,
         caption: caption,
-        imagePath: imagePath,
-        cords: cords,
         description: description,
-        timestamp: Date.now()
+        atimestamp: Date.now()
 
     })
     .then(() => { console.log("Post saved!"); })

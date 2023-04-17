@@ -60,6 +60,8 @@ export default function ({ navigation }) {
 
       });
 
+      allFeed.sort((a, b) => { return b.key - a.key; });
+
     });
 
   }, []);
@@ -88,7 +90,7 @@ export default function ({ navigation }) {
           zIndex: 1,
         }}
         
-        onPress = {() => { alert("Feature coming soon!"); }}>
+        onPress = {() => { navigation.navigate("Upload") }}>
             
           <Ionicons
             name = {"ios-add-circle"}

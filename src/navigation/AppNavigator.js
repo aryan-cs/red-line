@@ -12,6 +12,7 @@ import TabBarText from "../components/utils/TabBarText";
 import Home from "../screens/Home";
 import Settings from "../screens/Settings";
 import Add from "../screens/Add";
+import Upload from "../screens/Upload";
 import Ride from "../screens/Ride";
 import Track from "../screens/Track";
 import Profile from "../screens/Profile";
@@ -63,6 +64,7 @@ const Main = () => {
       <MainStack.Screen name="MainTabs" component={MainTabs} />
       <MainStack.Screen name="Settings" component={Settings} />
       <MainStack.Screen name="Add Ride" component={Add} />
+      <MainStack.Screen name="Upload" component={Upload} />
       <MainStack.Screen name="Post" component={Post} />
     </MainStack.Navigator>
   );
@@ -109,6 +111,7 @@ const MainTabs = () => {
         name="Home"
         component={Home}
         options={{
+          unmountOnBlur: true,
           tabBarLabel: ({ focused }) => (
             <TabBarText focused={focused} title="Feed" />
           ),

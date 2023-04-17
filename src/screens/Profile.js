@@ -254,7 +254,7 @@ export default function ({ navigation }) {
 								flexWrap: "wrap",
 								textAlign: "center",
 							}}
-							string = {milesDriven > 1 ? "miles" : "mile"}/>
+							string = {(milesDriven == 1 ? " mile" : " miles")}/>
 
 						</View>
 

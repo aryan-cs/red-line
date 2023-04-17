@@ -44,7 +44,7 @@ export default function ({ item, index }) {
 
         <AppTitle string = {item.company}
           style = {{
-            color: "#222",
+            color: "#FFFFFF70",
             fontSize: item.image ? 28 : 30,
             fontWeight: "bold",
             paddingLeft: 20,
@@ -53,7 +53,7 @@ export default function ({ item, index }) {
 
         <AppTitle string = {item.model.toUpperCase()}
           style = {{
-            color: "#222",
+            color: "#FFFFFF70",
             fontSize: item.image ? 68 : "70%",
             fontWeight: "bold",
             paddingLeft: 20,
@@ -83,13 +83,13 @@ export default function ({ item, index }) {
             marginHorizontal: 20,
           }}>
 
-          <AppText string = {item.model} style = {{ paddingLeft: 0, fontSize: 20, color: "black" }} />
-          <AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: "black" }} />
-          <AppText string = {item.year} style = {{ paddingLeft: 0, fontSize: 20, color: "black" }} />
-          <AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: "black" }} />
-          <AppText string = {item.engine} style = {{ paddingLeft: 0, fontSize: 20, color: "black" }} />
-          <AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: "black" }} />
-          <AppText string = {item.hp + " HP"} style = {{ paddingLeft: 0, fontSize: 20, color: "black" }} />
+          <AppText string = {item.model} style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
+          <AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
+          <AppText string = {item.year} style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
+          <AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
+          <AppText string = {item.engine} style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
+          <AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
+          <AppText string = {item.hp + " HP"} style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
 
         </View>
 
@@ -99,7 +99,7 @@ export default function ({ item, index }) {
             marginHorizontal: 15,
             marginBottom: 60,
             fontSize: 30,
-            color: "black",
+            color: "#FFFFFF70",
             textAlign: "right"
           }} />
 
@@ -109,7 +109,9 @@ export default function ({ item, index }) {
             bottom: 0,
             right: 0,
             backgroundColor: VARS.redline,
-            borderTopLeftRadius: 15,
+            borderRadius: "100%",
+            marginBottom: 10,
+            marginRight: 10,
           }}>
 
           <AppTitle
@@ -131,7 +133,7 @@ export default function ({ item, index }) {
             }}>
 
             <AppButton
-              string = {"      "}
+              string = {"ACTIVATE"}
               style = {{
                 backgroundColor: VARS.redline,
                 marginHorizontal: 10,
