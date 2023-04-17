@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, ImageBackground, Image } from "react-native";
+import { View, ActivityIndicator, Dimensions, ImageBackground, Image, TouchableOpacity } from "react-native";
 
 import AppText from "../components/AppText";
 import AppTitle from "../components/AppTitle";
@@ -10,12 +10,55 @@ import Floaty from "../components/Floaty";
 import * as VARS from "../../Vars";
 import * as db from "../../Firebase";
 
+import { Ionicons } from "@expo/vector-icons";
+
 export const SLIDER_WIDTH = Dimensions.get('window').width;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.9);
 export const SLIDER_HEIGHT = Dimensions.get('window').height;
 export const ITEM_HEIGHT = Math.round(SLIDER_HEIGHT * 0.7);
 
 export default function ({ item, index }) {
+
+  // const [image, setImage] = useState(item.image);
+
+  // useEffect(() => {
+
+  //   db.getRideImage(item.company + item.model + item.year)
+  //   .then((url) => { setImage(url); });
+
+  // }, []);
+
+  if (!item.image) {
+
+    return (
+
+      <View style = {{
+        backgroundColor: 'white',
+        width: ITEM_WIDTH,
+        height: ITEM_HEIGHT,
+        margin: 10,
+        alignSelf: "center",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 3, },
+        shadowOpacity: 0.3,
+        shadowRadius: 4.65,
+        elevation: 7,
+        borderRadius: 20,
+      }} key = {index}>
+  
+        <ActivityIndicator
+          size = "large"
+          color = {VARS.midGray}
+          style = {{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        />
+  
+      </View>
+
+    );
+
+  }
+  
+  else {
 
   return (
 
@@ -30,6 +73,7 @@ export default function ({ item, index }) {
       shadowOpacity: 0.3,
       shadowRadius: 4.65,
       elevation: 7,
+      borderRadius: 20,
     }} key = {index}>
 
       <ImageBackground
@@ -39,7 +83,7 @@ export default function ({ item, index }) {
           width: "100%",
           height: "100%",
           justifyContent: "center",
-          borderRadius: 8,
+          borderRadius: 20,
         }}>
 
         <AppTitle string = {item.company}
@@ -132,18 +176,27 @@ export default function ({ item, index }) {
               left: 0,
             }}>
 
-            <AppButton
-              string = {"ACTIVATE"}
-              style = {{
-                backgroundColor: VARS.redline,
-                marginHorizontal: 10,
-                marginBottom: 10,
-                borderRadius: "100%",
-              }}
-              onPress = {() => {
-                alert("Activated the " + item.company + " " + item.model + "!");
-                db.setCurrentRide(item);
-              }} />
+            <TouchableOpacity
+						style = {{
+							width: 80,
+							height: 80,
+							marginHorizontal: 20,
+							marginVertical: -35,
+							textAlign: "center",
+							backgroundColor: "transparent"
+						}}
+						onPress = {() => {
+              alert("Activated the " + item.company + " " + item.model + "!");
+              db.setCurrentRide(item);
+            }}>
+							
+						<Ionicons
+							name = {"md-key"}
+							style = {{}}
+							size = {25}
+							color = "#FFFFFF70"/>
+
+					  </TouchableOpacity>
 
           </View>
 
@@ -152,5 +205,7 @@ export default function ({ item, index }) {
     </View>
 
   );
+
+  }
 
 }

@@ -35,12 +35,10 @@ export default function ({ navigation }) {
 		});
 
 		if (!_image.canceled) {
-			
-      db.getUser().then((user) => {
 
-			  db.saveRideImage(_image.assets[0].uri, company + model + year);
+      console.log("Image selected!");
 
-      });
+			db.saveRideImage(_image.assets[0].uri, company + model + year);
 
 		}
 
@@ -191,6 +189,7 @@ export default function ({ navigation }) {
                 db.saveRide(company, model, parseInt(year), engine, parseInt(hp), 0).then(() => {
                   alert("Ride added!");
                   setLoading(false);
+                  navigation.navigate("Your Ride");
                 });
               });
 

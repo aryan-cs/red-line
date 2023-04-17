@@ -23,7 +23,7 @@ export default function ({ navigation }) {
   const lastCruiseTime = useRef();
   const [lastCruiseAddress, setLastCruiseAddress] = useState();
 
-  useEffect(() => {
+  const updateFeed = async () => {
 
     db.getJourneys().then((allJourneys) => {
 
@@ -56,13 +56,19 @@ export default function ({ navigation }) {
           />,
           ...allFeed,
 
-        ]);
+        ].sort((a, b) => { return b.key - a.key; }));
 
       });
 
-      allFeed.sort((a, b) => { return b.key - a.key; });
-
     });
+
+  };
+
+  useEffect(() => {
+
+    const focusHandler = navigation.addListener('focus', () => { updateFeed(); });
+
+    updateFeed();
 
   }, []);
 

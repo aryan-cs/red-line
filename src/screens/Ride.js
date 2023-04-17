@@ -34,7 +34,7 @@ export default function ({ navigation }) {
 
 			}}>
 
-				<CarouselCards />
+				<CarouselCards navigation = {navigation} />
 
 				<TouchableOpacity style = {{
         			width: 60,

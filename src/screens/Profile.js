@@ -82,12 +82,6 @@ export default function ({ navigation }) {
 		}
 	};
 
-	const changeName = () => {
-
-		
-
-	}
-
 	return (
 
 		<Layout>
@@ -298,16 +292,8 @@ export default function ({ navigation }) {
 							width: 155,
 							backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
 						}}
-						string = "Upload picture"
+						string = "Change photo"
 						onPress = {() => { choosePhoto(); }}/>
-
-						<AppButton style = {{
-							marginBottom: 15,
-							width: 155,
-							backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
-						}}
-						string = "Change name"
-						onPress = {() => { changeName(); }}/>
 
 					</View>		
 

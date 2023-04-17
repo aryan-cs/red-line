@@ -13,36 +13,35 @@ import Floaty from "../components/Floaty";
 import * as VARS from "../../Vars";
 import * as db from "../../Firebase";
 
-const CarouselCards = () => {
+const CarouselCards = ({ navigation }) => {
 
   const { isDarkmode, setTheme } = useTheme();
   const [index, setIndex] = React.useState(0);
   const isCarousel = React.useRef(null);
   const [rides, setRides] = React.useState([]);
 
-  useEffect(() => {
-    
+  const updateCards = () => {
+
     db.getRides().then((data) => {
-      db.getUser().then((user) => {
         
-        data.forEach(ride => {
+      data.forEach(ride => {
 
-          if (user.currentRide) {
-            if ((ride.company + ride.model + ride.year + ride.hp) ===
-                (user.currentRide.company + user.currentRide.model + user.currentRide.year + user.currentRide.hp)) {
-                ride.isActive = true; }
-          }
-
-          db.getRideImage(ride.company + ride.model + ride.year + user.uid)
-          .then((url) => { ride.image = url; });
+        db.getRideImage(ride.company + ride.model + ride.year)
+        .then((url) => { ride.image = url; });
           
-        });
-
-        setRides(data);
-
       });
 
+      setRides(data);
+
     });
+
+  };
+
+  useEffect(() => {
+
+    const focusHandler = navigation.addListener('focus', () => { updateCards(); });
+    
+    updateCards();
   
   }, []);
    

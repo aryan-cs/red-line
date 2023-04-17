@@ -163,6 +163,7 @@ export default function ({ navigation }) {
                 db.savePost(postTitle, postCaption, postDescription).then(() => {
                   alert("Uploaded post!");
                   setLoading(false);
+                  navigation.navigate("Home");
                 // });
               });
 

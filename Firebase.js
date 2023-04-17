@@ -165,7 +165,7 @@ export async function savePost (title, caption, description) {
         title: title,
         caption: caption,
         description: description,
-        atimestamp: Date.now()
+        timestamp: Date.now()
 
     })
     .then(() => { console.log("Post saved!"); })
@@ -213,31 +213,17 @@ export async function getJourneys () {
 
 export async function saveRideImage (image, name) {
 
-    console.log("Saving ride image...");
+    console.log("Saving user image...");    
 
-    const response = await fetch(image);
-    const blob = await response.blob();
-    const storageRef = ref(storage, "users/rides/" + name + auth.currentUser.uid);
-
-    const uploadTask = uploadBytesResumable(storageRef, blob);
-
-    uploadTask.on("state_changed",
-    (snapshot) => {},
-    (error) => { alert(error); },
-    () => {
-        getDownloadURL(uploadTask.snapshot.ref)
-        .then((downloadURL) => {
-            console.log("Saved ride image!");
-            console.log(downloadURL);   
-            return downloadURL;
-        });
-    });    
+    await uploadBytes(ref(storage, "users/rides/" + name + auth.currentUser.uid), image)
+    .then(() => { console.log("Journey image saved!"); })
+    .catch((error) => { console.log("Error saving journey image: " + error); });
 
 }
 
 export async function getRideImage (name) {
 
-    const storageRef = ref(storage, "users/rides/" + name);
+    const storageRef = ref(storage, "users/rides/" + name + auth.currentUser.uid);
     const downloadURL = await getDownloadURL(storageRef);
 
     return downloadURL;
