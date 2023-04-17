@@ -22,7 +22,7 @@ export default function Floaty ({style, title, desc, src, cords, postText, navig
 
   const onPress = () => {
 
-    let content = { text: postText, title: title }
+    let content = { text: postText, title: title.toUpperCase() }
 
     if (cords !== undefined && cords !== null) { content = { ...content, cords: cords, }; }
 
@@ -61,7 +61,7 @@ export default function Floaty ({style, title, desc, src, cords, postText, navig
         zIndex: 3,
         color: VARS.redline,
                 
-      }} string = {title} />
+      }} string = {title.toUpperCase()} />
 
       <AppText style = {{
                 
