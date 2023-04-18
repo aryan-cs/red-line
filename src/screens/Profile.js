@@ -170,7 +170,6 @@ export default function ({ navigation }) {
 						source = {{ uri: profileImage }}/>
 
 					<View style = {{
-						paddingHorizontal: 15,
 						marginHorizontal: 20,
 						marginTop: 10,
 						paddingTop: 15,
@@ -184,6 +183,7 @@ export default function ({ navigation }) {
 						<AppText style = {{
 							fontSize: 20,
 							margin: 10,
+							paddingHorizontal: 15,
 							color: isDarkmode ? themeColor.white100 : themeColor.black100,
 						}}
 						string = {"Joined on " + (new Date(createdDate)).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}/>
@@ -191,6 +191,7 @@ export default function ({ navigation }) {
 						<AppText style = {{
 							fontSize: 20,
 							margin: 10,
+							paddingHorizontal: 15,
 							color: isDarkmode ? themeColor.white100 : themeColor.black100,
 						}}
 						string = {"Last seen on " + (new Date(lastSignIn)).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}/>
@@ -204,9 +205,9 @@ export default function ({ navigation }) {
 
 						<View style = {{
 							flexDirection: "column",
-							marginHorizontal: 10,
+							marginLeft: 20,
 							marginBottom: 10,
-							width: "25%",
+							width: "20%",
 						}}>
 
 							<AppTitle style = {{
@@ -229,9 +230,9 @@ export default function ({ navigation }) {
 
 						<View style = {{
 							flexDirection: "column",
-							marginHorizontal: 10,
+							marginHorizontal: 20,
 							marginBottom: 10,
-							width: "25%",
+							width: "34%",
 						}}>
 
 							<AppTitle style = {{
@@ -254,9 +255,9 @@ export default function ({ navigation }) {
 
 						<View style = {{
 							flexDirection: "column",
-							marginHorizontal: 10,
+							marginRight: 20,
 							marginBottom: 10,
-							width: "25%",
+							width: "20%",
 						}}>
 
 							<AppTitle style = {{
@@ -285,6 +286,7 @@ export default function ({ navigation }) {
 						justifyContent: "space-between",
 						alignContent: "flex-end",
 						alignItems: "flex-end",
+						paddingHorizontal: 15,
 					}}>
 
 						<AppButton style = {{

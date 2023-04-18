@@ -213,11 +213,23 @@ export async function getJourneys () {
 
 export async function saveRideImage (image, name) {
 
-    console.log("Saving user image...");    
+    console.log("Saving ride image...");   
+        
+    const response = await fetch(image);
+    const blob = await response.blob();
+    const storageRef = ref(storage, "users/rides/" + name + auth.currentUser.uid);
 
-    await uploadBytes(ref(storage, "users/rides/" + name + auth.currentUser.uid), image)
-    .then(() => { console.log("Journey image saved!"); })
-    .catch((error) => { console.log("Error saving journey image: " + error); });
+    const uploadTask = uploadBytesResumable(storageRef, blob);
+
+    uploadTask.on("state_changed",
+    (snapshot) => {},
+    (error) => { alert(error); },
+    () => { getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => { return downloadURL; }); }); 
+
+    // const metadata = { contentType: "image/jpeg" };
+    // await uploadBytes(ref(storage, "users/rides/" + name + auth.currentUser.uid), image, metadata)
+    // .then(() => { console.log("Ride image saved!"); })
+    // .catch((error) => { console.log("Error saving journey image: " + error); });
 
 }
 
