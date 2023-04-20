@@ -103,7 +103,7 @@ export default function ({ navigation }) {
 
         <View style = {{ flex: 1, padding: 15 }}>
 
-          <AppText style = {{ marginTop: 15, fontSize: 17 }} string = "Company" />
+          <AppText style = {{ marginTop: 15, fontSize: 17 }} string = "Make" />
 
           <AppInput
             containerStyle = {{ marginTop: 10 }}
