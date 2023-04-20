@@ -40,7 +40,7 @@ export default function ({ navigation }) {
         			width: 30,
         			height: 30,
         			position: "absolute",
-        			top: "9%",
+        			top: "9.5%",
         			right: "6%",
         			justifyContent: "center",
         			alignItems: "center",
@@ -61,7 +61,7 @@ export default function ({ navigation }) {
         		    name = {"ios-add-circle"}
         		    style = {{
         		      marginLeft: -4.50,
-        		      marginTop: -7.2,
+        		      marginTop: -7.3,
         		    }}
         		    size = {40}
         		    color = { VARS.redline }/>
