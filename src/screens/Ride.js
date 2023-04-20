@@ -37,11 +37,11 @@ export default function ({ navigation }) {
 				<CarouselCards navigation = {navigation} />
 
 				<TouchableOpacity style = {{
-        			width: 60,
-        			height: 60,
+        			width: 30,
+        			height: 30,
         			position: "absolute",
-        			bottom: "2%",
-        			right: "50%",
+        			top: "9%",
+        			right: "6%",
         			justifyContent: "center",
         			alignItems: "center",
         			textAlign: "center",
@@ -60,10 +60,10 @@ export default function ({ navigation }) {
         		  <Ionicons
         		    name = {"ios-add-circle"}
         		    style = {{
-        		      marginLeft: -5.25,
-        		      marginTop: -10,
+        		      marginLeft: -4.50,
+        		      marginTop: -7.2,
         		    }}
-        		    size = {75}
+        		    size = {40}
         		    color = { VARS.redline }/>
 
         		</TouchableOpacity>

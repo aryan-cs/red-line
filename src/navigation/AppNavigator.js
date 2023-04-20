@@ -125,7 +125,7 @@ const MainTabs = () => {
         name="Your Ride"
         component={Ride}
         options={{
-          unmountOnBlur: true,
+          // unmountOnBlur: true,
           tabBarLabel: ({ focused }) => (
             <TabBarText focused={focused} title="Your Ride" />
           ),

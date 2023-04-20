@@ -19,7 +19,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function ({ navigation }) {
 
-	let refresh = 750;
+	let refresh = 1500;
 
 	const mapRef = useRef(null);
 	const { isDarkmode, setTheme } = useTheme();
