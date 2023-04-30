@@ -19,6 +19,8 @@ export const ITEM_HEIGHT = Math.round(SLIDER_HEIGHT * 0.7);
 
 export default function ({ item, index }) {
 
+  let textColor = "#FFFFFFA5";
+
   // const [image, setImage] = useState(item.image);
 
   // useEffect(() => {
@@ -88,16 +90,16 @@ export default function ({ item, index }) {
 
         <AppTitle string = {item.company}
           style = {{
-            color: "#FFFFFF70",
+            color: textColor,
             fontSize: item.image ? 28 : 30,
             fontWeight: "bold",
             paddingLeft: 20,
-            paddingTop: 20
+            paddingTop: 50
           }}/>
 
         <AppTitle string = {item.model.toUpperCase()}
           style = {{
-            color: "#FFFFFF70",
+            color: textColor,
             fontSize: item.image ? 68 : "70%",
             fontWeight: "bold",
             paddingLeft: 20,
@@ -107,14 +109,14 @@ export default function ({ item, index }) {
           style = {{
             alignSelf: "center",
             width: "90%",
-            height: item.image ? 180 : "30%",
+            height: item.image ? 300 : "30%",
             borderRadius: 8,
             shadowColor: "black",
             shadowOffset: { width: 0, height: 0 },
             shadowOpacity: .25,
             shadowRadius: 8,  
             elevation: 1,
-            margin: 20
+            margin: 10
           }}/>
 
         <View
@@ -122,32 +124,32 @@ export default function ({ item, index }) {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
-            marginTop: 20,
+            marginTop: 5,
             marginBottom: 20,
-            marginHorizontal: 20,
+            marginHorizontal: 60,
           }}>
 
-          <AppText string = {item.model} style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
-          <AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
-          <AppText string = {item.year} style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
-          <AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
-          <AppText string = {item.engine} style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
-          <AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
-          <AppText string = {item.hp + " HP"} style = {{ paddingLeft: 0, fontSize: 20, color: "#FFFFFF70" }} />
+          <AppText string = {item.model} style = {{ paddingLeft: 0, fontSize: 20, color: textColor }} />
+          <AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: textColor }} />
+          <AppText string = {item.year} style = {{ paddingLeft: 0, fontSize: 20, color: textColor }} />
+          <AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: textColor }} />
+          <AppText string = {item.engine} style = {{ paddingLeft: 0, fontSize: 20, color: textColor }} />
+          <AppText string = "|" style = {{ paddingLeft: 0, fontSize: 20, color: textColor }} />
+          <AppText string = {item.hp + " HP"} style = {{ paddingLeft: 0, fontSize: 20, color: textColor }} />
 
         </View>
 
         <AppTitle
-          string = {item.miles + (item.miles == 1 ? " mile" : " miles")}
+          string = {item.miles + (item.miles == 1 ? " MILE DRIVEN" : " MILES DRIVEN") + "\n" + item.topSpeed + " MPH TOPSPEED"}
           style = {{
             marginHorizontal: 15,
             marginBottom: 60,
-            fontSize: 30,
-            color: "#FFFFFF70",
+            fontSize: 25,
+            color: textColor,
             textAlign: "right"
           }} />
 
-        <View
+        {/* <View
           style = {{
             position: "absolute",
             bottom: 0,
@@ -167,7 +169,7 @@ export default function ({ item, index }) {
               fontSize: 40,
             }} />
 
-          </View>
+          </View> */}
 
           <View
             style = {{
@@ -194,7 +196,7 @@ export default function ({ item, index }) {
 							name = {"md-key"}
 							style = {{}}
 							size = {25}
-							color = "#FFFFFF70"/>
+							color = {textColor}/>
 
 					  </TouchableOpacity>
 
