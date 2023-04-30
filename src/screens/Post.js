@@ -19,6 +19,7 @@ import { Ionicons } from "@expo/vector-icons";
 function Post ({ route, navigation }) {
 
   const { isDarkmode, setTheme } = useTheme();
+  let time = new Date(route.params.date);
 
   return (
 
@@ -92,6 +93,22 @@ function Post ({ route, navigation }) {
           color: isDarkmode ? themeColor.white100 : themeColor.black,
           fontWeight: "bold",
           textAlign: "left",
+          backgroundColor: "transparent"
+
+        }}/>
+
+      <AppText
+        string = {route.params.user + " on " + time.toString().substring(0, time.toString().indexOf("GMT"))}
+        style = {{
+
+          fontSize: 16,
+          paddingHorizontal: 20,
+          marginHorizontal: 0,
+          marginVertical: 30,
+          color: isDarkmode ? themeColor.white100 : themeColor.black,
+          fontWeight: "bold",
+          textAlign: "left",
+          color: "#666666",
           backgroundColor: "transparent"
 
         }}/>

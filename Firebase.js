@@ -165,7 +165,8 @@ export async function savePost (title, caption, description) {
         title: title,
         caption: caption,
         description: description,
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        user: auth.currentUser.displayName,
 
     })
     .then(() => { console.log("Post saved!"); })

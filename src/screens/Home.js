@@ -52,6 +52,8 @@ export default function ({ navigation }) {
             cords = {post.cords}
             postText = {post.description}
             key = {post.timestamp}
+            date = {post.timestamp}
+            user = {post.user}
             navigation = {navigation}
           />,
           ...allFeed,

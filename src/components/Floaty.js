@@ -15,14 +15,14 @@ import MapView from 'react-native-maps';
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.95 };
 
-export default function Floaty ({style, title, desc, src, cords, postText, navigation}) {
+export default function Floaty ({style, title, desc, src, cords, postText, user, date, navigation}) {
 
   const { theme, isDarkmode } = useTheme();
   const radius = 12;
 
   const onPress = () => {
 
-    let content = { text: postText, title: title.toUpperCase() }
+    let content = { text: postText, title: title.toUpperCase(), user: user, date: date };
 
     if (cords !== undefined && cords !== null) { content = { ...content, cords: cords, }; }
 
