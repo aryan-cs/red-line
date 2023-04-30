@@ -30,7 +30,7 @@ export default function ({ navigation }) {
 		let _image = await ImagePicker.launchImageLibraryAsync({
 		  mediaTypes: ImagePicker.MediaTypeOptions.Images,
 		  allowsEditing: true,
-		  aspect: [16, 9],
+		  aspect: [4, 3],
 		  quality: 1,
 		});
 

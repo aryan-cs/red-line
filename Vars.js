@@ -5,7 +5,7 @@ export var lightmodeBG = "#f7f7f7";
 export var lightmodeBGaccent = "#ffffff";
 export var midGray = "#c9c9c9";
 
-export var redline = "#ff3939";
+export var redline = "#CE2F2F";
 export var redlineaccent = "#6e001f";
 
 export var mapStyle = [

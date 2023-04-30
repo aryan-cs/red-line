@@ -222,14 +222,9 @@ export async function saveRideImage (image, name) {
     const uploadTask = uploadBytesResumable(storageRef, blob);
 
     uploadTask.on("state_changed",
-    (snapshot) => {},
+    (snapshot) => { console.log((snapshot.bytesTransferred / snapshot.totalBytes) * 100 + "%"); },
     (error) => { alert(error); console.log(error); },
     () => { getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => { return downloadURL; }); }); 
-
-    // const metadata = { contentType: "image/jpeg" };
-    // await uploadBytes(ref(storage, "users/rides/" + name + auth.currentUser.uid), image, metadata)
-    // .then(() => { console.log("Ride image saved!"); })
-    // .catch((error) => { console.log("Error saving journey image: " + error); });
 
 }
 
