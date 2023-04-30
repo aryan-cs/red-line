@@ -26,6 +26,7 @@ export default function ({ navigation }) {
 	const [rides, setRides] = React.useState([]);
 	const [milesDriven, setMilesDriven] = React.useState(0);
 	const [topSpeed, setTopSpeed] = React.useState(0);
+	const [currentRide, setCurrentRide] = React.useState(null);
 	
 	useEffect(() => {
 
@@ -39,6 +40,7 @@ export default function ({ navigation }) {
 			setUser(user);
 			setUsername(user.username);
 			setEmail(user.email);
+			setCurrentRide(user.currentRide.year + " " + user.currentRide.company + " " + user.currentRide.model);
 
 			db.getUserImage(user.uid)
 			.then((image) => { setProfileImage(image); });
@@ -181,26 +183,34 @@ export default function ({ navigation }) {
 					}}>
 
 						<AppText style = {{
-							fontSize: 20,
-							margin: 10,
+							fontSize: 18,
+							margin: 7,
 							paddingHorizontal: 15,
 							color: isDarkmode ? themeColor.white100 : themeColor.black100,
 						}}
 						string = {"Joined on " + (new Date(createdDate)).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}/>
 
 						<AppText style = {{
-							fontSize: 20,
-							margin: 10,
+							fontSize: 18,
+							margin: 7,
 							paddingHorizontal: 15,
 							color: isDarkmode ? themeColor.white100 : themeColor.black100,
 						}}
 						string = {"Last seen on " + (new Date(lastSignIn)).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}/>
 
+						<AppText style = {{
+							fontSize: 18,
+							margin: 7,
+							paddingHorizontal: 15,
+							color: isDarkmode ? themeColor.white100 : themeColor.black100,
+						}}
+						string = {"Currently driving their " + currentRide }/>
+
 						<View style = {{
 							flexDirection: "row",
 							justifyContent: "space-between",
 							alignItems: "center",
-							marginVertical: 30,
+							marginVertical: 80,
 						}}>
 
 						<View style = {{

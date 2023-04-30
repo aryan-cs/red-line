@@ -132,6 +132,8 @@ export default function ({ navigation }) {
                             "Last drove to " + lastCruiseAddress :
                             "Unable to load last cruise."}
               navigation = {navigation}
+              date = {lastCruiseTime.current}
+              user = {getAuth().currentUser.displayName}
             />
 
             {allFeed}
