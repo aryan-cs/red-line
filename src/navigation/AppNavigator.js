@@ -97,7 +97,7 @@ const MainTabs = () => {
         name="Track"
         component={Track}
         options={{
-          unmountOnBlur: true,
+          // unmountOnBlur: true,
           tabBarLabel: ({ focused }) => (
             <TabBarText focused={focused} title="Track" />
           ),

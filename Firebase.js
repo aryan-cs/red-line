@@ -125,7 +125,7 @@ export async function saveUserImage (image) {
 
     uploadTask.on("state_changed",
     (snapshot) => {},
-    (error) => { alert(error); },
+    (error) => { alert(error); console.log(error); },
     () => { getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => { return downloadURL; }); });
 
 }

@@ -126,11 +126,11 @@ export default function ({ navigation }) {
               title = {"LAST CRUISE"}
               desc = {(lastCruiseAddress !== undefined && lastCruiseAddress !== null) ?
                         "Last drove to " + lastCruiseAddress.substring(0, lastCruiseAddress.indexOf(",")) :
-                        "Unable to load last cruise."}
+                        " "}
               cords = {lastCruiseCords.current}
               postText = {(lastCruiseAddress !== undefined && lastCruiseAddress !== null) ?
                             "Last drove to " + lastCruiseAddress :
-                            "Unable to load last cruise."}
+                            " "}
               navigation = {navigation}
               date = {lastCruiseTime.current}
               user = {getAuth().currentUser.displayName}

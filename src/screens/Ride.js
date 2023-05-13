@@ -55,7 +55,10 @@ export default function ({ navigation }) {
     		  		elevation: 1,
         		}}
 			
-        		onPress = {() => { navigation.navigate("Add Ride"); }}>
+        		onPress = {() => {
+					// navigation.navigate("Add Ride");
+					alert("Sorry, but this feature has been disabled due to a lack of storage space. Please check back later.")
+					}}>
 				
         		  <Ionicons
         		    name = {"ios-add-circle"}
