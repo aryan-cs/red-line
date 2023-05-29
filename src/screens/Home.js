@@ -17,7 +17,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function ({ navigation }) {
 
-  const { isDarkmode, setTheme } = useTheme();
+  const { isDarkmode } = useTheme();
   const [allFeed, setAllFeed] = useState([]);
   const lastCruiseCords = useRef();
   const lastCruiseTime = useRef();
@@ -26,6 +26,8 @@ export default function ({ navigation }) {
   const updateFeed = async () => {
 
     db.getJourneys().then((allJourneys) => {
+
+      if (allJourneys.length === 0) { return; }
 
       lastCruiseCords.current = allJourneys[allJourneys.length - 1].journey[allJourneys[allJourneys.length - 1].journey.length - 1].latitude + ", " + allJourneys[allJourneys.length - 1].journey[allJourneys[allJourneys.length - 1].journey.length - 1].longitude;
       lastCruiseTime.current = allJourneys[allJourneys.length - 1].journey[allJourneys[allJourneys.length - 1].journey.length - 1].timestamp;
@@ -76,12 +78,12 @@ export default function ({ navigation }) {
 
   return (
 
-    <View style = {{ flex: 1, backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG }}>
+    <View style = {{ flex: 1 }}>
 
       <View style = {{
         marginTop: -60,
         paddingTop: 60,
-        backgroundColor: isDarkmode ? VARS.darkmodeBGdarker : VARS.lightmodeBG,      
+        backgroundColor: isDarkmode ? VARS.darkMode : VARS.lightMode,
       }}>
 
         <TouchableOpacity style = {{
@@ -93,11 +95,10 @@ export default function ({ navigation }) {
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
-          backgroundColor: themeColor.white100,
+          backgroundColor: isDarkmode ? VARS.dark : VARS.light,
           borderRadius: "100%",
           zIndex: 1,
         }}
-        
         onPress = {() => { navigation.navigate("Upload") }}>
             
           <Ionicons
@@ -107,7 +108,7 @@ export default function ({ navigation }) {
               marginTop: -10,
             }}
             size = {75}
-            color = { VARS.redline }/>
+            color = { isDarkmode ? VARS.darkModeAccent : VARS.lightModeAccent }/>
 
         </TouchableOpacity>
 
@@ -121,6 +122,8 @@ export default function ({ navigation }) {
             marginBottom: 60,
             zIndex: 1
           }}>
+
+            {lastCruiseAddress ? 
 
             <Floaty
               title = {"LAST CRUISE"}
@@ -136,7 +139,10 @@ export default function ({ navigation }) {
               user = {getAuth().currentUser.displayName}
             />
 
+            : <></> }
+
             {allFeed}
+            
 
           </View>
 

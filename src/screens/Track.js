@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, ActivityIndicator, Image, TouchableHighlight, TouchableOpacity } from "react-native";
-import { Layout, themeColor, useTheme } from "react-native-rapi-ui";
+import { themeColor, useTheme } from "react-native-rapi-ui";
 
 import AppText from "../../src/components/AppText";
 import AppTitle from "../../src/components/AppTitle";
 import AppButton from "../../src/components/AppButton";
 import AppInput from "../../src/components/AppInput";
 import Floaty from "../../src/components/Floaty";
+import Layout from "../../src/components/Layout";
 
 import * as VARS from "../../Vars";
 import * as db from "../../Firebase";
@@ -30,6 +31,8 @@ export default function ({ navigation }) {
 	const [longi, setLongitude] = useState(null);
 	const [lati, setLatitude] = useState(null);
 	let lat = 0, long = 0;
+	let addressInfo = LOADING;
+	  let speedInfo = "--";
   	const speed = useRef(null);
   	const [errorMsg, setErrorMsg] = useState(null);
 	const [content, setContent] = React.useState(indicatorContent);
@@ -211,25 +214,22 @@ export default function ({ navigation }) {
 		
 	  }, []);
 	
-	  let addressInfo = LOADING;
-	  let speedInfo = "--";
-	
 	  if (errorMsg) { text = errorMsg; }
 	  else if (location) {
 		
 		addressInfo = <AppText style = {{
 
 			fontSize: 20,
-			color: isDarkmode ? VARS.dark5 : VARS.light4,
+			color: isDarkmode ? VARS.dark5 : VARS.light5,
 			textAlign: "center",
 			justifyContent: "center",
 			alignItems: "center",
-				
+			
 		}} string = {address} />
 
 		speedInfo = parseFloat(JSON.stringify(speed.current).replace(/"/g,"")) * 2.23694;
-		if (speedInfo < 0) { speedInfo = 0; }
-		else { speedInfo = speedInfo.toFixed(1); }	
+		if (speedInfo < 0) { speedInfo = "0"; }
+		else { speedInfo = speedInfo.toFixed(0); }	
 	
 	  }
 
@@ -273,7 +273,7 @@ export default function ({ navigation }) {
 						longitude: longi ? longi : 0,
 					}}
             		title = {username}
-            		description = {currentRide ? "Driving their " + currentRide.company + " " + currentRide.model : "No ride selected"}
+            		description = {currentRide ? (currentRide.company + " " + currentRide.model) : "No ride selected"}
 					pinColor = {isDarkmode ? VARS.opaqueAccent3 : VARS.opaqueAccent3}
 					animateToRegion = {
 						({
@@ -306,7 +306,7 @@ export default function ({ navigation }) {
 
 					paddingVertical: 10,
 					paddingHorizontal: 20,
-					backgroundColor: isDarkmode ? VARS.accent : VARS.dark,
+					backgroundColor: isDarkmode ? VARS.darkMode : VARS.lightMode,
 					borderRadius: "100%",
 					marginTop: 5,
 
@@ -372,7 +372,7 @@ export default function ({ navigation }) {
 					right: "3%",
 					width: 125,
 					height: 125,
-					backgroundColor: isDarkmode ? VARS.accent : VARS.dark,
+					backgroundColor: isDarkmode ? VARS.darkMode : VARS.lightMode,
 
 					shadowColor: "black",
     				shadowOffset: { width: 0, height: 3 },

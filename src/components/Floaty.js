@@ -44,22 +44,21 @@ export default function Floaty ({style, title, desc, src, cords, postText, user,
   if (!fontsLoaded) { return null; }
 
   const content = (type) => {
-
-    var col = [themeColor.white100, VARS.lightmodeBGaccent];
+    
     var offset = 0;
 
-    if (type === "map") { col = [themeColor.white100, VARS.darkmodeBGaccent]; offset = 10; }
+    if (type === "map") { offset = 10; }
 
     return (<>
 
       <AppTitle style = {{
                 
-        fontSize: 30,
+        fontSize: 27,
         marginHorizontal: 13,
         alignSelf: "flex-end",
         textAlign:'right',
         zIndex: 3,
-        color: VARS.redline,
+        color: VARS.dark,
                 
       }} string = {title.toUpperCase()} />
 
@@ -71,7 +70,7 @@ export default function Floaty ({style, title, desc, src, cords, postText, user,
         alignSelf: "flex-end",
         textAlign:'right',
         zIndex: 3,
-        color: isDarkmode ? col[0] : col[1],
+        color: VARS.dark,
                 
       }} string = {desc} />
     
@@ -245,7 +244,7 @@ export default function Floaty ({style, title, desc, src, cords, postText, user,
 
               <View style = {{
 
-                backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : "#1c1c1c",
+                backgroundColor: VARS.darkModeAccent,
                 borderRadius: radius,
                 height: "100%",
                 width: "100%",

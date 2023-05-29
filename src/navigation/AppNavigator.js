@@ -25,6 +25,8 @@ import Register from "../screens/auth/Register";
 import ForgetPassword from "../screens/auth/ForgetPassword";
 import { AuthContext } from "../provider/AuthProvider";
 
+import * as VARS from "../../Vars";
+
 // Better put your these secret keys in .env file
 const firebaseConfig = {
   apiKey: "AIzaSyCt9YHjNGMBL1g9RYPkzEhPBVtn74991MQ",
@@ -80,7 +82,7 @@ const MainTabs = () => {
         tabBarStyle: {
           
           borderTopColor: isDarkmode ? themeColor.dark100 : "#c0c0c0",
-          backgroundColor: isDarkmode ? themeColor.dark200 : "#ffffff",
+          backgroundColor: isDarkmode ? VARS.darkMode : "#ffffff",
           paddingTop: 8,
           borderWidth: 0,
 					shadowColor: "black",

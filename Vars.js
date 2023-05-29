@@ -8,6 +8,11 @@ export var midGray = "red";
 export var redline = "yellow";
 export var redlineaccent = "yellow";
 
+export var lightMode = "#ffffff";
+export var lightModeAccent = "#f5f5f5";
+export var darkMode = "#1c1c1c";
+export var darkModeAccent = "#2e2e2e";
+
 var level1 = "1A";
 var level2 = "33";
 var level3 = "59";
