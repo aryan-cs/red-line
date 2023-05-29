@@ -9,7 +9,6 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {
   Layout,
   useTheme,
-  themeColor,
 } from "react-native-rapi-ui";
 
 import AppText from "../../components/AppText";
@@ -24,7 +23,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function ({ navigation }) {
 
-  const { isDarkmode, setTheme } = useTheme();
+  const { isDarkmode } = useTheme();
   const auth = getAuth();
   const [email, setEmail] = useState("");
   const [displayName, setDisplayName] = useState("");
@@ -33,15 +32,15 @@ export default function ({ navigation }) {
 
   async function register () {
 
-    if (Dimensions.get("window").height < 850 || Dimensions.get("window").width < 390) {
+    // if (Dimensions.get("window").height < 850 || Dimensions.get("window").width < 390) {
 
-      alert("This screen size is currently unsupported for this app. Please use a larger device.");
+    //   alert("This screen size is currently unsupported for this app. Please use a larger device.");
 
-      return;
+    //   return;
 
-    }
+    // }
 
-    else {
+    // else {
 
       setLoading(true);
       await createUserWithEmailAndPassword(auth, email, password)
@@ -59,22 +58,23 @@ export default function ({ navigation }) {
 
       });
 
-    }
+    // }
 
   }
 
   return (
     
-    <KeyboardAvoidingView behavior = "height" enabled style = {{ flex: 1, marginTop: -60, marginBottom: -60 }}>
+    <KeyboardAvoidingView behavior = "height" enabled style = {{ flex: 1 }}>
       
       <Layout>
+
+        <ScrollView contentContainerStyle = {{ flexGrow: 1 }}>
         
           <View
             style = {{
               flex: 3,
               paddingHorizontal: 20,
               paddingBottom: 20,
-              backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
               justifyContent: "center"
             }}>
 
@@ -125,7 +125,7 @@ export default function ({ navigation }) {
             <AppButton
               string = {loading ? "Loading" : "Create an account"}
               onPress = {() => { register(); }}
-              style = {{ marginTop: 20 }}
+              style = {{ marginTop: 30 }}
               disabled = {loading}
             />
 
@@ -145,13 +145,15 @@ export default function ({ navigation }) {
                   name = {"arrow-back-outline"}
                   style = {{ marginTop: 20 }}
                   size = {24}
-                  color = { isDarkmode ? themeColor.white100 : VARS.midGray }/>
+                  color = { isDarkmode ? VARS.dark4 : VARS.light4 } />
 
               </TouchableOpacity>
 
             </View>
 
           </View>
+
+        </ScrollView>
 
       </Layout>
 

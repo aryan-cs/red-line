@@ -121,7 +121,7 @@ const MainTabs = () => {
         }}
       />
 
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="Your Ride"
         component={Ride}
         options={{
@@ -133,7 +133,7 @@ const MainTabs = () => {
             <TabBarIcon focused={focused} icon={"car-side"} />
           ),
         }}
-      />
+      /> */}
 
       <Tabs.Screen
         name="Profile"

@@ -9,7 +9,6 @@ import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import {
   Layout,
   useTheme,
-  themeColor,
 } from "react-native-rapi-ui";
 
 import AppText from "../../components/AppText";
@@ -23,7 +22,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function ({ navigation }) {
 
-  const { isDarkmode, setTheme }  =  useTheme();
+  const { isDarkmode }  =  useTheme();
   const auth  =  getAuth();
   const [email, setEmail]  =  useState("");
   const [loading, setLoading]  =  useState(false);
@@ -48,17 +47,19 @@ export default function ({ navigation }) {
   
   return (
 
-    <KeyboardAvoidingView behavior = "height" enabled style = {{ flex: 1, marginTop: -60, marginBottom: -60 }}>
+    <KeyboardAvoidingView behavior = "height" enabled style = {{ flex: 1 }}>
       
       <Layout>
+
+        <ScrollView contentContainerStyle = {{ flexGrow: 1 }}>
         
           <View
             style = {{
               flex: 3,
               paddingHorizontal: 20,
-              paddingBottom: 20,
-              backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
-              justifyContent: "center"
+              justifyContent: "center",
+              alignContent: "center",
+              paddingBottom: 100,
             }}>
 
             <AppTitle style = {{ alignSelf: "center", textAlign: "center", padding: 10, fontSize: 48 }} string = "FORGOT PASSWORD" />
@@ -100,13 +101,15 @@ export default function ({ navigation }) {
                   name = {"arrow-back-outline"}
                   style = {{ marginTop: 20 }}
                   size = {24}
-                  color = { isDarkmode ? themeColor.white100 : VARS.midGray }/>
+                  color = { isDarkmode ? VARS.dark4 : VARS.light4 } />
 
               </TouchableOpacity>
 
             </View>
 
           </View>
+
+        </ScrollView>
 
       </Layout>
 

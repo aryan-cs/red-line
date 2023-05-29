@@ -37,7 +37,7 @@ export default function AppText ({style, string, onPress, disabled}) {
             padding: 13,
             borderRadius: 10,
             borderColor: "transparent",
-            backgroundColor: VARS.redline,
+            backgroundColor: isDarkmode ? VARS.dark2 : VARS.light4,
             ...style
 
           }}>
@@ -46,7 +46,7 @@ export default function AppText ({style, string, onPress, disabled}) {
 
             style = {{
 
-              color: VARS.lightmodeBGaccent,
+              color: VARS.dark,
               fontFamily: "Barlow",
               textAlign: "center",
               fontSize: 17

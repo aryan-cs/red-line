@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, themeColor, useTheme } from "react-native-rapi-ui";
+import { Text, useTheme } from "react-native-rapi-ui";
 import * as VARS from "../../../Vars";
 import AppText from "../AppText";
 
@@ -13,8 +13,7 @@ export default (props) => {
       style = {{
         color: props.focused
           ? isDarkmode
-            ? themeColor.white100
-            : VARS.redline
+            ? VARS.dark5 : VARS.light5
           : "#757575",
         fontSize: 10,
       }}

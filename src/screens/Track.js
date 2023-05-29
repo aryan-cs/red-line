@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, ActivityIndicator, Image } from "react-native";
+import { View, ActivityIndicator, Image, TouchableHighlight, TouchableOpacity } from "react-native";
 import { Layout, themeColor, useTheme } from "react-native-rapi-ui";
 
 import AppText from "../../src/components/AppText";
@@ -14,15 +14,14 @@ import * as db from "../../Firebase";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function ({ navigation }) {
 
-	let refresh = 1500;
+	let refresh = 500;
 
 	const mapRef = useRef(null);
-	const { isDarkmode, setTheme } = useTheme();
+	const { isDarkmode } = useTheme();
 	const [user, setUser] = useState(null);
 	const [currentRide, setCurrentRide] = useState(null);
 	const [username, setUsername] = useState("");
@@ -30,6 +29,7 @@ export default function ({ navigation }) {
   	const [address, setAddress] = useState(null);
 	const [longi, setLongitude] = useState(null);
 	const [lati, setLatitude] = useState(null);
+	let lat = 0, long = 0;
   	const speed = useRef(null);
   	const [errorMsg, setErrorMsg] = useState(null);
 	const [content, setContent] = React.useState(indicatorContent);
@@ -37,21 +37,21 @@ export default function ({ navigation }) {
 	const tracker = useRef(null);
 	const journey = useRef([]);
 
-	const LOADING = <ActivityIndicator
+	// for address
+	let LOADING = <ActivityIndicator
 						size = "small"
-  						color = {VARS.redline}
-  						style = {{ paddingTop: 6 }}/>;
-					
+  						color = {isDarkmode ? VARS.dark5 : VARS.light4}
+  						style = {{ paddingTop: 4.5, marginVertical: 2 }}/>;
+				
+	// for user icon
 	let indicatorContent = <ActivityIndicator
 								size = "small"
+								color = {isDarkmode ? VARS.dark5 : VARS.light4}
 								style = {{
 									width: 40,
 									height: 40,
 									borderRadius: "100%",
-									borderColor: VARS.darkmodeBGaccent,
 									borderWidth: 2.5,
-									backgroundColor: themeColor.white100,
-
 									shadowColor: "black",
     								shadowOffset: { width: 0, height: 3 },
     								shadowOpacity: .3,
@@ -61,7 +61,7 @@ export default function ({ navigation }) {
 
 	let trackButton = <ActivityIndicator
 						size = "small"
-						color = {VARS.redline}
+						color = {VARS.light3}
 						style = {{
 							backgroundColor: themeColor.white100,
 							width: "100%",
@@ -132,6 +132,23 @@ export default function ({ navigation }) {
 
 	}
 
+	const focus = () => {
+
+		if (mapRef.current !== null) {
+
+			mapRef.current.animateToRegion(({
+		
+				latitude: lati,
+				longitude: longi,
+				latitudeDelta: 0.007,
+				longitudeDelta: 0.007,
+		
+			}), 1000);
+		
+		}
+
+	}
+
 	useEffect(() => {
 
 		db.getUser()
@@ -151,6 +168,7 @@ export default function ({ navigation }) {
 							}}
 							defaultSource={require("../../assets/default.png")}
 							source = {{ uri: image }}/>);
+
 			});
 
 		});
@@ -164,27 +182,20 @@ export default function ({ navigation }) {
 			
 			let location = await Location.getCurrentPositionAsync({
 				accuracy: Location.Accuracy.BestForNavigation,
-				// activityType: Location.ActivityType.AutomotiveNavigation,
+				activityType: Location.ActivityType.AutomotiveNavigation,
 			}).catch(function(error) { return null; });
-
-			// setTimestamp(location.timestamp)
-
-			let stamp = new Date(location.timestamp);
-			let hrs = stamp.getHours() % 12;
-			let mins = stamp.getMinutes();
-			let secs = stamp.getSeconds();
-			if (mins < 10) { mins = "0" + mins; }
-			if (secs < 10) { secs = "0" + secs; }
-			// setLastUpdated("at " + hrs + ":" + mins + ":" + secs);
 
 			let address = await Location.reverseGeocodeAsync(location.coords).then((address) => {
 
+				// console.log(address[0].name);
 				return JSON.stringify(address[0].name).replace(/"/g,"");
 			
-			}).catch(function(error) { return LOADING; });
+			})
+			.catch(function(error) { return LOADING; });
+			// uncomment to show loading indicator when address is loading otherwise shows last address
 
-			let lat = location.coords.latitude;
-			let long = location.coords.longitude;
+			lat = location.coords.latitude;
+			long = location.coords.longitude;
 			speed.current = location.coords.speed;
 	
 			setLocation(location);
@@ -192,18 +203,7 @@ export default function ({ navigation }) {
 			setLongitude(long);
 			setLatitude(lat);
 
-			if (mapRef.current !== null) {
-
-				mapRef.current.animateToRegion(({
-
-					latitude: lat,
-					longitude: long,
-					latitudeDelta: 0.005,
-					longitudeDelta: 0.005,
-
-		  		}), refresh);
-
-			}
+			// focus();
 	
 		  }, refresh);
 	
@@ -217,25 +217,19 @@ export default function ({ navigation }) {
 	  if (errorMsg) { text = errorMsg; }
 	  else if (location) {
 		
-		addressInfo = address;
+		addressInfo = <AppText style = {{
+
+			fontSize: 20,
+			color: isDarkmode ? VARS.dark5 : VARS.light4,
+			textAlign: "center",
+			justifyContent: "center",
+			alignItems: "center",
+				
+		}} string = {address} />
+
 		speedInfo = parseFloat(JSON.stringify(speed.current).replace(/"/g,"")) * 2.23694;
 		if (speedInfo < 0) { speedInfo = 0; }
-		else { speedInfo = speedInfo.toFixed(0); }
-
-		trackButton = <TouchableOpacity
-						onPress = {toggleTracking}
-						style = {{}}>
-						
-						<Ionicons
-							name = {tracking ? "ios-play-circle" : "ios-pause-circle"}
-							style = {{
-							  marginLeft: -5.25,
-							  marginTop: -10,
-							}}
-							size = {75}
-							color = {isDarkmode ? VARS.darkmodeBGaccent : themeColor.white100}/>
-
-					</TouchableOpacity>	
+		else { speedInfo = speedInfo.toFixed(1); }	
 	
 	  }
 
@@ -247,7 +241,6 @@ export default function ({ navigation }) {
 				
 				alignItems: "center",
 				flex: 1,
-				backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
 				marginTop: -120,
 				paddingTop: 120,
 				marginBottom: -120,
@@ -257,7 +250,7 @@ export default function ({ navigation }) {
 				<MapView style = {{
 
 					width: "100%",
-					height: "105%",
+					height: "110%",
 					position: "absolute",
 					top: 0,
 					left: 0,
@@ -267,12 +260,12 @@ export default function ({ navigation }) {
 					
 				}}
 				ref = {mapRef}
-				// showsUserLocation={true}
 				loadingEnabled = {true}
-         		loadingIndicatorColor = {VARS.redline}
+         		loadingIndicatorColor = {VARS.accent}
          		loadingBackgroundColor = {"white"}
-				userInterfaceStyle = {isDarkmode ? "dark" : "light"}
-				>
+				userInterfaceStyle = {isDarkmode ? "dark" : "light"}>
+
+				<TouchableOpacity onPress = {() => focus()}>
 
 				<Marker.Animated
             		coordinate = {{
@@ -281,8 +274,15 @@ export default function ({ navigation }) {
 					}}
             		title = {username}
             		description = {currentRide ? "Driving their " + currentRide.company + " " + currentRide.model : "No ride selected"}
-					pinColor = {VARS.redline}
-					animateToRegion = {true}
+					pinColor = {isDarkmode ? VARS.opaqueAccent3 : VARS.opaqueAccent3}
+					animateToRegion = {
+						({
+							latitude: lati,
+							longitude: longi,
+							latitudeDelta: 0.005,
+							longitudeDelta: 0.005,
+						}, 1000)
+					}
 					style = {{
 
 						shadowColor: "black",
@@ -298,15 +298,16 @@ export default function ({ navigation }) {
 
 				</Marker.Animated>
 
+				</TouchableOpacity>
+
 				</MapView>
 
 				<View style = {{
 
 					paddingVertical: 10,
 					paddingHorizontal: 20,
-					backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
+					backgroundColor: isDarkmode ? VARS.accent : VARS.dark,
 					borderRadius: "100%",
-					borderColor: VARS.redline,
 					marginTop: 5,
 
 					borderWidth: 0,
@@ -318,19 +319,11 @@ export default function ({ navigation }) {
 
 				}}>
 
-				<AppText style = {{
-						
-					fontSize: 20,
-					color: VARS.redline,
-					textAlign: "center",
-					justifyContent: "center",
-					alignItems: "center",
-						
-				}} string = {addressInfo} />
+				{addressInfo}
 
 				</View>
 
-				<View style = {{
+				{/* <View style = {{
 						
 					borderRadius: "100%",
 					justifyContent: "center",
@@ -339,7 +332,7 @@ export default function ({ navigation }) {
 					position: "absolute",
 					bottom: "28%",
 					right: "2%",
-					backgroundColor: VARS.redline,
+					backgroundColor: isDarkmode ? VARS.dark3 : VARS.light4,
 					width: 60,
 					height: 60,
 
@@ -351,9 +344,22 @@ export default function ({ navigation }) {
 							
 				}}>
 	
-					{trackButton}
+					<TouchableOpacity
+						onPress = {toggleTracking}
+						style = {{}}>
+						
+						<Ionicons
+							name = {tracking ? "ios-play-circle" : "ios-pause-circle"}
+							style = {{
+							  marginLeft: -5.25,
+							  marginTop: -10,
+							}}
+							size = {70}
+							color = {isDarkmode ? VARS.accent : VARS.dark}/>
+
+					</TouchableOpacity>
 	
-				</View>
+				</View> */}
 
 				<View style = {{
 						
@@ -366,7 +372,7 @@ export default function ({ navigation }) {
 					right: "3%",
 					width: 125,
 					height: 125,
-					backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
+					backgroundColor: isDarkmode ? VARS.accent : VARS.dark,
 
 					shadowColor: "black",
     				shadowOffset: { width: 0, height: 3 },
@@ -380,24 +386,16 @@ export default function ({ navigation }) {
 						
 						fontSize: 45,
 						textAlign: "center",
-						color: VARS.redline,
-						
-						// textShadowColor: isDarkmode ? VARS.redline : "transparent",
-    					// textShadowRadius: 7,
-						// paddingHorizontal: 7
-					
+						color: isDarkmode ? VARS.dark5 : VARS.light5,
+
 					}} string = {speedInfo} />
 
 					<AppTitle style = {{
 						
 						fontSize: 20,
 						textAlign: "center",
-						color: VARS.redline,
+						color: isDarkmode ? VARS.dark5 : VARS.light5,
 
-						// textShadowColor: isDarkmode ? VARS.redline : "transparent",
-    					// textShadowRadius: 7,
-						// paddingHorizontal: 7
-					
 					}} string = {"MPH"} />
 
 				</View>

@@ -27,9 +27,6 @@ export default function ({ navigation }) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const windowDimensions = Dimensions.get('window');
-  const screenDimensions = Dimensions.get('screen');
-
   async function login () {
 
     if (Dimensions.get("window").height < 850 || Dimensions.get("window").width < 390) {
@@ -60,20 +57,11 @@ export default function ({ navigation }) {
 
   return (
 
-    <KeyboardAvoidingView
-      behavior = "height"
-      enabled style = {{
-        
-        flex: 1,
-        backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
-        marginTop: -60,
-        marginBottom: -60,
-        
-      }}>
+    <KeyboardAvoidingView behavior = "height" enabled style = {{ flex: 1 }}>
 
       <Layout>
 
-        {/* <ScrollView contentContainerStyle = {{ flexGrow: 1 }}> */}
+        <ScrollView contentContainerStyle = {{ flexGrow: 1 }}>
 
           <View
             style = {{
@@ -81,7 +69,6 @@ export default function ({ navigation }) {
               paddingHorizontal: 20,
               justifyContent: "center",
               paddingBottom: 30,
-              backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
             }}>
 
             <AppTitle style = {{ alignSelf: "center", padding: 30, fontSize: 60 }} string = "LOG IN" />
@@ -137,7 +124,7 @@ export default function ({ navigation }) {
 
           </View>
 
-        {/* </ScrollView> */}
+        </ScrollView>
 
       </Layout>
 

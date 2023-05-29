@@ -8,7 +8,7 @@ import * as VARS from "../../Vars";
 
 export default function AppInput ({containerStyle, placeholder, value, autoCapitalize, autoCompleteType, autoCorrect, secureTextEntry, keyboardType, onChangeText, style}) {
 
-    const { theme, isDarkmode } = useTheme();
+    const { isDarkmode } = useTheme();
 
     const [fontsLoaded] = useFonts({
         'Barlow': require('../../assets/fonts/barlow.ttf'),
@@ -33,22 +33,17 @@ export default function AppInput ({containerStyle, placeholder, value, autoCapit
             keyboardType = {keyboardType}
             onChangeText = {onChangeText}
             theme = {{ fonts: { regular: "Barlow" } }}
-            placeholderTextColor = {VARS.midGray}
+            placeholderTextColor = { isDarkmode ? VARS.dark3 : VARS.light3 }
             style = {{
 
                 fontFamily: "Barlow",
                 padding: 12,
                 borderRadius: 10,
-                borderColor: "transparent",
-                color: isDarkmode ? VARS.lightmodeBGaccent : VARS.darkmodeBGaccent,
-                backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
+                color: isDarkmode ? VARS.dark4 : VARS.light4,
+                backgroundColor: isDarkmode ? VARS.dark1 : VARS.light1,
                 ...style
 
-            }}>
-
-
-
-        </TextInput>
+            }}/>
 
     );
 

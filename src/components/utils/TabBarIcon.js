@@ -25,8 +25,7 @@ export default (props) => {
         color={
           props.focused
             ? isDarkmode
-              ? themeColor.white100
-              : VARS.redline
+              ? VARS.dark5 : VARS.light5
             : "#757575"
         }
       />
@@ -47,8 +46,7 @@ export default (props) => {
         color={
           props.focused
             ? isDarkmode
-              ? themeColor.white100
-              : VARS.redline
+              ? VARS.dark5 : VARS.light5
             : "#757575"
         }
       />
