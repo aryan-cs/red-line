@@ -88,7 +88,7 @@ export default function ({ navigation }) {
 
         <TouchableOpacity style = {{
           width: 60,
-          height: 60,
+          height: 59.88,
           position: "absolute",
           bottom: "2%",
           right: "3.5%",

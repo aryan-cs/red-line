@@ -115,7 +115,6 @@ export default function Floaty ({style, title, desc, src, cords, postText, user,
               position: "absolute",
               justifyContent: "flex-end",
               borderRadius: radius,
-              backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : "#1c1c1c",
 
             }}>
 
@@ -170,7 +169,7 @@ export default function Floaty ({style, title, desc, src, cords, postText, user,
 
           <View style = {{
 
-              backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : "#1c1c1c",
+              backgroundColor: isDarkmode ? VARS.darkModeAccent : VARS.lightModeAccent,
               borderRadius: radius,
               height: "100%",
               width: "100%",
