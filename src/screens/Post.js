@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { ImageBackground, View } from "react-native";
 import {
-  Layout,
   themeColor,
   useTheme,
 } from "react-native-rapi-ui";
@@ -11,6 +10,7 @@ import AppTitle from "../components/AppTitle";
 import AppButton from "../components/AppButton";
 import AppInput from "../components/AppInput";
 import Floaty from "../components/Floaty";
+import Layout from "../components/Layout";
 
 import * as VARS from "../../Vars";
 
@@ -28,14 +28,13 @@ function Post ({ route, navigation }) {
     <View style = {{
       
       flex: 1,
-      backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
       marginTop: -60,
       paddingTop: 60,
       marginBottom: -35
       
     }}>
 
-      <View style = {{ flexDirection: "row", backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG, }}>
+      <View style = {{ flexDirection: "row" }}>
 
         <AppButton
           string = {
@@ -73,7 +72,7 @@ function Post ({ route, navigation }) {
                 fontSize: 50,
                 marginHorizontal: 0,
                 marginVertical: 10,
-                color: VARS.redline,
+                color: VARS.accent,
                 fontWeight: "bold",
                 textAlign: "center",
                 backgroundColor: "transparent"

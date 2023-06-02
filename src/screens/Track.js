@@ -146,7 +146,7 @@ export default function ({ navigation }) {
 				latitudeDelta: 0.007,
 				longitudeDelta: 0.007,
 		
-			}), 1000);
+			}), 1500);
 		
 		}
 

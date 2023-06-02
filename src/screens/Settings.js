@@ -1,13 +1,14 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
-import { Layout, themeColor, useTheme, } from "react-native-rapi-ui";
+import { themeColor, useTheme, } from "react-native-rapi-ui";
 
 import AppText from "../components/AppText";
 import AppTitle from "../components/AppTitle";
 import AppButton from "../components/AppButton";
 import AppInput from "../components/AppInput";
 import Floaty from "../components/Floaty";
+import Layout from "../components/Layout";
 
 import * as VARS from "../../Vars";
 
@@ -25,7 +26,6 @@ export default function ({ navigation }) {
     <View style = {{
       
       flex: 1,
-      backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
       marginTop: -60,
       paddingTop: 60,
       marginBottom: -35
@@ -52,7 +52,6 @@ export default function ({ navigation }) {
 					</TouchableOpacity>
 
       <View style = {{
-        backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
         textAlign: "center",
         justifyContent: "center",
         alignItems: "center",
@@ -82,25 +81,25 @@ export default function ({ navigation }) {
           string = "Contact Us"
           status = {isDarkmode ? "success" : "warning"}
           onPress = {() => { alert("Feature coming soon!"); }}
-          style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.midGray }}/>
+          style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkModeAccent : VARS.light3 }}/>
 
         <AppButton
           string = "Report an Issue"
           status = {isDarkmode ? "success" : "warning"}
           onPress = {() => { alert("Feature coming soon!"); }}
-          style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.midGray }}/>
+          style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkModeAccent : VARS.light3 }}/>
 
         <AppButton
           string = {isDarkmode ? "Switch to Light Mode" : "Switch to Dark Mode"}
           status = {isDarkmode ? "success" : "warning"}
           onPress = {() => { if (isDarkmode) { setTheme("light"); } else { setTheme("dark"); }}}
-          style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.midGray }}/>
+          style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkModeAccent : VARS.light3 }}/>
 
         <AppButton
           status = "danger"
           string = "Logout"
           onPress = {() => { signOut(auth); }}
-          style = {{ marginTop: 10, backgroundColor: VARS.redline }}
+          style = {{ marginTop: 10, backgroundColor: VARS.accent }}
         />
 
       </View>

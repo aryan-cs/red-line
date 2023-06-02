@@ -1,12 +1,12 @@
 import React, { useState } from "react";import { View, TouchableOpacity } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
-import { Layout, themeColor, useTheme, } from "react-native-rapi-ui";
+import { themeColor, useTheme, } from "react-native-rapi-ui";
 
 import AppText from "../components/AppText";
 import AppTitle from "../components/AppTitle";
 import AppButton from "../components/AppButton";
 import AppInput from "../components/AppInput";
-import Floaty from "../components/Floaty";
+import Layout from "../components/Layout";
 
 import * as VARS from "../../Vars";
 import * as db from "../../Firebase";

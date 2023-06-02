@@ -1,12 +1,14 @@
-import React, { useState } from "react";import { View, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { View, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
-import { Layout, themeColor, useTheme, } from "react-native-rapi-ui";
+import { themeColor, useTheme, } from "react-native-rapi-ui";
 
 import AppText from "../components/AppText";
 import AppTitle from "../components/AppTitle";
 import AppButton from "../components/AppButton";
 import AppInput from "../components/AppInput";
 import Floaty from "../components/Floaty";
+import Layout from "../components/Layout";
 
 import * as VARS from "../../Vars";
 import * as db from "../../Firebase";
@@ -48,12 +50,13 @@ export default function ({ navigation }) {
 
   return (
 
+    <KeyboardAvoidingView behavior = "height" enabled style = {{ flex: 1 }}>
+
     <Layout>
       
       <View style = {{
 
         flex: 1,
-        backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
         marginTop: -60,
         paddingTop: 60,
         marginBottom: -35,
@@ -80,7 +83,6 @@ export default function ({ navigation }) {
 				</TouchableOpacity>
 
         <View style = {{
-          backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
           textAlign: "center",
           justifyContent: "center",
           alignItems: "center",
@@ -176,6 +178,8 @@ export default function ({ navigation }) {
       </View>
 
     </Layout>
+
+    </KeyboardAvoidingView>
 
   );
 

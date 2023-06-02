@@ -66,7 +66,7 @@ export default function ({ navigation }) {
               flex: 3,
               paddingHorizontal: 20,
               justifyContent: "center",
-              paddingBottom: 30,
+              paddingBottom: 90,
             }}>
 
             <AppTitle style = {{ alignSelf: "center", padding: 30, fontSize: 60 }} string = "LOG IN" />

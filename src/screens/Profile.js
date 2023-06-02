@@ -89,15 +89,7 @@ export default function ({ navigation }) {
 
 		<Layout>
 
-			<View style = {{
-
-				marginTop: -60,
-				paddingTop: 60,
-				marginBottom: -35,
-				paddingBottom: 35,
-				flex: 1,
-
-			}}>
+			<View style = {{ flex: 1 }}>
 
 					<TouchableOpacity
 						style = {{
@@ -139,6 +131,9 @@ export default function ({ navigation }) {
 							fontSize: 40,
 							marginHorizontal: 10,
 							color: themeColor.white100,
+							width: 250,
+							textAlign: "right",
+
 						}}
 						string = {username}/>
 
@@ -207,17 +202,14 @@ export default function ({ navigation }) {
 						string = {"Currently driving their " + currentRide }/>
 
 						<View style = {{
-							flexDirection: "row",
+							flexDirection: "column",
 							justifyContent: "space-between",
-							alignItems: "center",
-							marginVertical: 80,
+							paddingTop: 20,
 						}}>
 
 						<View style = {{
 							flexDirection: "column",
-							marginLeft: 20,
 							marginBottom: 10,
-							width: "20%",
 						}}>
 
 							<AppTitle style = {{
@@ -240,9 +232,7 @@ export default function ({ navigation }) {
 
 						<View style = {{
 							flexDirection: "column",
-							marginHorizontal: 20,
 							marginBottom: 10,
-							width: "34%",
 						}}>
 
 							<AppTitle style = {{
@@ -259,15 +249,13 @@ export default function ({ navigation }) {
 								flexWrap: "wrap",
 								textAlign: "center",
 							}}
-							string = {(milesDriven == 1 ? " mile" : " miles")}/>
+							string = {(milesDriven == 1 ? " mile driven" : " miles driven")}/>
 
 						</View>
 
 						<View style = {{
 							flexDirection: "column",
-							marginRight: 20,
 							marginBottom: 10,
-							width: "20%",
 						}}>
 
 							<AppTitle style = {{
@@ -284,7 +272,7 @@ export default function ({ navigation }) {
 								flexWrap: 'wrap',
 								textAlign: "center",
 							}}
-							string = {"mph"}/>
+							string = {"mph topspeed"}/>
 
 						</View>
 
