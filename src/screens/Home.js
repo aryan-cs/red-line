@@ -104,7 +104,7 @@ export default function ({ navigation }) {
         onPress = {() => { navigation.navigate("Upload") }}>
 
           <View style = {{
-            backgroundColor: isDarkmode ? VARS.dark : VARS.light,
+            backgroundColor: isDarkmode ? VARS.dark4 : VARS.light4,
             borderRadius: "100%",
             position: "absolute",
             width: 70,

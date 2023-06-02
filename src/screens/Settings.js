@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
 import { themeColor, useTheme, } from "react-native-rapi-ui";
@@ -11,13 +11,39 @@ import Floaty from "../components/Floaty";
 import Layout from "../components/Layout";
 
 import * as VARS from "../../Vars";
+import * as db from "../../Firebase";
 
 import { Ionicons } from "@expo/vector-icons";
+import * as ImagePicker from 'expo-image-picker';
 
 export default function ({ navigation }) {
 
   const { isDarkmode, setTheme } = useTheme();
   const auth = getAuth();
+  const [user, setUser] = React.useState(null);
+
+  useEffect(() => {
+
+		db.getUser()
+		.then((user) => { setUser(user); })
+		.catch((error) => { console.log("Error getting user: " + error); });
+
+	}, []);
+
+  const choosePhoto = async () => {
+
+		let _image = await ImagePicker.launchImageLibraryAsync({
+		  mediaTypes: ImagePicker.MediaTypeOptions.Images,
+		  allowsEditing: true,
+		  aspect: [4, 3],
+		  quality: 1,
+		});
+		if (!_image.canceled) {
+			// setProfileImage(_image.assets[0].uri);
+			db.saveUserImage(_image.assets[0].uri, user.uid + ".png");
+		}
+
+	};
 
   return (
 
@@ -94,6 +120,12 @@ export default function ({ navigation }) {
           status = {isDarkmode ? "success" : "warning"}
           onPress = {() => { if (isDarkmode) { setTheme("light"); } else { setTheme("dark"); }}}
           style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkModeAccent : VARS.light3 }}/>
+
+        {/* <AppButton
+          string = {"Change profile picture"}
+          status = {isDarkmode ? "success" : "warning"}
+          onPress = {() => { choosePhoto(); }}
+          style = {{ marginTop: 10, width: 360, backgroundColor: isDarkmode ? VARS.darkModeAccent : VARS.light3 }}/> */}
 
         <AppButton
           status = "danger"
