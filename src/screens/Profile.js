@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { Layout, useTheme, themeColor } from 'react-native-rapi-ui';
+import { useTheme, themeColor } from 'react-native-rapi-ui';
 
 import AppText from "../components/AppText";
 import AppTitle from "../components/AppTitle";
 import AppButton from "../components/AppButton";
 import AppInput from "../components/AppInput";
 import Floaty from "../components/Floaty";
+import Layout from "../components/Layout";
 
 import * as VARS from "../../Vars";
 import * as db from "../../Firebase";
@@ -16,7 +17,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 export default function ({ navigation }) {
 
-	const { isDarkmode, setTheme } = useTheme();
+	const { isDarkmode } = useTheme();
 	const [user, setUser] = React.useState(null);
 	const [username, setUsername] = React.useState("");
 	const [email, setEmail] = React.useState("");
@@ -95,7 +96,6 @@ export default function ({ navigation }) {
 				marginBottom: -35,
 				paddingBottom: 35,
 				flex: 1,
-				backgroundColor: isDarkmode ? VARS.darkmodeBG : VARS.lightmodeBG,
 
 			}}>
 
@@ -123,7 +123,7 @@ export default function ({ navigation }) {
 
 						width: "100%",
 						height: "45%",
-						backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
+						backgroundColor: isDarkmode ? VARS.darkModeAccent : VARS.accent,
 						marginTop: "-50%",
 						justifyContent: "flex-end",
 						alignItems: "flex-end",
@@ -159,9 +159,9 @@ export default function ({ navigation }) {
 							marginLeft: 20,
 							borderRadius: "100%",
 							marginBottom: 10,
-							backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
+							backgroundColor: isDarkmode ? VARS.darkModeAccent : VARS.accent,
 							borderWidth: 8,
-							borderColor: isDarkmode ? "#2b2b2b" : VARS.redline,
+							borderColor: isDarkmode ? VARS.darkModeAccent : VARS.accent,
 							shadowColor: "black",
 							shadowOffset: { width: 0, height: 0 },
 							shadowOpacity: .25,
@@ -179,7 +179,7 @@ export default function ({ navigation }) {
 						flex: 1,
 						flexDirection: "column",
 						justifyContent: "center",
-						backgroundColor: isDarkmode ? VARS.darkmodeBGaccent : VARS.lightmodeBGaccent,
+						backgroundColor: isDarkmode ? VARS.darkModeAccent : VARS.lightModeAccent,
 					}}>
 
 						<AppText style = {{
@@ -302,7 +302,7 @@ export default function ({ navigation }) {
 						<AppButton style = {{
 							marginBottom: 15,
 							width: 155,
-							backgroundColor: isDarkmode ? "#2b2b2b" : VARS.redline,
+							backgroundColor: isDarkmode ? VARS.dark1 : VARS.accent,
 						}}
 						string = "Change photo"
 						onPress = {() => { choosePhoto(); }}/>

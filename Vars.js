@@ -21,7 +21,7 @@ var level5 = "BF";
 
 export var light = "#000000";
 export var dark = "#ffffff";
-export var accent = "#262833";
+export var accent = "#fc0330";
 
 export var light1 = light + level1;
 export var light2 = light + level2;

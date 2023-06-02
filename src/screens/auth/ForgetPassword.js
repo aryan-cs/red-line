@@ -6,15 +6,13 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import {
-  Layout,
-  useTheme,
-} from "react-native-rapi-ui";
+import { useTheme } from "react-native-rapi-ui";
 
 import AppText from "../../components/AppText";
 import AppTitle from "../../components/AppTitle";
 import AppButton from "../../components/AppButton";
 import AppInput from "../../components/AppInput";
+import Layout from "../../components/Layout";
 
 import * as VARS from "../../../Vars";
 

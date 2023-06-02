@@ -83,32 +83,48 @@ export default function ({ navigation }) {
       <View style = {{
         marginTop: -60,
         paddingTop: 60,
+        height: "108%",
         backgroundColor: isDarkmode ? VARS.darkMode : VARS.lightMode,
       }}>
 
         <TouchableOpacity style = {{
-          width: 60,
-          height: 59.88,
           position: "absolute",
-          bottom: "2%",
-          right: "3.5%",
-          justifyContent: "center",
+          bottom: 0,
+          right: 0,
+          margin: 10,
+          zIndex: 2,
+          // backgroundColor: "black",
+          borderRadius: 100,
+          width: 75,
+          height: 75,
           alignItems: "center",
-          textAlign: "center",
-          backgroundColor: isDarkmode ? VARS.dark : VARS.light,
-          borderRadius: "100%",
-          zIndex: 1,
+          justifyContent: "center",
+
         }}
         onPress = {() => { navigation.navigate("Upload") }}>
+
+          <View style = {{
+            backgroundColor: isDarkmode ? VARS.dark : VARS.light,
+            borderRadius: "100%",
+            position: "absolute",
+            width: 70,
+            height: 70,
+            zIndex: 3,
+            justifyContent: "center",
+            alignItems: "center",
+            
+          }}>
             
           <Ionicons
             name = {"ios-add-circle"}
             style = {{
-              marginLeft: -5.25,
-              marginTop: -10,
+              color: isDarkmode ? VARS.darkMode : VARS.dark,
+              zIndex: 4,
+              lineHeight: 75.5,
             }}
-            size = {75}
-            color = { isDarkmode ? VARS.darkModeAccent : VARS.lightModeAccent }/>
+            size = {75}/>
+
+          </View>
 
         </TouchableOpacity>
 
